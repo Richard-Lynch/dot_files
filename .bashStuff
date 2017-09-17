@@ -1,0 +1,75 @@
+# shortcuts
+CTRL(hold) + x then e (then realease CTRL) - command editor
+sudo !! - redo last command w/sudo 
+^foo^bar - redo last but replace foo with bar
+ESC + . - paste last arg used in command. hit again to go back through history
+mv filename.{old,new} - quickly rename a file
+cp file.txt{,.bak} - quick backup
+\[command] - escape any command alias. (strip flags)
+some_very_long_and_complex_command # label - then do reverse search for label 
+echo "!!" > foo.sh - create a script of the last command
+!* - reuse all params from last command
+!:- - last command without last arg
+!$ - last
+!^ - first
+!:3 - third etc
+!:2-4 - second to fourth
+!:-4 - first 4, including command
+!:2- - second end excluding last
+!:2-$ - second to end
+!:^-4 - first to 4th
+!3 - execute 3rd command from history
+!-2 - execute next to last command
+!ssh - repeat last command starting with ssh
+!?search? - repeat last command containing search
+#modifiers - add as many as you like
+!!:$:h - last param, before last slash ( head )
+!!:$:t - last param, after last slash
+!!:$:r - strips extension
+!!:$:e - just extension
+!!:$:p - echo command as parsed
+CTRL+P - will execute a command just parsed
+!!:$:s/original/new/ - substitute first original
+!!:$:gs/original/new/ - substitute all original 
+
+
+
+
+
+
+CTRL-aaryr - rev search command you're typing
+
+
+
+CDPATH=:..:~:~/programs - set paths for cd to search. current path is back between = and :, .. is parent, ~ is home etc
+
+vim -x <FILENAME> - add a password to a file in vim
+
+pv - mv with progress
+
+
+
+
+#html
+python -m SimpleHTTPServer - serve current dir at http://$HOSTNAME:8000/
+curl ifconfig.me - get external IP
+    curl ifconfig.me/ip -> IP Adress
+    curl ifconfig.me/host -> Remote Host
+    curl ifconfig.me/ua ->User Agent
+    curl ifconfig.me/port -> Port
+man ascii - ascii table
+vim scp://username@host//path/to/somefile - edit remote file
+
+#random
+dd if=/dev/dsp | ssh -c arcfour -C username@host dd of=/dev/dsp - output microphone to remote speaker during ssh
+
+curl -u user:pass -d status="Tweeting from the shell" http://twitter.com/statuses/update.xml - update twitter via cli
+
+ssh -t reachable_host ssh unreachable_host - ssh through hidden nodes
+
+ssh-copy-id username@hostname - Copy your SSH public key on a remote machine for passwordless login - the easy way
+cat ~/.ssh/id_rsa.pub | ssh user@machine "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys" - the hard way
+
+
+
+
