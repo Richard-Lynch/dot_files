@@ -70,6 +70,9 @@ alias agu="sudo apt-get update"
 alias agug="sudo apt-get update;sudo apt-get upgrade"
 alias agi="sudo apt-get install"
 alias bstuff="(cd && vim .bashStuff)"
+alias p="cd $buildLocation ; clear ; ls -A ;"
+alias s="cd $scriptLocation ; clear ; ls -A ;"
+alias rmdi="rm -rf"
 #---------------------NAVIGATION COMMANDS---------------------
 # list files
 alias ls="ls -I *.sh~ --color=auto -FG"  #lists file with color and annotation
@@ -329,7 +332,7 @@ alias toprl="top -u rlynch79"
 
 alias gcom="git commit -am"		# commits all to git
 alias gpush="git push origin"	# pushes all to remote
-
+# -- branches -- 
 gbls () {                        #lists the branches
     git branch -l                     ;
 }
@@ -338,10 +341,15 @@ gbch () {                        #checks out the branch
     git checkout "$1"               ;
 }
 
-gbchnew () {
+gbnew () {
     git checkout -b "$1"            ;
 }
 
+gbdel () {
+    git branch -d "$1"              ;
+}
+
+# -- files -- 
 gadd () {               #creates a file in a git repo, adds it to the repo, commits to local and pushes to remote
     create -g "$@"
 #     touch "$1"                       ;
@@ -377,14 +385,22 @@ gnew () {
 #     "git@bbgithub.dev.bloomberg.com:rlynch79/$1.git"                      ;
     git remote -v                   ;
     git push -u origin master       ;
-    }
+}
+
 gnewRemote () {
     curl -u $GITUSERNAME:$GitAccessToken https://api.github.com/user/repos -d "{\"name\":\"$1\"}"   ;
 }
 
 gclone () {
-    git clone $1                    ;
-    git checkout -b $2              ;
+    git clone $1                    ; # clone dir
+    temp=$1                         ; # create temp var for dir name
+    temp=${temp%.git*}              ; # strip the ".git"
+    temp=${temp#*$GITUSERNAME/}     ; # strip everything before the repo-name 
+    cd $temp                        ; # enter dir
+    if [[ $# == 2 ]] ; then           # if there is a branch passed
+        git checkout -b $2          ; # create that branch and swich to it
+    fi
+    ls -A                           ; # list the contents of the dir
 }
 # -------------- College -------------------
 
