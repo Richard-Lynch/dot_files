@@ -16,6 +16,7 @@ SAVEHIST=10000
 export HISTCONTROL=ignoreboth:erasedups
 shopt -s histappend
 shopt -s histverify
+# adds cmd and refresh history after every command
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export HISTTIMEFORMAT="%d/%m/%y %T "
 alias git="git -c http.sslVerify=false"
@@ -27,6 +28,9 @@ alias lslog="ls *.log.*";
 #this line ensure that putty and tmus draw lines between panes
 #export LANG=en_US.utf8;
 
+#---------------------Locations---------------------
+buildLocation="~/programs" 
+scriptLocation="~/programs/scripts"
 #---------------------Style of Terminal---------------------
 bold=$(tput bold)
 line=$(tput setab 0)
@@ -45,8 +49,8 @@ export PS1="\[${bold}\]\[${col}\][\w]\n$ \[${reset}\]" # super small
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -69,16 +73,12 @@ alias bstuff="(cd && vim .bashStuff)"
 #---------------------NAVIGATION COMMANDS---------------------
 # list files
 alias ls="ls -I *.sh~ --color=auto -FG"  #lists file with color and annotation
-alias lsa="ls -A"	#lists all including hidden colors etc
-alias lsal="ls -lAh" #lists as above + permissions
-alias lgrep="ls | grep"
+alias la="ls -A"	#lists all including hidden colors etc
+alias ll="ls -lAh" #lists as above + permissions
+alias lsgrep="ls | grep"
 alias lagrep="lsa | grep"
-alias lalgrep="lsal | grep"
+alias llgrep="lsal | grep"
 
-# els () {
-#     egrep -lir "$1" .;
-# #     egrep -lir --include=*.log.* "$1" .;
-# }
 ils () {
     egrep -lir --include=*"$2"* "$1" .;
 }
@@ -90,10 +90,12 @@ alias mv="mv -iv"	#moves but warns if there will be an override
 
 # dirs
 alias dirs="dirs -v"    #lists the stack vertically with index's
+# better; pop dirs[$1] from stack
 betterpopd () {
     popd +$1 > /dev/null;
     dirs -v;
 }
+# better; push current dir onto stack, and go to arg
 betterpushd () {
     pushd $1 > /dev/null;
     clear;
@@ -105,7 +107,7 @@ alias popb="betterpopd"
 
 alias H="history"
 alias h="history 10"  #lists history of commands
-alias hls="history 10 | grep"
+alias hls="history | grep -m 10"
 alias r='fc -s'     #repeats last command which cotnains first arg
 
 # mk
@@ -118,18 +120,20 @@ mcdir () {                  #creates a dir and hops into it
 # clears
 alias c="clear"   #clear and return home
 alias ch="clear && cd"  #clear and return home
-alias cb="clear && b"   #clear and returns to build
+alias cb="clear && cd $buildLocation"   #clear and returns to build
+alias cs="clear && cd $scriptLopcation" #clear and returns to scripts
 
-alias cs="clear && ls"  #clear and ls
-alias chs="clear && cd && ls"  #clear and return home and ls
-alias cbs="clear && b && ls"   #clear and return to build and ls
+alias cl="clear && ls"  #clear and ls
+alias chl="clear && cd && ls"  #clear and return home and ls
+alias cbl="clear && cd $buildLocation && ls"   #clear and return to build and ls
+alias csl="clear && cd $scriptLocation && ls"   #clear and return to build and ls
 
 alias ca="clear && lsa"   #clear and ls all
 alias cha="clear && cd && lsa" #clear and return home and ls all
-alias cba="clear && b && lsa"   #clear and return to build and ls all
+alias cba="clear && cd $buildLocation && lsa"   #clear and return to build and ls all
+alias csa="clear && cd $scriptLocation && lsa"   #clear and return to build and ls all
 
 # cds
-
 cdl () {    #enters dir and lists files inside
     cd "$1"         ;
     clear           ;
@@ -163,13 +167,13 @@ alias .4s="cd ../../../../; ls"
 alias .5s="cd ../../../../../; ls"
 alias .6s="cd ../../../../../../; ls"
 
-alias ..la="cd ../; lsa"
-alias ...la="cd ../../; lsa"
-alias .2la="cd ../../; lsa"
-alias .3la="cd ../../../; lsa"
-alias .4la="cd ../../../../; lsa"
-alias .5la="cd ../../../../../; lsa"
-alias .6la="cd ../../../../../../; lsa"
+alias ..a="cd ../; lsa"
+alias ...a="cd ../../; lsa"
+alias .2a="cd ../../; lsa"
+alias .3a="cd ../../../; lsa"
+alias .4a="cd ../../../../; lsa"
+alias .5a="cd ../../../../../; lsa"
+alias .6a="cd ../../../../../../; lsa"
 
 
 #---------------------tmux utils---------------------
@@ -182,6 +186,11 @@ alias tsplit="~/scripts/multiTmux.sh" ;
 alias ta='tmux attach -t $1'
 if [ -f ~/.bash_completion.d/ta ]; then
 . ~/.bash_completion.d/ta
+fi
+
+alias asm="~/scripts/asm.sh"
+if [ -f ~/.bash_completion.d/asm ]; then
+. ~/.bash_completion.d/asm
 fi
 # ---- file in ~/.bash_completion.d/ta ----
 # _ta() {
@@ -220,9 +229,70 @@ alias sbu="source ~/.bash_profile"  #sources bash without backup and stuff
 alias timer="echo Press CTL + D to stop timer.; time read;"        ;
 
 create () {         #just creates a quick file
+    fileString=""
+    addToGit=0
+    OPTIND=1
+        while getopts ":gbp:-:" opt; do
+        case $opt in
+            g)
+                addToGit=1
+                ;;
+            b) # -b = bash
+                echo "creating bash file" >&2
+                fileString="$(which bash)"
+                ;;
+            p) # -p = python
+                case $OPTARG in 
+                    2 | 3)
+                        echo "creating python $OPTARG file" >&2
+                        fileString="$(which python$OPTARG)"
+                        ;;
+                    *)
+                        echo "Invalid python version!"
+                        return
+                        ;;
+                esac
+                ;;
+            -) # --abitrary
+                fileString="$(which $OPTARG)"
+                if [[ $fileString == "" ]] ; then
+                    echo "$OPTARG not installed"
+                    return
+                fi
+                ;;
+            :) # no arg passed
+                echo "option -$OPTARG required arg " >&2
+                return  
+                ;;
+            ?) # unknown flag
+                echo "unknow flag: $OPTARG" >&2
+                return
+                ;;
+                    esac
+    done
+    # reset $1 to the first positional argument
+    shift $(($OPTIND - 1))
+    # if no flag set, then just create a blank file
+    if [[ $fileString != "" ]] ; then
+        # Delete all leading blank lines at top of file (only).
+        sed -i '/./,$!d' $1 ; 
+        # add a line to the file if nessasary
+        if [ \! -s $1 ]; then echo "" >> $1 ; echo "added blank line to file" ;  fi ;
+        # remove any lines starting with #!
+        sed -i '/^#!/ d' $1 ; 
+        # insert the correct fileString to the top of the file
+        sed -i "1i#!$fileString" $1
+    else
+        echo "fileString empty" > /dev/null
+    fi
+    
     touch $1        ;
     chmod u+x $1    ;
     vim $1          ;
+    if [[ $addToGit == 1 ]] ; then
+        git add $1      ;
+        git commit -am "Added $1" ; 
+    fi ; 
 }
 
 killloads () {
@@ -260,25 +330,26 @@ alias toprl="top -u rlynch79"
 alias gcom="git commit -am"		# commits all to git
 alias gpush="git push origin"	# pushes all to remote
 
-gbl () {                      #lists the branches
+gbls () {                        #lists the branches
     git branch -l                     ;
 }
 
-gch () {            #checks out the branch
+gbch () {                        #checks out the branch
     git checkout "$1"               ;
 }
 
-gchb () {
+gbchnew () {
     git checkout -b "$1"            ;
 }
 
 gadd () {               #creates a file in a git repo, adds it to the repo, commits to local and pushes to remote
-    touch "$1"                       ;
-    chmod u+x "$1"                  ;
-    git add "$1"                      ;
-    git commit -am "Created $1"     ;
-    git push origin $(git rev-parse --abbrev-ref HEAD);
-    vim "$1"                        ;
+    create -g "$@"
+#     touch "$1"                       ;
+#     chmod u+x "$1"                  ;
+#     git add "$1"                      ;
+#     git commit -am "Created file"     ;
+#     git push origin $(git rev-parse --abbrev-ref HEAD);
+#     vim "$1"                        ;
 }
 gcp () {
     cp "$1" "$2";
@@ -315,6 +386,7 @@ gclone () {
     git clone $1                    ;
     git checkout -b $2              ;
 }
+# -------------- College -------------------
 
 # sets up pre commands for bash, such as mandatory alias
 #source ~/.bash-preexe.sh
