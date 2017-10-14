@@ -1,0 +1,49 @@
+motions
+i - in (inside of object)
+a - all (inside of object including surround, ie daw - delete word and white space, da" delete everything inside brackets including brackets)
+t - till (untill char not including)
+T - till backawards 
+f - find (untill char including char)
+f - find backwards
+/ - search
+$ - end
+0 - start
+^ - start non white
+
+actions
+d - delete
+v - visual
+c - change
+y - yank
+
+objects
+w - word
+p - paragraph
+s - sentence
+t - tags
+
+multiplier - action - motion - object
+
+dd/yy - d or y whole line
+D/C - d or change to end of line
+I/A - insert at start or end
+o/O - insert line before or after current and insert
+
+:earlier 2m - undo all steps in last two minutes!!!
+
+dot commant
+can v select block of text, then use dot, and will repeat for each line
+
+:normal $SomeNormalCommand 
+:normal @w // use @w on visual selection
+
+CTRL+A - increment number
+14
+
+PLUGINS
+fugitive
+syntatic
+
+let @a='CTRL+a - will paste the contents of the buffer for editing, needs a ' added at the end
+
+:CTRL+F - in command mode, show history

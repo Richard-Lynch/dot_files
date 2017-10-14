@@ -73,11 +73,19 @@ alias bstuff="(cd && vim .bashStuff)"
 alias p="cd $buildLocation ; clear ; ls -A ;"
 alias s="cd $scriptLocation ; clear ; ls -A ;"
 alias rmdi="rm -rf"
+printPDF () {
+    vim '+hardcopy > out.ps' +q $1 ; 
+    ps2pdf out.ps
+    \mv out.pdf $1.pdf 
+    rm out.ps
+}
+alias pdf="printPDF"
 #---------------------NAVIGATION COMMANDS---------------------
 # list files
 alias ls="ls -I *.sh~ --color=auto -FG"  #lists file with color and annotation
 alias la="ls -A"	#lists all including hidden colors etc
-alias ll="ls -lAh" #lists as above + permissions
+alias lsa="ls -A"	#lists all including hidden colors etc
+alias lsal="ls -lAh" #lists as above + permissions
 alias lsgrep="ls | grep"
 alias lagrep="lsa | grep"
 alias llgrep="lsal | grep"
@@ -124,17 +132,17 @@ mcdir () {                  #creates a dir and hops into it
 alias c="clear"   #clear and return home
 alias ch="clear && cd"  #clear and return home
 alias cb="clear && cd $buildLocation"   #clear and returns to build
-alias cs="clear && cd $scriptLopcation" #clear and returns to scripts
+alias cs="clear && cd $scriptLocation" #clear and returns to scripts
 
 alias cl="clear && ls"  #clear and ls
 alias chl="clear && cd && ls"  #clear and return home and ls
 alias cbl="clear && cd $buildLocation && ls"   #clear and return to build and ls
 alias csl="clear && cd $scriptLocation && ls"   #clear and return to build and ls
 
-alias ca="clear && lsa"   #clear and ls all
-alias cha="clear && cd && lsa" #clear and return home and ls all
-alias cba="clear && cd $buildLocation && lsa"   #clear and return to build and ls all
-alias csa="clear && cd $scriptLocation && lsa"   #clear and return to build and ls all
+alias ca="clear && la"   #clear and ls all
+alias cha="clear && cd && la" #clear and return home and ls all
+alias cba="clear && cd $buildLocation && la"   #clear and return to build and ls all
+alias csa="clear && cd $scriptLocation && la"   #clear and return to build and ls all
 
 # cds
 cdl () {    #enters dir and lists files inside
@@ -191,9 +199,13 @@ if [ -f ~/.bash_completion.d/ta ]; then
 . ~/.bash_completion.d/ta
 fi
 
-alias asm="~/scripts/asm.sh"
+alias asm="~/scripts/utils/asm.sh"
 if [ -f ~/.bash_completion.d/asm ]; then
 . ~/.bash_completion.d/asm
+fi
+alias casm="~/scripts/utils/casm.sh"
+if [ -f ~/.bash_completion.d/casm ]; then
+. ~/.bash_completion.d/casm
 fi
 # ---- file in ~/.bash_completion.d/ta ----
 # _ta() {
@@ -280,7 +292,7 @@ create () {         #just creates a quick file
         # Delete all leading blank lines at top of file (only).
         sed -i '/./,$!d' $1 ; 
         # add a line to the file if nessasary
-        if [ \! -s $1 ]; then echo "" >> $1 ; echo "added blank line to file" ;  fi ;
+        if [ \! -s $1 ] ; then echo "" >> $1 ; echo "added blank line to file" ;  fi ;
         # remove any lines starting with #!
         sed -i '/^#!/ d' $1 ; 
         # insert the correct fileString to the top of the file
@@ -332,6 +344,7 @@ alias toprl="top -u rlynch79"
 
 alias gcom="git commit -am"		# commits all to git
 alias gpush="git push origin"	# pushes all to remote
+alias gls="git ls-tree -r master --name-only" # list files tracked by git ( same as "git ls-tree -r master --name-only" )
 # -- branches -- 
 gbls () {                        #lists the branches
     git branch -l                     ;
@@ -389,6 +402,64 @@ gnew () {
 
 gnewRemote () {
     curl -u $GITUSERNAME:$GitAccessToken https://api.github.com/user/repos -d "{\"name\":\"$1\"}"   ;
+}
+
+# gDelRemote () {
+#     curl -X DELETE -H 'Authorization: token $GitAccessToken' https://api.github.com/user/repos/$GITUSERNAME/$1   ;
+# }
+
+gnewHere () {
+    if [[ $# == 1 ]] ; then
+        cd $1                ;
+    fi
+    git init                        ;
+    git add -n .                   ; # show files which would be added 
+    while : ; do
+        echo -n "Add all of the above files to this new git repo? "
+        read yno
+        case $yno in 
+            [yY] | [yY][eE][sS] )
+                echo "Adding all files"
+                git add .
+                gFinishNew
+                break
+                ;;
+            [nN] | [nN][oO] )
+                echo "Not adding any files, add and run 'gFinishNew'"
+                return
+                break
+                ;;
+            *)
+                echo "invalid option"
+                ;;
+        esac
+    done
+}
+
+gFinishNew () {
+    repoName=${PWD##*/}
+    while : ; do
+        echo -n "Finish repo in current dir:$repoName? "
+        read yno
+        case $yno in 
+            [yY] | [yY][eE][sS] )
+                echo "Finishing repo"
+                break
+                ;;
+            [nN] | [nN][oO] )
+                echo "Not finishing repo."
+                return
+                ;;
+            *)
+                echo "invalid option"
+                ;;
+        esac
+    done
+    git commit -am "Creating repo from existing dir"
+    gnewRemote $repoName
+    git remote add origin "git@github.com:$GITUSERNAME/$repoName.git"          ;
+    git remote -v                   ;
+    git push -u origin master       ;
 }
 
 gclone () {

@@ -126,6 +126,8 @@ set encoding=utf-8
 
 "Information on the following setting can be found with
 ":help set
+set printoptions=formfeed:y,number:y    " number: print linenumbers
+                                        " formfeed: use pagebreaks (add with CTRL+V then CTRL+L)
 set tabstop=4
 set expandtab
 set autoindent 
@@ -313,6 +315,7 @@ autocmd!
     autocmd FileType tex                    let b:comment_leader = '% '
     autocmd FileType mail                   let b:comment_leader = '> '
     autocmd FileType vim                    let b:comment_leader = '" '
+    autocmd FileType asm                    let b:comment_leader = '; '
 augroup END
 "   (remap) (set_mark) (search for comment at start of line) (search for start of line) (clear search) (move back to mark) (correct offset) 
 noremap <Leader>c m`:s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>``ll
@@ -396,7 +399,9 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 set showmatch
 set matchtime=10        "time to flash matching
 
-set termguicolors
+if has("termguicolors")
+    set termguicolors
+ endif
 
 colorscheme wwdc16
 set t_ut=       "diable background color erase
