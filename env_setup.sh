@@ -107,3 +107,5 @@ cd ~/.vim/bundle/YouCompleteMe
 ./install.py --clang-completer
 
 
+mv $DOTFILES/.git $HOMEdir/
+# git add $FILENAMES
