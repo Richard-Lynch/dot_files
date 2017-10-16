@@ -50,8 +50,8 @@ echo "BACKUP: $BACKUP"
 echo "HOMENAME: $HOMENAME"
 echo "FILENAMES: $FILENAMES"
 # ---- Main Copy ----
-git clone https://github.com/Richard-Lynch/dot_files.git
-FILENAMES="$(cd dot_files/ ; \ls -AI .git)"
+# git clone https://github.com/Richard-Lynch/dot_files.git
+FILENAMES="$(cd ; cd  dot_files/ ; \ls -AI .git)"
 echo $FILENAMES
 mkdir $BACKUP;
 for file in $FILENAMES; do
