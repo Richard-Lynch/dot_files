@@ -406,6 +406,35 @@ if has("termguicolors")
 colorscheme wwdc16
 set t_ut=       "diable background color erase
 
+function! GitBranch()
+    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+    let l:branchname = GitBranch()
+    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+
+set scrolloff=1                       " Keep one line below the cursor
+
+
+set statusline=
+set statusline+=%#todo#
+" set statusline+=[%n]\ 
+" set statusline+=[%{StatuslineGit()}]\ 
+set statusline+=\ %f\ 
+set statusline+=%#LineNr#
+set statusline+=%h%m%r%w                     " flags
+" set statusline+=%m\
+set statusline+=%=
+set statusline+=%#CursorColumn#
+set statusline+=\ %y
+" set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+" set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ Line:%l/%L\ Col:%c
+set statusline+=\ 
+
 "When editing a file, make screen display the name of the file you are editing
 "function! SetTitle()
 "  if $TERM =~ "^screen"
