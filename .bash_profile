@@ -7,7 +7,7 @@ echo "bash profile was run"
 #this creates a command which is run after youve typed something but before its run
 #export preexec_functions=()
 #source ~/.explicit_aliases.sh #if you have an alias for what you just did, itll remind you!
-
+#testing to see if move worked
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # DOMENICO's bash
 HISTFILE="$HOME/.history"
