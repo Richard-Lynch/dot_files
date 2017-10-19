@@ -40,12 +40,13 @@ scriptLocation="~/programs/scripts"
 bold=$(tput bold)
 line=$(tput setab 0)
 col=$(tput setaf 227)
+col2=$(tput setaf 249)
 # col=$(tput setaf 46) #green
 reset=$(tput sgr0)
 # export PS1="\[\e[1;32m\]\H\[\e[0m\] :: \[\e[1;30m\]\d\[\e[0m\] \@ :: \[\e[1;33m\]\w\n\[\033[0m\]"
 #export PS1='\[$bold\][\w]\$\[$reset\] '
 # export PS1="\[${bold}\]\[${col}\]\u @ \w \[${reset}\]" # super small
-export PS1="\[${bold}\]\[${col}\][\w]\n$ \[${reset}\]" # super small
+export PS1="\[${bold}\]\[${col}\][\w]\[${col2}\][\u : \h]\n\[${col}\]$ \[${reset}\]" # super small
 # ok so the \[ and \] around the bold and reset, basically tell bash that these values have size 0,so it doesnt 
 # grab random old commands and append them on to your PS1 when searching through history
 # export PS1="${bold}\w ${reset}" # super small
