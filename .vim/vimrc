@@ -121,6 +121,11 @@ set encoding=utf-8
 " let NERDTreeShowHidden=1
 " let NERDTreeDirArrows = 1
 
+"----ShowMarks-----
+" let g:showmarks_textlower=""
+" let g:showmarks_textupper=""
+" let g:showmarks_textother=""
+
 "----Tabs------
 "next tab
 "map  <C-l> :tabn<CR>
@@ -327,6 +332,8 @@ noremap <Leader>c m`:s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch
 noremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>``hh
 vnoremap <Leader>c m`:s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>gv
 vnoremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>gv
+
+noremap <Leader>g :!git commit -am "
 
 " Tabbling blocks of code. 
 " let b:tab_leader = '    '
