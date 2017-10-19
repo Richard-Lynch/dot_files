@@ -339,7 +339,7 @@ endif
 
 function! MyGitCommit()
     silent !clear
-    execute "!" . g:MyGitCommand
+    execute "silent !" . g:MyGitCommand
 "     redraw!
 endfunction
 
