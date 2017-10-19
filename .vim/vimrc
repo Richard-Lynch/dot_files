@@ -333,7 +333,7 @@ noremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsea
 vnoremap <Leader>c m`:s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>gv
 vnoremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>gv
 
-noremap <Leader>g :silent !git commit -am "
+noremap <Leader>g :silent !git commit -a<CR>
 noremap <Leader>p :!git push
 " noremap <Lea
 
