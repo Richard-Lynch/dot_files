@@ -5,8 +5,8 @@ echo "bash profile was run"
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=i
 
 #this creates a command which is run after youve typed something but before its run
-#export preexec_functions=()
-#source ~/.explicit_aliases.sh #if you have an alias for what you just did, itll remind you!
+# export preexec_functions=()
+# source ~/.explicit_aliases.sh #if you have an alias for what you just did, itll remind you!
 #testing to see if move worked
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # DOMENICO's bash
@@ -70,13 +70,14 @@ alias agu="sudo apt-get update"
 alias agug="sudo apt-get update;sudo apt-get upgrade"
 alias agi="sudo apt-get install"
 alias bstuff="(cd && vim .bashStuff)"
-alias p="cd $buildLocation ; clear ; ls -A ;"
-alias s="cd $scriptLocation ; clear ; ls -A ;"
+# alias p="cd $buildLocation ; clear ; ls -A ;"
+# alias s="cd $scriptLocation ; clear ; ls -A ;"
 alias rmdi="rm -rf"
 printPDF () {
     vim '+hardcopy > out.ps' +q $1 ; 
     ps2pdf out.ps
-    \mv out.pdf $1.pdf 
+    out="$(echo "$1" | tr '[.]' '_')"
+    \mv out.pdf $out.pdf 
     rm out.ps
 }
 alias pdf="printPDF"
@@ -129,62 +130,63 @@ mcdir () {                  #creates a dir and hops into it
 }
 
 # clears
-alias c="clear"   #clear and return home
-alias ch="clear && cd"  #clear and return home
-alias cb="clear && cd $buildLocation"   #clear and returns to build
-alias cs="clear && cd $scriptLocation" #clear and returns to scripts
+# alias c="clear"   #clear and return home
+# alias h="clear && cd"  #clear and return home
+# alias b="clear && cd $buildLocation"   #clear and returns to build
+# alias s="clear && cd $scriptLocation" #clear and returns to scripts
 
-alias cl="clear && ls"  #clear and ls
-alias chl="clear && cd && ls"  #clear and return home and ls
-alias cbl="clear && cd $buildLocation && ls"   #clear and return to build and ls
-alias csl="clear && cd $scriptLocation && ls"   #clear and return to build and ls
+alias c="clear && lsa"  #clear and ls
+alias h="clear && cd && lsa"  #clear and return home and ls
+alias p="clear && cd $buildLocation && lsa"   #clear and return to build and ls
+alias s="clear && cd $scriptLocation && lsa"   #clear and return to build and ls
 
-alias ca="clear && la"   #clear and ls all
-alias cha="clear && cd && la" #clear and return home and ls all
-alias cba="clear && cd $buildLocation && la"   #clear and return to build and ls all
-alias csa="clear && cd $scriptLocation && la"   #clear and return to build and ls all
 
 # cds
-cdl () {    #enters dir and lists files inside
-    cd "$1"         ;
+cd_clear () {    #enters dir and lists files inside
+    if [ $# -ne 1 ]; then
+        cd          ;
+    else
+        cd "$1"     ;
+    fi
     clear           ;
-    ls              ;
+    lsa              ;
 }
 
-cds () {    #enters a dir and lists files inside
-    cd "$1"         ;
-    ls              ;
+cd_noClear () {    #enters dir and lists files inside
+    if [ $# -ne 1 ]; then
+        cd          ;
+    else
+        cd "$1"     ;
+    fi
+    lsa              ;
 }
 
-cda () {   #enters a dir and lists all files inside
-    cd "$1"         ;
-    lsa             ;
-}
+alias cs="cd_clear" # should repalce cd
 
 # cd
-alias ..="cd ../"
-alias ...="cd ../../"
-alias .2="cd ../../"
-alias .3="cd ../../../"
-alias .4="cd ../../../../"
-alias .5="cd ../../../../../"
-alias .6="cd ../../../../../../"
+alias ..="cs ../"
+alias ...="cs ../../"
+alias .2="cs ../../"
+alias .3="cs ../../../"
+alias .4="cs ../../../../"
+alias .5="cs ../../../../../"
+alias .6="cs ../../../../../../"
 
-alias ..s="cd ../; ls"
-alias ...s="cd ../../; ls"
-alias .2s="cd ../../; ls"
-alias .3s="cd ../../../; ls"
-alias .4s="cd ../../../../; ls"
-alias .5s="cd ../../../../../; ls"
-alias .6s="cd ../../../../../../; ls"
+alias ..l="cd ../; ls"
+alias ...l="cd ../../; ls"
+alias .2l="cd ../../; ls"
+alias .3l="cd ../../../; ls"
+alias .4l="cd ../../../../; ls"
+alias .5l="cd ../../../../../; ls"
+alias .6l="cd ../../../../../../; ls"
 
-alias ..a="cd ../; lsa"
-alias ...a="cd ../../; lsa"
-alias .2a="cd ../../; lsa"
-alias .3a="cd ../../../; lsa"
-alias .4a="cd ../../../../; lsa"
-alias .5a="cd ../../../../../; lsa"
-alias .6a="cd ../../../../../../; lsa"
+# alias ..a="cd ../; lsa"
+# alias ...a="cd ../../; lsa"
+# alias .2a="cd ../../; lsa"
+# alias .3a="cd ../../../; lsa"
+# alias .4a="cd ../../../../; lsa"
+# alias .5a="cd ../../../../../; lsa"
+# alias .6a="cd ../../../../../../; lsa"
 
 
 #---------------------tmux utils---------------------
@@ -197,6 +199,11 @@ alias tsplit="~/scripts/multiTmux.sh" ;
 alias ta='tmux attach -t $1'
 if [ -f ~/.bash_completion.d/ta ]; then
 . ~/.bash_completion.d/ta
+fi
+
+alias ts='tmux switch -t $1'
+if [ -f ~/.bash_completion.d/ts ]; then
+. ~/.bash_completion.d/ts
 fi
 
 alias asm="~/scripts/utils/asm.sh"

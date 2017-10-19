@@ -49,6 +49,10 @@ augroup end
 "---------
 syntax on
 
+" inoremap ;;b <em></em><Space><++><esc>FeT>i
+set makeprg=[[\ -f\ makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ .. 
+" let &makeprg = '[[ -f makefile ]] && make || make -C ..'
+
 " fixes issue where esc + arrow will display letters etc
 set nocp
 

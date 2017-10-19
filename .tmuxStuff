@@ -1,3 +1,4 @@
 prefix+Z // expand current pane to full screen, repeat to toggle
 vimux // send commands to tmux from vim
+C-a + s // list of sessions
 

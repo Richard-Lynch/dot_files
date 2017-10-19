@@ -1,3 +1,8 @@
+TODO
+add snippits - quickly add chunks of code
+add abriviations - quickly run command based on stuff typed in insert mode
+
+
 motions
 i - in (inside of object)
 a - all (inside of object including surround, ie daw - delete word and white space, da" delete everything inside brackets including brackets)
