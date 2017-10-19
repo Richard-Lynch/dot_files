@@ -333,19 +333,26 @@ noremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsea
 vnoremap <Leader>c m`:s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>gv
 vnoremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>gv
 
-if !exists("g:MyGitCommand")
-    let g:MyGitCommand = "git commit -a"
+if !exists("g:MyGitCommitCommand")
+    let g:MyGitCommitCommand = "git commit -a"
+endif
+if !exists("g:MyGitPushCommand")
+    let g:MyGitPushCommand = "git push"
 endif
 
 function! MyGitCommit()
     silent !clear
-    execute "silent !" . g:MyGitCommand
-"     redraw!
+    execute "silent !" . g:MyGitCommitCommand
+endfunction
+
+function! MyGitPush()
+    silent !clear
+    execute "silent !" . g:MyGitPushCommand
 endfunction
 
 noremap <Leader>g :call MyGitCommit()<CR>:redraw!<CR>
 " noremap <Leader>g :silent !git commit -a<CR>
-noremap <Leader>p :!git push
+noremap <Leader>p :call MyGitPush()<CR>:redraw!<CR>
 " noremap <Lea
 
 " Tabbling blocks of code. 
