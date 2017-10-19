@@ -160,6 +160,7 @@ else
 endif
 
 set cursorline	" highlight current active line
+set lazyredraw
 "add some more memory etc
 set hidden
 set history=1000
