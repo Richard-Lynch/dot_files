@@ -343,7 +343,7 @@ function! MyGitCommit()
 "     redraw!
 endfunction
 
-noremap <Leader>g :call MyGitCommit()<CR>
+noremap <Leader>g :call MyGitCommit()<CR>:redraw!
 " noremap <Leader>g :silent !git commit -a<CR>
 noremap <Leader>p :!git push
 " noremap <Lea
