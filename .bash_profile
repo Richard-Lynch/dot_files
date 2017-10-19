@@ -3,8 +3,12 @@
 echo "bash profile was run"
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=i
-alias vim="/usr/local/bin/mvim -v"
-source ~/.vmwareAlias
+if [ -x /usr/local/bin/mvim ] ; then
+    alias vim="/usr/local/bin/mvim -v"
+fi
+if [ -x ~/.vmwareAlias ] ; then
+    source ~/.vmwareAlias
+fi
 #this creates a command which is run after youve typed something but before its run
 # export preexec_functions=()
 # source ~/.explicit_aliases.sh #if you have an alias for what you just did, itll remind you!
