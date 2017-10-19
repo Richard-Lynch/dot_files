@@ -3,7 +3,8 @@
 echo "bash profile was run"
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=i
-
+alias vim="/usr/local/bin/mvim -v"
+source ~/.vmwareAlias
 #this creates a command which is run after youve typed something but before its run
 # export preexec_functions=()
 # source ~/.explicit_aliases.sh #if you have an alias for what you just did, itll remind you!
@@ -46,6 +47,10 @@ export PS1="\[${bold}\]\[${col}\][\w]\n$ \[${reset}\]" # super small
 # export PS1="${bold}\w ${reset}" # super small
 
 # enable color support of ls and also add handy aliases
+# mac
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+# linux?
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -83,7 +88,7 @@ printPDF () {
 alias pdf="printPDF"
 #---------------------NAVIGATION COMMANDS---------------------
 # list files
-alias ls="ls -I *.sh~ --color=auto -FG"  #lists file with color and annotation
+# alias ls="ls --color=auto -FG"  #lists file with color and annotation
 alias la="ls -A"	#lists all including hidden colors etc
 alias lsa="ls -A"	#lists all including hidden colors etc
 alias lsal="ls -lAh" #lists as above + permissions
