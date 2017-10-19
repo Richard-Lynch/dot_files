@@ -1,0 +1,13 @@
+ShowMarks - fixes "not possble to change sign"
+  Replaced the following line : 
+      exe 'sign place '.id.' name=ShowMark'.nm.' line='.ln.'
+      buffer='.winbufnr(0) 
+        by the following three lines 
+
+        if ln > 0 " conditional which tests for the line number as greater
+            than 0 
+                exe 'sign place '.id.' name=ShowMark'.nm.' line='.ln.'
+                buffer='.winbufnr(0) 
+                endif     " end conditional 
+
+                Seems to be the easiest solution... 
