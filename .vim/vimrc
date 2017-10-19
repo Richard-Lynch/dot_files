@@ -333,7 +333,9 @@ noremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsea
 vnoremap <Leader>c m`:s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>gv
 vnoremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>gv
 
-noremap <Leader>g :!git commit -am "
+noremap <Leader>g :silent !git commit -am "
+noremap <Leader>p :!git push
+" noremap <Lea
 
 " Tabbling blocks of code. 
 " let b:tab_leader = '    '
@@ -395,12 +397,12 @@ nnoremap ; :
 "CTRL+L cancel highlight and redraw screen
 nnoremap <C-l> :nohl<CR><C-l>
 
-" Copy to buffer
-vmap <Leader>y :w! ~/shared/clip<CR>
-nmap <Leader>y :.w! ~/shared/clip<CR>
-" Past from buffer
-nmap <Leader>p :r ~/shared/clip<CR>
-"set clipboard=unnamedplus
+" " Copy to buffer
+" vmap <Leader>y :w! ~/shared/clip<CR>
+" nmap <Leader>y :.w! ~/shared/clip<CR>
+" " Past from buffer
+" nmap <Leader>p :r ~/shared/clip<CR>
+" "set clipboard=unnamedplus
 "
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
