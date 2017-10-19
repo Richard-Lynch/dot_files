@@ -51,7 +51,8 @@ echo "HOMENAME: $HOMENAME"
 echo "FILENAMES: $FILENAMES"
 # ---- Main Copy ----
 # git clone https://github.com/Richard-Lynch/dot_files.git
-FILENAMES="$(cd ; cd  dot_files/ ; \ls -AI .git)"
+# FILENAMES="$(cd ; cd  dot_files/ ; \ls -AI .git)" # linux
+FILENAMES="$(cd ; cd  dot_files/ ; \ls -A | grep -v '.git')" # mac
 echo $FILENAMES
 mkdir $BACKUP;
 for file in $FILENAMES; do
