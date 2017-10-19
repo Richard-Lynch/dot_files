@@ -1,5 +1,16 @@
 #!/bin/bash
 
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+echo "machine: $machine"
+
+exit 
 
 if [ ! -x /usr/bin/git ] ; then
     echo "Error: Git not installed.\nPlease install git and run again.";
@@ -51,6 +62,7 @@ echo "HOMENAME: $HOMENAME"
 echo "FILENAMES: $FILENAMES"
 # ---- Main Copy ----
 # git clone https://github.com/Richard-Lynch/dot_files.git
+
 # FILENAMES="$(cd ; cd  dot_files/ ; \ls -AI .git)" # linux
 FILENAMES="$(cd ; cd  dot_files/ ; \ls -A | grep -v '.git')" # mac
 echo $FILENAMES
@@ -101,8 +113,23 @@ else
 fi
 
 # youcompleteme
-sudo apt-get install build-essential cmake
-sudo apt-get install python-dev python3-dev
+case "${unameOut}" in
+    Linux*)     
+        machine=Linux
+        sudo apt-get install build-essential cmake
+        sudo apt-get install python-dev python3-dev
+        ;;
+    Darwin*)    
+        machine=Mac
+        brew install python
+        brew install python3
+        brew install cmake
+        ;;
+    *)          
+        echo "unknown machine, not compiling ycm"
+        exit
+        ;;
+esac
 
 cd ~/.vim/bundle/YouCompleteMe
 ./install.py --clang-completer
