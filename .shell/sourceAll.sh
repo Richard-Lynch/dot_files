@@ -2,12 +2,12 @@
 # source all files, called in bash_profile
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 # external files
-if [ -f $HOME/.bash_aliases ]; then
+if [[ -f $HOME/.bash_aliases ]] ; then
     . $HOME/.bash_aliases
 fi
 
-if [ -x $HOME/.vmwareAlias ] ; then
-    source $HOME/.vmwareAlias # connect to VMs
+if [[ -x $HOME/.vmwareAlias ]] ; then
+    . $HOME/.vmwareAlias # connect to VMs
 fi
 
 if [[ -x $HOME/.shell/colors.sh ]] ; then
@@ -24,6 +24,10 @@ fi
 
 if [[ -x $HOME/.shell/killLoads.sh ]] ; then
     . $HOME/.shell/killLoads.sh ; # kills all files containing $1
+fi
+
+if [[ -x $HOME/.shell/dircolors.sh ]] ; then
+    . $HOME/.shell/dircolors.sh ; # kills all files containing $1
 fi
 
 if [[ -x $HOME/.shell/git.sh ]] ; then

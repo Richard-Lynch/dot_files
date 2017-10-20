@@ -12,28 +12,31 @@ alias ycm="~/.vim/bundle/YCM-Generator/config_gen.py -b make ."
 alias addMake="cp ~/.make/makefileGeneric ./makefile;" ; 
 alias topme="top -U '$(whoami)'"
 
-# files
+# open file
 alias bp="(cd && vim .bash_profile)" # opens bash profile
 alias ba="(cd && vim .bash_aliases)" # opens bash aliases
 alias vrc="(cd && vim .vimrc)"  # opens vimrc
 alias tco="(cd && vim .tmux.conf)"  #opens tmux.conf
+alias g="(cd ~/.shell && vim git.sh)"  #opens tmux.conf
 alias bstuff="(cd && vim .bashStuff)"
 alias vstuff="(cd && vim .vimStuff)"
 alias tstuff="(cd && vim .tmuxStuff)"
 
-# clear
+# clear and jump to dir
 alias c="clear && lsa"  #clear and ls
 alias h="clear && cd && lsa"  #clear and return home and ls
 alias p="clear && cd $buildLocation && lsa"   #clear and return to build and ls
 alias s="clear && cd $scriptLocation && lsa"   #clear and return to build and ls
-alias t="clear && cd $scriptLocation && lsa"   #clear and return to build and ls
+alias t="clear && cd $testLocation && lsa"   #clear and return to build and ls
+alias e="clear && cd $envScriptLocation && lsa"   #clear and return to build and ls
+alias d="clear && cd $driveLocation && lsa"   #clear and return to build and ls
+alias D="clear && cd $documentsLocation && lsa"   #clear and return to build and ls
 
 # apt-get
 alias agud="sudo apt-get update"
 alias agug="sudo apt-get update;sudo apt-get upgrade"
 alias agi="sudo apt-get install"
 alias bi="brew install"
-
 
 # history
 alias H="history 10"  #lists history of commands
@@ -76,14 +79,6 @@ cd_clear () {       # enters dir, clers, and lists files inside
     lsa             ;
 }
 
-cd_noClear () {     # enters dir and lists files inside
-    if [ $# -ne 1 ] ; then
-        cd          ; else
-        cd "$1"     ;
-    fi
-    lsa             ;
-}
-
 alias cs="cd_clear" # should repalce cd
 
 alias ..="cs ../"
@@ -94,8 +89,7 @@ alias .4="cs ../../../../"
 alias .5="cs ../../../../../"
 alias .6="cs ../../../../../../"
 
-
-#---------------------tmux utils---------------------
+#---------------------TMUX---------------------
 alias tmux="tmux -2 -u"; 
 alias tk="tmux kill-session" ; 
 alias tls="tmux ls";
@@ -112,7 +106,7 @@ if [ -f ~/.bash_completion.d/ts ]; then
 fi
 
 
-#---------------------scripts---------------------
+#---------------------Scripts---------------------
 # asm
 alias asm="~/scripts/utils/asm.sh"
 if [ -f ~/.bash_completion.d/asm ]; then
@@ -123,5 +117,4 @@ alias casm="~/scripts/utils/casm.sh"
 if [ -f ~/.bash_completion.d/casm ]; then
 . ~/.bash_completion.d/casm
 fi
-
 

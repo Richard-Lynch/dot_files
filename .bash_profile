@@ -6,6 +6,9 @@ echo "bash profile was run"
 buildLocation="~/programs" 
 scriptLocation="~/programs/scripts"
 testLocation="~/programs/tests"
+envScriptLocation="~/.shell/"
+driveLocation="~/Drive/"
+documentsLocation="~/Drive/Documents/"
 
 # externals
 if [[ -x $HOME/.shell/sourceAll.sh ]] ; then
