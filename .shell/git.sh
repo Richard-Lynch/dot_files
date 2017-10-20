@@ -13,6 +13,18 @@ alias gp="git push origin"
 alias gls="git ls-tree -r master --name-only" # list files tracked by git ( same as "git ls-tree -r master --name-only" )
 alias gmv="git mv"
 
+gcp () {
+    if [[ $# == 0 ]] ; then
+        git commit -a ; 
+    elif [[ $# == 1 ]] ; then
+        git commit -am "$1" ; 
+    else 
+        echo "Usage: gcp [commit_message]" ; 
+        exit ; 
+    fi
+    git push origin ; 
+}
+
 gm () {
     origf=$(greadlink -f $1)
     gmv $1 ./
@@ -48,7 +60,7 @@ gadd () {               #creates a file in a git repo, adds it to the repo, comm
 #     git push origin $(git rev-parse --abbrev-ref HEAD);
 #     vim "$1"                        ;
 }
-gcp () {
+gCP () {
     cp "$1" "$2";
     (
     cd $2;
