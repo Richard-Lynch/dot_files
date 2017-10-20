@@ -93,10 +93,10 @@ printPDF () {
 alias pdf="printPDF"
 #---------------------NAVIGATION COMMANDS---------------------
 # list files
-# alias ls="ls --color=auto -FG"  #lists file with color and annotation
-alias la="ls -A"	#lists all including hidden colors etc
-alias lsa="ls -A"	#lists all including hidden colors etc
-alias lsal="ls -lAh" #lists as above + permissions
+alias ls="ls -F"  #lists file with color and annotation
+alias la="ls -AF"	#lists all including hidden colors etc
+alias lsa="ls -AF"	#lists all including hidden colors etc
+alias lsal="ls -lAhF" #lists as above + permissions
 alias lsgrep="ls | grep"
 alias lagrep="lsa | grep"
 alias llgrep="lsal | grep"
