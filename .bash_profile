@@ -55,24 +55,25 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# if [ -f /home/rlynch79/.bash_aliases ]; then
-  #   . /home/rlynch79/.bash_aliases
-# fi
+if [ -f $HOME/.bash_aliases ]; then
+    . $HOME/.bash_aliases
+fi
 
-#---------------------SHORTCUTS---------------------
-alias v="vim"
-alias ba="(cd && vim .bash_profile)"					# opens bash profileb
-alias vrc="(cd && vim .vimrc)"  # opens vimrc
-alias tco="(cd && vim .tmux.conf)"  #opens tmux.conf
-alias agud="sudo apt-get update"
-alias agug="sudo apt-get update;sudo apt-get upgrade"
-alias agi="sudo apt-get install"
-alias bstuff="(cd && vim .bashStuff)"
-alias vstuff="(cd && vim .vimStuff)"
-alias tstuff="(cd && vim .tmuxStuff)"
-# alias p="cd $buildLocation ; clear ; ls -A ;"
-# alias s="cd $scriptLocation ; clear ; ls -A ;"
-alias rmdi="rm -rf"
+    # #---------------------SHORTCUTS---------------------
+    # alias v="vim"
+    # alias ba="(cd && vim .bash_profile)"					# opens bash profileb
+    # alias vrc="(cd && vim .vimrc)"  # opens vimrc
+    # alias tco="(cd && vim .tmux.conf)"  #opens tmux.conf
+    # alias agud="sudo apt-get update"
+    # alias agug="sudo apt-get update;sudo apt-get upgrade"
+    # alias agi="sudo apt-get install"
+    # alias bstuff="(cd && vim .bashStuff)"
+    # alias vstuff="(cd && vim .vimStuff)"
+    # alias tstuff="(cd && vim .tmuxStuff)"
+    # # alias p="cd $buildLocation ; clear ; ls -A ;"
+    # # alias s="cd $scriptLocation ; clear ; ls -A ;"
+    # alias rmdi="rm -rf"
+
 printPDF () {
     vim '+hardcopy > out.ps' +q $1 ; 
     ps2pdf out.ps
@@ -81,24 +82,24 @@ printPDF () {
     rm out.ps
 }
 alias pdf="printPDF"
-#---------------------NAVIGATION COMMANDS---------------------
-# list files
-alias ls="ls -F"  #lists file with color and annotation
-alias la="ls -AF"	#lists all including hidden colors etc
-alias lsa="ls -AF"	#lists all including hidden colors etc
-alias lsal="ls -lAhF" #lists as above + permissions
-alias lsgrep="ls | grep"
-alias lagrep="lsa | grep"
-alias llgrep="lsal | grep"
+    # #---------------------NAVIGATION COMMANDS---------------------
+    # # list files
+    # alias ls="ls -F"  #lists file with color and annotation
+    # alias la="ls -AF"	#lists all including hidden colors etc
+    # alias lsa="ls -AF"	#lists all including hidden colors etc
+    # alias lsal="ls -lAhF" #lists as above + permissions
+    # alias lsgrep="ls | grep"
+    # alias lagrep="lsa | grep"
+    # alias llgrep="lsal | grep"
 
-ils () {
-    egrep -lir --include=*"$2"* "$1" .;
-}
+# ils () {
+#     egrep -lir --include=*"$2"* "$1" .;
+# }
 
 # files
 # alias cd="cd -P"    #"follow physical directory structure not sym links" ie show real path, not sym path (rlynch/ not ~/)
-alias cp="cp -irv" 	#copys but warns if there will be an override
-alias mv="mv -iv"	#moves but warns if there will be an override
+    # alias cp="cp -irv" 	#copys but warns if there will be an override
+    # alias mv="mv -iv"	#moves but warns if there will be an override
 
 # dirs
 alias dirs="dirs -v"    #lists the stack vertically with index's
@@ -117,17 +118,17 @@ betterpushd () {
 alias pushb="betterpushd" 
 alias popb="betterpopd"
 
-alias H="history"
-alias h="history 10"  #lists history of commands
-alias hls="history | grep -m 10"
-alias r='fc -s'     #repeats last command which cotnains first arg
+    # alias H="history"
+    # alias h="history 10"  #lists history of commands
+    # alias hls="history | grep -m 10"
+    # alias r='fc -s'     #repeats last command which cotnains first arg
 
-# mk
-alias mkdir="mkdir -p"     #creates intermediate dirs if required and is verbose
-mcdir () {                  #creates a dir and hops into it
-    mkdir -p "$1"       ;
-    cd "$1"             ;
-}
+    # # mk
+    # alias mkdir="mkdir -p"     #creates intermediate dirs if required and is verbose
+    # mcdir () {                  #creates a dir and hops into it
+    #     mkdir -p "$1"       ;
+    #     cd "$1"             ;
+    # }
 
 # clears
 # alias c="clear"   #clear and return home
@@ -135,120 +136,120 @@ mcdir () {                  #creates a dir and hops into it
 # alias b="clear && cd $buildLocation"   #clear and returns to build
 # alias s="clear && cd $scriptLocation" #clear and returns to scripts
 
-alias c="clear && lsa"  #clear and ls
-alias h="clear && cd && lsa"  #clear and return home and ls
-alias p="clear && cd $buildLocation && lsa"   #clear and return to build and ls
-alias s="clear && cd $scriptLocation && lsa"   #clear and return to build and ls
+# alias c="clear && lsa"  #clear and ls
+# alias h="clear && cd && lsa"  #clear and return home and ls
+# alias p="clear && cd $buildLocation && lsa"   #clear and return to build and ls
+# alias s="clear && cd $scriptLocation && lsa"   #clear and return to build and ls
 
 
-# cds
-cd_clear () {    #enters dir and lists files inside
-    if [ $# -ne 1 ]; then
-        cd          ;
-    else
-        cd "$1"     ;
-    fi
-    clear           ;
-    lsa              ;
-}
+    # # cds
+    # cd_clear () {    #enters dir and lists files inside
+    #     if [ $# -ne 1 ]; then
+    #         cd          ;
+    #     else
+    #         cd "$1"     ;
+    #     fi
+    #     clear           ;
+    #     lsa              ;
+    # }
+    # 
+    # cd_noClear () {    #enters dir and lists files inside
+    #     if [ $# -ne 1 ]; then
+    #         cd          ;
+    #     else
+    #         cd "$1"     ;
+    #     fi
+    #     lsa              ;
+    # }
+    # 
+    # alias cs="cd_clear" # should repalce cd
+    # 
+    # # cd
+    # alias ..="cs ../"
+    # alias ...="cs ../../"
+    # alias .2="cs ../../"
+    # alias .3="cs ../../../"
+    # alias .4="cs ../../../../"
+    # alias .5="cs ../../../../../"
+    # alias .6="cs ../../../../../../"
+    # 
+    # alias ..l="cd ../; ls"
+    # alias ...l="cd ../../; ls"
+    # alias .2l="cd ../../; ls"
+    # alias .3l="cd ../../../; ls"
+    # alias .4l="cd ../../../../; ls"
+    # alias .5l="cd ../../../../../; ls"
+    # alias .6l="cd ../../../../../../; ls"
+    # 
+    # # alias ..a="cd ../; lsa"
+    # # alias ...a="cd ../../; lsa"
+    # # alias .2a="cd ../../; lsa"
+    # # alias .3a="cd ../../../; lsa"
+    # # alias .4a="cd ../../../../; lsa"
+    # # alias .5a="cd ../../../../../; lsa"
+    # # alias .6a="cd ../../../../../../; lsa"
+    # 
 
-cd_noClear () {    #enters dir and lists files inside
-    if [ $# -ne 1 ]; then
-        cd          ;
-    else
-        cd "$1"     ;
-    fi
-    lsa              ;
-}
-
-alias cs="cd_clear" # should repalce cd
-
-# cd
-alias ..="cs ../"
-alias ...="cs ../../"
-alias .2="cs ../../"
-alias .3="cs ../../../"
-alias .4="cs ../../../../"
-alias .5="cs ../../../../../"
-alias .6="cs ../../../../../../"
-
-alias ..l="cd ../; ls"
-alias ...l="cd ../../; ls"
-alias .2l="cd ../../; ls"
-alias .3l="cd ../../../; ls"
-alias .4l="cd ../../../../; ls"
-alias .5l="cd ../../../../../; ls"
-alias .6l="cd ../../../../../../; ls"
-
-# alias ..a="cd ../; lsa"
-# alias ...a="cd ../../; lsa"
-# alias .2a="cd ../../; lsa"
-# alias .3a="cd ../../../; lsa"
-# alias .4a="cd ../../../../; lsa"
-# alias .5a="cd ../../../../../; lsa"
-# alias .6a="cd ../../../../../../; lsa"
-
-
-#---------------------tmux utils---------------------
-alias tmux="tmux -2 -u"; 
-alias tk="tmux kill-session" ; 
-alias tls="tmux ls";
-alias tsplit="~/scripts/multiTmux.sh" ;
-
-# alias ta="tmux attach -t";
-alias ta='tmux attach -t $1'
-if [ -f ~/.bash_completion.d/ta ]; then
-. ~/.bash_completion.d/ta
-fi
-
-alias ts='tmux switch -t $1'
-if [ -f ~/.bash_completion.d/ts ]; then
-. ~/.bash_completion.d/ts
-fi
-
-alias asm="~/scripts/utils/asm.sh"
-if [ -f ~/.bash_completion.d/asm ]; then
-. ~/.bash_completion.d/asm
-fi
-alias casm="~/scripts/utils/casm.sh"
-if [ -f ~/.bash_completion.d/casm ]; then
-. ~/.bash_completion.d/casm
-fi
-# ---- file in ~/.bash_completion.d/ta ----
-# _ta() {
-#     TMUX_SESSIONS=$(tmux ls -F '#S' | xargs)
-# 
-#     local cur=${COMP_WORDS[COMP_CWORD]}
-#     COMPREPLY=( $(compgen -W "$TMUX_SESSIONS" -- $cur) )
-# }
-# complete -F _ta ta
+    # #---------------------tmux utils---------------------
+    # alias tmux="tmux -2 -u"; 
+    # alias tk="tmux kill-session" ; 
+    # alias tls="tmux ls";
+    # alias tsplit="~/scripts/multiTmux.sh" ;
+    # 
+    # # alias ta="tmux attach -t";
+    # alias ta='tmux attach -t $1'
+    # if [ -f ~/.bash_completion.d/ta ]; then
+    # . ~/.bash_completion.d/ta
+    # fi
+    # 
+    # alias ts='tmux switch -t $1'
+    # if [ -f ~/.bash_completion.d/ts ]; then
+    # . ~/.bash_completion.d/ts
+    # fi
+    # 
+    # alias asm="~/scripts/utils/asm.sh"
+    # if [ -f ~/.bash_completion.d/asm ]; then
+    # . ~/.bash_completion.d/asm
+    # fi
+    # alias casm="~/scripts/utils/casm.sh"
+    # if [ -f ~/.bash_completion.d/casm ]; then
+    # . ~/.bash_completion.d/casm
+    # fi
+    # # ---- file in ~/.bash_completion.d/ta ----
+    # # _ta() {
+    # #     TMUX_SESSIONS=$(tmux ls -F '#S' | xargs)
+    # # 
+    # #     local cur=${COMP_WORDS[COMP_CWORD]}
+    # #     COMPREPLY=( $(compgen -W "$TMUX_SESSIONS" -- $cur) )
+    # # }
+    # # complete -F _ta ta
 
 
 #---------------------VIM utils---------------------
 alias ycm="~/.vim/bundle/YCM-Generator/config_gen.py -b make ."
 alias addMake="cp ~/.make/makefileGeneric ./makefile;" ; 
 
-#---------------------bash utils---------------------
-export VISUAL=vim
+#---------------------bash env---------------------
+export VISUAL=vim # default editor is vim
 export EDITOR="$VISUAL"
-export CDPATH=:..:~:~/programs
+export CDPATH=:..:~:~/programs # search each of these paths for autocomplete
 stty -ixon # disable CTRL-S to suspend terminal
 # bash source
 # Refresh Bash profile, commit and push to github and backup
-sb () {                                                         # refresh and backup bash_profile
-    (cd                                             ;           # open parenthesis creates subshell to execute from home dir                                                     
-    cp -iv ~/.bash_profile ~/.confBackup/bash_backup/bash_profile.backup.$(date +%Y-%m-%d_%H:%M:%S)   ;   # backup bash profile
-    cp -iv ~/.tmux.conf ~/.confBackup/tmux_backup/tmux.conf.backup.$(date +%Y-%m-%d_%H:%M:%S) ;     
-    cp -iv ~/.vim/vimrc ~/.confBackup/vim_backup/vim.backup.$(date +%Y-%m-%d_%H:%M:%S)   ; 
-    )   #outside of the subshell
-    source ~/.bash_profile                          ;           # refresh bash_profile
-#    echo "sourced bash"
-    tmux source ~/.tmux.conf        ;
-#    echo "sourced tmux";
-    }
-alias sbu="source ~/.bash_profile"  #sources bash without backup and stuff
+# sb () {   # refresh and backup bash_profile
+#     (cd                                             ;           # open parenthesis creates subshell to execute from home dir                                                     
+#     cp -iv ~/.bash_profile ~/.confBackup/bash_backup/bash_profile.backup.$(date +%Y-%m-%d_%H:%M:%S)   ;   # backup bash profile
+#     cp -iv ~/.tmux.conf ~/.confBackup/tmux_backup/tmux.conf.backup.$(date +%Y-%m-%d_%H:%M:%S) ;     
+#     cp -iv ~/.vim/vimrc ~/.confBackup/vim_backup/vim.backup.$(date +%Y-%m-%d_%H:%M:%S)   ; 
+#     )   #outside of the subshell
+#     source ~/.bash_profile                          ;           # refresh bash_profile
+# #    echo "sourced bash"
+#     tmux source ~/.tmux.conf        ;
+# #    echo "sourced tmux";
+#     }
+    # alias sbu="source ~/.bash_profile ; tmux source ~/.tmux.conf ; "  #sources bash without backup and stuff
 
-alias timer="echo Press CTL + D to stop timer.; time read;"        ;
+# alias timer="echo Press CTL + D to stop timer.; time read;"        ;
 
 create () {         #just creates a quick file
     fileString=""
