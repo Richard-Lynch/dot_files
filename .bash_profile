@@ -360,7 +360,9 @@ alias toprl="top -u rlynch79"
 # git push --set-upstream origin test       //create upstream branch of test on remote
 
 alias gcom="git commit -am"		# commits all to git
+alias gc="git commit -a"
 alias gpush="git push origin"	# pushes all to remote
+alias gp="git push origin"
 alias gls="git ls-tree -r master --name-only" # list files tracked by git ( same as "git ls-tree -r master --name-only" )
 # -- branches -- 
 gbls () {                        #lists the branches
@@ -401,24 +403,26 @@ gcp () {
 GITUSERNAME="Richard-Lynch"
 GitAccessToken=$(< ~/.gitToken)
 gnew () {
+    out="$(echo "$1" | tr '[ ]' '_')"
     # create directory, empty readme    
-    mkdir -p "$1" && cd "$1"        ;
+    mkdir -p "$out" && cd "$out"        ;
     touch readme.txt                ;
     # create local repo
     git init                        ;
     git add .                       ;
     git commit -am "First commit"   ;
     # create remote github repos, adds remote origin, verifys, pushs-
-    echo $GitAccessToken
-    curl -u $GITUSERNAME:$GitAccessToken https://api.github.com/user/repos -d "{\"name\":\"$1\"}"   ;
-    git remote add origin "git@github.com:$GITUSERNAME/$1.git"          ;
-#     "git@bbgithub.dev.bloomberg.com:rlynch79/$1.git"                      ;
+#     echo $GitAccessToken
+    curl -u $GITUSERNAME:$GitAccessToken https://api.github.com/user/repos -d "{\"name\":\"$out\"}"   ;
+    git remote add origin "git@github.com:$GITUSERNAME/$out.git"          ;
+#     "git@bbgithub.dev.bloomberg.com:rlynch79/$out.git"                      ;
     git remote -v                   ;
     git push -u origin master       ;
 }
 
 gnewRemote () {
-    curl -u $GITUSERNAME:$GitAccessToken https://api.github.com/user/repos -d "{\"name\":\"$1\"}"   ;
+    out="$(echo "$1" | tr '[ ]' '_')"
+    curl -u $GITUSERNAME:$GitAccessToken https://api.github.com/user/repos -d "{\"name\":\"$out\"}"   ;
 }
 
 # gDelRemote () {
@@ -455,6 +459,8 @@ gnewHere () {
 
 gFinishNew () {
     repoName=${PWD##*/}
+    out="$(echo "$repoName" | tr '[ ]' '_')"
+    repoName="$out"
     while : ; do
         echo -n "Finish repo in current dir:$repoName? "
         read yno
