@@ -48,13 +48,13 @@ create () {         #just creates a quick file
     # if no flag set, then just create a blank file
     if [[ $fileString != "" ]] ; then
         # Delete all leading blank lines at top of file (only).
-        sed -i '/./,$!d' $1 ; 
+        sed -i '' '/./,$!d' $1 ; 
         # add a line to the file if nessasary
         if [ \! -s $1 ] ; then echo "" >> $1 ; echo "added blank line to file" ;  fi ;
         # remove any lines starting with #!
-        sed -i '/^#!/ d' $1 ; 
+        sed -i '' '/^#!/ d' $1 ; 
         # insert the correct fileString to the top of the file
-        sed -i "1i#!$fileString" $1
+        sed -i '' "1i#!$fileString" $1
     else
         echo "fileString empty" > /dev/null
     fi

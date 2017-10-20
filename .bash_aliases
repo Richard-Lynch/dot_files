@@ -30,9 +30,8 @@ alias bi="brew install"
 
 
 # history
-alias H="history"
-alias h="history 10"  #lists history of commands
-alias hls="history | grep -m 10"
+alias H="history 10"  #lists history of commands
+alias hls="fc -lr -1000 | grep -m 10" # finds 10 last uses of $1 in 1000 commands
 alias r='fc -s'     #repeats last command which cotnains first arg
 
 
