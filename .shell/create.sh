@@ -56,7 +56,10 @@ create () {         #just creates a quick file
         # remove any lines starting with #!
         sed -i '' '/^#!/ d' $1 ; 
         # insert the correct fileString to the top of the file
-        sed -i '1i#!$fileString' $1
+        fileString="#!$fileString"
+        echo "at the adding line stage"
+        echo "fileString: $fileString"
+        gsed -i "1i$fileString" $1 # gsed = gnu-sed ( homebrew! )
     else
         echo "fileString empty" > /dev/null
     fi
