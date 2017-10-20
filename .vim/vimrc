@@ -132,6 +132,9 @@ set encoding=utf-8
 "map  <C-h> :tabp<CR>
 "map  <A-n> :tabnew<CR>
 
+" trying to clip to mac THIS WORKS FOR ME ON MACVIM
+set clipboard=unnamed
+
 
 "Information on the following setting can be found with
 ":help set

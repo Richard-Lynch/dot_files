@@ -1,0 +1,8 @@
+#!/bin/bash
+
+bold=$(tput bold)
+line=$(tput setab 0)
+col=$(tput setaf 227)
+col2=$(tput setaf 249)
+# col=$(tput setaf 46) #green
+reset=$(tput sgr0)
