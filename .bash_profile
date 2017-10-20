@@ -2,6 +2,11 @@
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo "bash profile was run"
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=i
+# externals
+if [[ -x $HOME/.shell/sourceAll.sh ]] ; then
+    . $HOME/.shell/sourceAll.sh ; 
+fi
+
 # defaults
 export VISUAL=vim # default editor is vim
 export EDITOR="$VISUAL"
