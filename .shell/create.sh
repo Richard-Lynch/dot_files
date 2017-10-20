@@ -56,7 +56,7 @@ create () {         #just creates a quick file
         # remove any lines starting with #!
         sed -i '' '/^#!/ d' $1 ; 
         # insert the correct fileString to the top of the file
-        sed -i '' '/1i#!$fileString' $1
+        sed -i '' '\1i#!$fileString' $1
     else
         echo "fileString empty" > /dev/null
     fi
