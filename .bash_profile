@@ -37,20 +37,8 @@ alias lslog="ls *.log.*";
 buildLocation="~/programs" 
 scriptLocation="~/programs/scripts"
 #---------------------Style of Terminal---------------------
-bold=$(tput bold)
-line=$(tput setab 0)
-col=$(tput setaf 227)
-col2=$(tput setaf 249)
-# col=$(tput setaf 46) #green
-reset=$(tput sgr0)
-# export PS1="\[\e[1;32m\]\H\[\e[0m\] :: \[\e[1;30m\]\d\[\e[0m\] \@ :: \[\e[1;33m\]\w\n\[\033[0m\]"
-#export PS1='\[$bold\][\w]\$\[$reset\] '
-# export PS1="\[${bold}\]\[${col}\]\u @ \w \[${reset}\]" # super small
-export PS1="\[${bold}\]\[${col}\][\w]\[${col2}\][\u : \h]\n\[${col}\]$ \[${reset}\]" # super small
-# ok so the \[ and \] around the bold and reset, basically tell bash that these values have size 0,so it doesnt 
-# grab random old commands and append them on to your PS1 when searching through history
-# export PS1="${bold}\w ${reset}" # super small
-
+source ~/.shell/colors.sh
+export PS1="\[${bold}\]\[${yellow}\][\w]\[${grey}\][\u : \h]\n\[${yellow}\]$ \[${reset}\]" # super small
 # enable color support of ls and also add handy aliases
 # mac
 export CLICOLOR=1
@@ -76,10 +64,12 @@ alias v="vim"
 alias ba="(cd && vim .bash_profile)"					# opens bash profileb
 alias vrc="(cd && vim .vimrc)"  # opens vimrc
 alias tco="(cd && vim .tmux.conf)"  #opens tmux.conf
-alias agu="sudo apt-get update"
+alias agud="sudo apt-get update"
 alias agug="sudo apt-get update;sudo apt-get upgrade"
 alias agi="sudo apt-get install"
 alias bstuff="(cd && vim .bashStuff)"
+alias vstuff="(cd && vim .vimStuff)"
+alias tstuff="(cd && vim .tmuxStuff)"
 # alias p="cd $buildLocation ; clear ; ls -A ;"
 # alias s="cd $scriptLocation ; clear ; ls -A ;"
 alias rmdi="rm -rf"
@@ -364,6 +354,16 @@ alias gc="git commit -a"
 alias gpush="git push origin"	# pushes all to remote
 alias gp="git push origin"
 alias gls="git ls-tree -r master --name-only" # list files tracked by git ( same as "git ls-tree -r master --name-only" )
+alias gmv="git mv"
+
+gm () {
+    origf=$(greadlink -f $1)
+    gmv $1 ./
+    fileName=$(basename $1)
+    newf=$(greadlink -f $fileName)
+    ln -s $newf $origf
+}
+
 # -- branches -- 
 gbls () {                        #lists the branches
     git branch -l                     ;
