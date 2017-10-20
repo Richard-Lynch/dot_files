@@ -46,6 +46,8 @@ create () {         #just creates a quick file
     # reset $1 to the first positional argument
     shift $(($OPTIND - 1))
     # if no flag set, then just create a blank file
+    touch $1        ;
+    chmod u+x $1    ;
     if [[ $fileString != "" ]] ; then
         # Delete all leading blank lines at top of file (only).
         sed -i '' '/./,$!d' $1 ; 
@@ -59,8 +61,6 @@ create () {         #just creates a quick file
         echo "fileString empty" > /dev/null
     fi
     
-    touch $1        ;
-    chmod u+x $1    ;
     vim $1          ;
     if [[ $addToGit == 1 ]] ; then
         git add $1      ;

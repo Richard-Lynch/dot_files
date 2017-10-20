@@ -2,11 +2,15 @@
 
 #---------------------SHORTCUTS---------------------
 # programs/commands
-alias v="vim"
 alias sbu="source ~/.bash_profile ; tmux source ~/.tmux.conf ; " # source env
 alias sb="(cd ; gcom 'sourcing' ; gpush ) ; sbu" # source and commit
 alias rmdi="rm -rf"
 alias toprl="top -u rlynch79"
+alias pdf="printPDF"
+alias v="vim"
+alias ycm="~/.vim/bundle/YCM-Generator/config_gen.py -b make ."
+alias addMake="cp ~/.make/makefileGeneric ./makefile;" ; 
+alias topme="top -U '$(whoami)'"
 
 # files
 alias ba="(cd && vim .bash_profile)" # opens bash profile
@@ -33,7 +37,6 @@ alias bi="brew install"
 alias H="history 10"  #lists history of commands
 alias hls="fc -lr -1000 | grep -m 10" # finds 10 last uses of $1 in 1000 commands
 alias r='fc -s'     #repeats last command which cotnains first arg
-
 
 #---------------------NAVIGATION COMMANDS---------------------
 # ls / list
