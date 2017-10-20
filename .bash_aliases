@@ -13,7 +13,8 @@ alias addMake="cp ~/.make/makefileGeneric ./makefile;" ;
 alias topme="top -U '$(whoami)'"
 
 # files
-alias ba="(cd && vim .bash_profile)" # opens bash profile
+alias bp="(cd && vim .bash_profile)" # opens bash profile
+alias ba="(cd && vim .bash_aliases)" # opens bash aliases
 alias vrc="(cd && vim .vimrc)"  # opens vimrc
 alias tco="(cd && vim .tmux.conf)"  #opens tmux.conf
 alias bstuff="(cd && vim .bashStuff)"
@@ -25,6 +26,7 @@ alias c="clear && lsa"  #clear and ls
 alias h="clear && cd && lsa"  #clear and return home and ls
 alias p="clear && cd $buildLocation && lsa"   #clear and return to build and ls
 alias s="clear && cd $scriptLocation && lsa"   #clear and return to build and ls
+alias t="clear && cd $scriptLocation && lsa"   #clear and return to build and ls
 
 # apt-get
 alias agud="sudo apt-get update"

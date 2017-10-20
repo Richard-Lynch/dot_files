@@ -2,8 +2,14 @@
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo "bash profile was run"
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=i
+# locations
+buildLocation="~/programs" 
+scriptLocation="~/programs/scripts"
+testLocation="~/programs/tests"
+
 # externals
 if [[ -x $HOME/.shell/sourceAll.sh ]] ; then
+    echo "sourcing all"
     . $HOME/.shell/sourceAll.sh ; 
 fi
 
@@ -34,8 +40,6 @@ shopt -s histverify # ??? TODO
 export PS1="\[${bold}\]\[${yellow}\][\w]\[${grey}\][\u : \h]\n\[${yellow}\]$ \[${reset}\]" # super small
 export PROMPT_COMMAND="history -a; history -c; history -r;" # append, clear, refresh
 
-# locations
-buildLocation="~/programs" 
-scriptLocation="~/programs/scripts"
+
 
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
