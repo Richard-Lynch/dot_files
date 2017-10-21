@@ -26,13 +26,14 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'vim-scripts/argtextobj.vim'
+Plugin 'airblade/vim-gitgutter.git'
 
 "------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+ "filetype plugin on
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -67,6 +68,19 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_show_hidden = 1
 
 set tags=./tags;
+
+"----git gutter----
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+nmap <Leader>h :GitGutterLineHighlightsToggle<CR>
+
+if exists('&signcolumn')  " Vim 7.4.2201
+  set signcolumn=yes
+else
+  let g:gitgutter_sign_column_always = 1
+endif
+" let g:gitgutter_highlight_lines = 1
+
 
 "colorscheme distinguished
 "autocmd BufEnter * colorscheme default
@@ -125,9 +139,9 @@ set encoding=utf-8
 " let NERDTreeDirArrows = 1
 
 "----ShowMarks-----
-" let g:showmarks_textlower=""
-" let g:showmarks_textupper=""
-" let g:showmarks_textother=""
+let g:showmarks_textlower="-"
+let g:showmarks_textupper="-"
+let g:showmarks_textother="-"
 
 "----Tabs------
 "next tab
@@ -170,8 +184,10 @@ else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
-set cursorline	" highlight current active line
+set nocursorline	" highlight current active line
+set nocursorcolumn	" highlight current active line
 set lazyredraw
+set scrolljump=1
 "add some more memory etc
 set hidden
 set history=1000

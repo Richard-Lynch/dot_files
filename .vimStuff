@@ -26,7 +26,7 @@ w - start of next word (go forward)
 e - end of word (go forward)
 b - start of word (go back)
 ge - eng of prev word (go back)
-p - paragraph
+p - paragraph 
 s - sentence
 t - tags
 
