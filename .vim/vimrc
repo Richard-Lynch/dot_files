@@ -107,22 +107,20 @@ endif
 " adds 'cut' - d no longer cuts, just deletes
 " note will need to use zl and zh to delete chars on either side of the cursor
 let g:EasyClipUseCutDefaults = 0 
-nmap z <Plug>MoveMotionPlug
-xmap z <Plug>MoveMotionXPlug
-nmap zz <Plug>MoveMotionLinePlug
+nmap d <Plug>MoveMotionPlug
+xmap d <Plug>MoveMotionXPlug
+nmap dd <Plug>MoveMotionLinePlug
 let g:EasyClipUseSubstituteDefaults = 1
 "substitute
 " siw - substitute clipboard to inner word
 " sip - substitue inner paragraph
 
+" toggle yank 
+" CTRL+f - search chronilogically backwards through yanks
+nmap <c-f> <plug>EasyClipSwapPasteForward
+" CTRL+d - search forward chronilogically through yanks
+nmap <c-d> <plug>EasyClipSwapPasteBackwards
 
-"colorscheme distinguished
-"autocmd BufEnter * colorscheme default
-"autocmd BufEnter *.php colorscheme Tomorrow-Night
-"autocmd BufEnter *.py colorscheme Tomorrow
-"
-"
-"
 "----YouCompleteMe----
 noremap <Leader>t :! ~/.vim/bundle/YCM-Generator/config_gen.py ..<CR>
 "" turn on completion in comments
@@ -177,12 +175,6 @@ set encoding=utf-8
 let g:showmarks_textlower="-"
 let g:showmarks_textupper="-"
 let g:showmarks_textother="-"
-
-"----Tabs------
-"next tab
-"map  <C-l> :tabn<CR>
-"map  <C-h> :tabp<CR>
-"map  <A-n> :tabnew<CR>
 
 " trying to clip to mac THIS WORKS FOR ME ON MACVIM
 set clipboard=unnamed
