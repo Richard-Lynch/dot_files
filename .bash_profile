@@ -22,6 +22,7 @@ export VISUAL=vim # default editor is vim
 export EDITOR="$VISUAL"
 if [ -x /usr/local/bin/mvim ] ; then
     alias vim="/usr/local/bin/mvim -v"
+    export EDITOR="/usr/local/bin/mvim -v"
 fi
 
 # options

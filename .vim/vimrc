@@ -31,6 +31,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
 Plugin 'svermeulen/vim-easyclip'
 
 "------------------------------------------------------------
@@ -524,6 +525,7 @@ set statusline+=%#todo#
 " set statusline+=[%{StatuslineGit()}]\ 
 set statusline+=\ %f\ 
 set statusline+=%#LineNr#
+set statusline+=%{fugitive#statusline()}
 set statusline+=%h%m%r%w                     " flags
 " set statusline+=%m\
 set statusline+=%=
