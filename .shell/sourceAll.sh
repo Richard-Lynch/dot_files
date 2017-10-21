@@ -14,8 +14,14 @@ if [[ -x $HOME/.shell/colors.sh ]] ; then
     . $HOME/.shell/colors.sh ; # color settings
 fi
 
-if [[ -x $HOME/.shell/printPDF.sh ]] ; then
-    . $HOME/.shell/printPDF.sh ; # prints to PDF via vim
+if [[ $(uname) == *"Darwin"* ]] ; then
+    if [[ -x $HOME/.shell/printPDFmac.sh ]] ; then
+        . $HOME/.shell/printPDFmac.sh ; # prints to PDF via vim
+    fi
+else
+    if [[ -x $HOME/.shell/printPDF.sh ]] ; then
+        . $HOME/.shell/printPDF.sh ; # prints to PDF via vim
+    fi
 fi
 
 if [[ -x $HOME/.shell/create.sh ]] ; then

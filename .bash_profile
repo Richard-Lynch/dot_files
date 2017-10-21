@@ -9,6 +9,7 @@ testLocation="~/programs/tests"
 envScriptLocation="~/.shell/"
 driveLocation="~/Drive/"
 documentsLocation="~/Drive/Documents/"
+engineeringLocation="~/Engineering"
 
 # externals
 if [[ -x $HOME/.shell/sourceAll.sh ]] ; then

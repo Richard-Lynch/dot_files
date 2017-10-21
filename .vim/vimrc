@@ -139,6 +139,7 @@ set encoding=utf-8
 " let NERDTreeDirArrows = 1
 
 "----ShowMarks-----
+" <Leader>mt // toggles marks
 let g:showmarks_textlower="-"
 let g:showmarks_textupper="-"
 let g:showmarks_textother="-"

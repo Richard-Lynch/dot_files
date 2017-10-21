@@ -31,6 +31,7 @@ alias t="clear && cd $testLocation && lsa"   #clear and return to build and ls
 alias e="clear && cd $envScriptLocation && lsa"   #clear and return to build and ls
 alias d="clear && cd $driveLocation && lsa"   #clear and return to build and ls
 alias D="clear && cd $documentsLocation && lsa"   #clear and return to build and ls
+alias E="clear && cd $engineeringLocation && lsa"   #clear and return to build and ls
 
 # apt-get
 alias agud="sudo apt-get update"
