@@ -1,4 +1,3 @@
-":? list shortcus
 ":pc preview close
 "ctrl-a increment number
 
@@ -89,7 +88,7 @@ endif
 
 "---------abolish------------------
 "abbreviation
-:Abolish char{,s}  character{,s}
+":Abolish char{,s}  character{,s}"
 "substitution
 ":Subvert/address{,es}/reference{,s}/g
 "Coercion
