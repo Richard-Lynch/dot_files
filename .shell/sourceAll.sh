@@ -14,6 +14,8 @@ if [[ -x $HOME/.shell/colors.sh ]] ; then
     . $HOME/.shell/colors.sh ; # color settings
 fi
 
+
+# platform specific
 if [[ $(uname) == *"Darwin"* ]] ; then
     if [[ -x $HOME/.shell/printPDFmac.sh ]] ; then
         . $HOME/.shell/printPDFmac.sh ; # prints to PDF via vim
