@@ -32,6 +32,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
+Plugin 'svermeulen/vim-easyclip'
 
 "------------------------------------------------------------
 " All of your Plugins must be added before the following line
@@ -88,7 +89,7 @@ endif
 
 "---------abolish------------------
 "abbreviation
-" Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
+:Abolish char{,s}  character{,s}
 "substitution
 ":Subvert/address{,es}/reference{,s}/g
 "Coercion
@@ -101,6 +102,19 @@ endif
 " noremap <Leader>C gcc
 " vnoremap <Leader>c gcc
 " vnoremap <Leader>C gcc
+
+"----------easyclip------------
+" adds 'cut' - d no longer cuts, just deletes
+" note will need to use zl and zh to delete chars on either side of the cursor
+let g:EasyClipUseCutDefaults = 0 
+nmap z <Plug>MoveMotionPlug
+xmap z <Plug>MoveMotionXPlug
+nmap zz <Plug>MoveMotionLinePlug
+let g:EasyClipUseSubstituteDefaults = 1
+"substitute
+" siw - substitute clipboard to inner word
+" sip - substitue inner paragraph
+
 
 "colorscheme distinguished
 "autocmd BufEnter * colorscheme default
