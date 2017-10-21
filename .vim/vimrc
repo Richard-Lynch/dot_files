@@ -24,6 +24,8 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/ShowMarks'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'rdnetto/YCM-Generator'
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'vim-scripts/argtextobj.vim'
 
 "------------------------------------------------------------
 " All of your Plugins must be added before the following line
@@ -70,6 +72,7 @@ set tags=./tags;
 "autocmd BufEnter * colorscheme default
 "autocmd BufEnter *.php colorscheme Tomorrow-Night
 "autocmd BufEnter *.py colorscheme Tomorrow
+"
 "
 "
 "----YouCompleteMe----
@@ -397,11 +400,12 @@ nnoremap <Leader>[ bi[<Esc>ea]<Esc>
 nnoremap <Leader>( bi(<Esc>ea)<Esc>
 
 "insert brackets/quotes around selection
-vnoremap <Leader>" di"<Esc>pli"<Esc>
-vnoremap <Leader>' di'<Esc>pli'<Esc>
-vnoremap <Leader>{ di{<Esc>pli}<Esc>
-vnoremap <Leader>[ di[<Esc>pli]<Esc>
-vnoremap <Leader>( di(<Esc>pli)<Esc>
+
+vnoremap <Leader>" l<Esc>`<i"<Esc>`>a"<Esc>
+vnoremap <Leader>' l<Esc>`<i'<Esc>`>a'<Esc>
+vnoremap <Leader>{ l<Esc>`<i{<Esc>`>a}<Esc>
+vnoremap <Leader>[ l<Esc>`<i[<Esc>`>a]<Esc>
+vnoremap <Leader>( l<Esc>`<i(<Esc>`>a)<Esc>
 
 "save and quit fast
 nnoremap <Leader>w :w<CR>

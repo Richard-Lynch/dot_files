@@ -22,10 +22,17 @@ c - change
 y - yank
 
 objects
-w - word
+w - start of next word (go forward)
+e - end of word (go forward)
+b - start of word (go back)
+ge - eng of prev word (go back)
 p - paragraph
 s - sentence
 t - tags
+
+--custom objects
+i - indent ( github.com/michaeljsmith/vim-indent-object/ )
+a - arguemnt ( https://github.com/vim-scripts/argtextobj.vim )
 
 multiplier - action - motion - object
 
