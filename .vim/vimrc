@@ -27,6 +27,11 @@ Plugin 'rdnetto/YCM-Generator'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'vim-scripts/argtextobj.vim'
 Plugin 'airblade/vim-gitgutter.git'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-commentary'
 
 "------------------------------------------------------------
 " All of your Plugins must be added before the following line
@@ -81,6 +86,21 @@ else
 endif
 " let g:gitgutter_highlight_lines = 1
 
+"---------abolish------------------
+"abbreviation
+" Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
+"substitution
+":Subvert/address{,es}/reference{,s}/g
+"Coercion
+"MixedCase (crm), camelCase (crc), snake_case (crs), UPPER_CASE (cru),
+"dash-case (cr-), dot.case (cr.), space case (cr<space>), and Title Case (crt)
+
+"--------commentary-----------------
+" noremap <C-c> gcc
+" noremap <Leader>c gcc
+" noremap <Leader>C gcc
+" vnoremap <Leader>c gcc
+" vnoremap <Leader>C gcc
 
 "colorscheme distinguished
 "autocmd BufEnter * colorscheme default
@@ -342,19 +362,38 @@ nnoremap <Leader>: m`A;<Esc>``
 " Commenting blocks of code.
 augroup filestypes_comments
 autocmd!
-    autocmd FileType c,cpp,java,scala       let b:comment_leader = '// '
-    autocmd FileType sh,ruby,python,tmux,make    let b:comment_leader = '# '
-    autocmd FileType conf,fstab             let b:comment_leader = '# '
-    autocmd FileType tex                    let b:comment_leader = '% '
-    autocmd FileType mail                   let b:comment_leader = '> '
-    autocmd FileType vim                    let b:comment_leader = '" '
-    autocmd FileType asm                    let b:comment_leader = '; '
+    autocmd FileType apache setlocal commentstring=#\ %s
 augroup END
+
+nnoremap <Leader>C :execute "normal \<Plug>CommentaryUndo"<CR>
+nnoremap <Leader>c :Commentary<CR>
+vnoremap <Leader>c :Commentary<CR>
+
+" CTRL+/ is mapped to CTRL+_ on most unix systems
+if has('win32')
+  nmap <C-/> :Commentary<CR>
+  vmap <C-/> :Commentary<CR>
+else
+  nmap <C-_> :Commentary<CR>
+  vmap <C-_> :Commentary<CR>
+endif
+
+" augroup filestypes_comments
+" autocmd!
+"     autocmd FileType c,cpp,java,scala       let b:comment_leader = '// '
+"     autocmd FileType sh,ruby,python,tmux,make    let b:comment_leader = '# '
+"     autocmd FileType conf,fstab             let b:comment_leader = '# '
+"     autocmd FileType tex                    let b:comment_leader = '% '
+"     autocmd FileType mail                   let b:comment_leader = '> '
+"     autocmd FileType vim                    let b:comment_leader = '" '
+"     autocmd FileType asm                    let b:comment_leader = '; '
+" augroup END
+
 "   (remap) (set_mark) (search for comment at start of line) (search for start of line) (clear search) (move back to mark) (correct offset) 
-noremap <Leader>c m`:s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>``ll
-noremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>``hh
-vnoremap <Leader>c m`:s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>gv
-vnoremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>gv
+" noremap <Leader>c m`:s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>``ll
+" noremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>``hh
+" vnoremap <Leader>c m`:s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>gv
+" vnoremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>gv
 
 if !exists("g:MyGitCommitCommand")
     let g:MyGitCommitCommand = "git commit -a"

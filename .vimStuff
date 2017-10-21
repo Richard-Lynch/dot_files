@@ -2,10 +2,51 @@ TODO
 add snippits - quickly add chunks of code
 add abriviations - quickly run command based on stuff typed in insert mode
 
+Coercion
+    MixedCase (crm), camelCase (crc), snake_case (crs), UPPER_CASE (cru),
+    dash-case (cr-), dot.case (cr.), space case (cr<space>), and Title Case (crt)
+Substitution
+    :Subvert/address{,es}/reference{,s}/g
+Abbreviation
+    :Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
+
+unimpared
+    [ before, or prev, or first
+    ] after, or next or last
+        <space> - add line
+        e       - exchange lines
+        f       - go to file
+        lowercase = next/prev, upper = first/last
+        q       - :cnext/cprev
+        a       - :next/prev
+        b       - :bnext/bprev
+        n       - SCM conflict marker/diff hunk
+    =o toggle
+    [o on
+    ]o off
+      l - list ( show endlines )  
+      r - relative numbers
+    > increase indent
+    < decrease indent
+    = same indent
+        p - paste linewise after
+        P - paste linewise before
+    [p - paste linewise before
+    ]p - paste linewise after
+
 
 motions
 i - in (inside of object)
 a - all (inside of object including surround, ie daw - delete word and white space, da" delete everything inside brackets including brackets)
+s - surrounding (tpope/vim-surround)
+    cs({ - change surrounding ( to {
+    ds" - delete surrounding "
+    ysiw} - wrap inner word in } ({ for no space)
+    yss) - wrap sentence in ) ( use ( for no space)
+    ds{ - delete surrounding {
+    VISUAL MODE
+        S<p class="important"> - wraps selection in p tag
+
 t - till (untill char not including)
 T - till backawards 
 f - find (untill char including char)
@@ -14,6 +55,8 @@ f - find backwards
 $ - end
 0 - start
 ^ - start non white
+
+
 
 actions
 d - delete
@@ -29,6 +72,8 @@ ge - eng of prev word (go back)
 p - paragraph 
 s - sentence
 t - tags
+
+
 
 --custom objects
 i - indent ( github.com/michaeljsmith/vim-indent-object/ )
@@ -59,3 +104,5 @@ syntatic
 let @a='CTRL+a - will paste the contents of the buffer for editing, needs a ' added at the end
 
 :CTRL+F - in command mode, show history
+
+
