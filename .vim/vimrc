@@ -344,7 +344,7 @@ call SetupCommandAlias("WQ","wq")
 "-----maps-----
 let mapleader=" "
 "space + r refreshes vimrc
-map <Leader>r :source ~/.vimrc<CR>:nohlsearch<CR>
+map <Leader>r :source ~/.vimrc<CR>:PluginInstall<CR>:q<CR>:nohlsearch<CR>
 
 "nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 
