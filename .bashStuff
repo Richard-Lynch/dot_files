@@ -1,3 +1,5 @@
+gdb - dashboard expressions watch
+
 # shortcuts
 CTRL(hold) + x then e (then realease CTRL) - command editor
 sudo !! - redo last command w/sudo 
