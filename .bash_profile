@@ -31,6 +31,8 @@ stty -ixon # disable CTRL-S to suspend terminal
 alias git="git -c http.sslVerify=false"
 export CLICOLOR=1 # supports color
 export LSCOLORS=ExFxBxDxCxegedabagacad # color selection
+# export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/VMware Fusion.app/Contents/Library:/Applications/VMware Fusion.app/Contents/Library"
+# export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/VMware Fusion.app/Contents/Library:/Applications/VMware Fusion.app/Contents/Library"
 
 # history
 HISTFILE="$HOME/.history" # location

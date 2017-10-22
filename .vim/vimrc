@@ -369,6 +369,7 @@ nnoremap <Leader>: m`A;<Esc>``
 augroup filestypes_comments
 autocmd!
     autocmd FileType apache setlocal commentstring=#\ %s
+    autocmd FileType asm setlocal commentstring=;\ %s
 augroup END
 
 nnoremap <Leader>C :execute "normal \<Plug>CommentaryUndo"<CR>

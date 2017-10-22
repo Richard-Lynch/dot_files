@@ -95,6 +95,8 @@ alias tmux="tmux -2 -u";
 alias tk="tmux kill-session" ; 
 alias tls="tmux ls";
 alias tsplit="~/scripts/multiTmux.sh" ;
+alias txp="tmux kill-pane -a" ; # kill all other panes in windows
+alias txw="tmux kill-window -a"; # kill all other windows in session
 
 alias ta='tmux attach -t $1'
 if [ -f ~/.bash_completion.d/ta ]; then
