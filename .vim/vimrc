@@ -33,7 +33,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'svermeulen/vim-easyclip'
-Plugin 'vim-scripts/minimal_gdb'
+Plugin 'mechatroner/minimal_gdb'
 
 "------------------------------------------------------------
 " All of your Plugins must be added before the following line
