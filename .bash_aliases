@@ -11,6 +11,7 @@ alias v="vim"
 alias ycm="~/.vim/bundle/YCM-Generator/config_gen.py -b make ."
 alias addMake="cp ~/.make/makefileGeneric ./makefile;" ; 
 alias topme="top -U '$(whoami)'"
+alias ghci="/usr/local/Cellar/ghc\@8.0/8.0.2/bin/ghci"
 
 # open file
 alias bp="(cd && vim .bash_profile)" # opens bash profile

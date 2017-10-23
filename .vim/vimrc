@@ -34,6 +34,8 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'svermeulen/vim-easyclip'
 Plugin 'mechatroner/minimal_gdb'
+" Plugin 'python-mode/python-mode'
+"hi pythonSelf  ctermfg=68  guifg=#5f87d7 cterm=bold gui=bold
 
 "------------------------------------------------------------
 " All of your Plugins must be added before the following line
@@ -76,10 +78,6 @@ let g:ctrlp_show_hidden = 1
 
 set tags=./tags;
 
-"----git gutter----
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
-nmap <Leader>h :GitGutterLineHighlightsToggle<CR>
 
 if exists('&signcolumn')  " Vim 7.4.2201
   set signcolumn=yes
@@ -97,12 +95,12 @@ endif
 "MixedCase (crm), camelCase (crc), snake_case (crs), UPPER_CASE (cru),
 "dash-case (cr-), dot.case (cr.), space case (cr<space>), and Title Case (crt)
 
-"--------commentary-----------------
-" noremap <C-c> gcc
-" noremap <Leader>c gcc
-" noremap <Leader>C gcc
-" vnoremap <Leader>c gcc
-" vnoremap <Leader>C gcc
+""--------commentary-----------------
+"noremap <C-c> gcc
+"noremap <Leader>c gcc
+"noremap <Leader>C gcc
+"vnoremap <Leader>c gcc
+"vnoremap <Leader>C gcc
 
 "----------easyclip------------
 " adds 'cut' - d no longer cuts, just deletes
@@ -346,6 +344,10 @@ let mapleader=" "
 "space + r refreshes vimrc
 map <Leader>r :source ~/.vimrc<CR>:PluginInstall<CR>:q<CR>:nohlsearch<CR>
 
+"----git gutter----
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+nmap <Leader>h :GitGutterLineHighlightsToggle<CR>
 "nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 
 "map <Leader>q :qa<CR>:!tk 
