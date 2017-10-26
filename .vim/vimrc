@@ -1,6 +1,7 @@
 ":pc preview close
 "ctrl-a increment number
 
+let mapleader=" "
 " source ~/.vim/settings-syntastic.vim
 "pretty sure pathogen isnt working
 " execute pathogen#infect()
@@ -36,6 +37,7 @@ Plugin 'svermeulen/vim-easyclip'
 Plugin 'mechatroner/minimal_gdb'
 " Plugin 'python-mode/python-mode'
 "hi pythonSelf  ctermfg=68  guifg=#5f87d7 cterm=bold gui=bold
+Plugin 'scrooloose/nerdtree'
 
 "------------------------------------------------------------
 " All of your Plugins must be added before the following line
@@ -148,26 +150,27 @@ let g:ycm_complete_in_strings = 1
 set encoding=utf-8
 
 " "----NERDtree----
-" "Toggle nerd
-" map <C-n> :NERDTreeToggle<CR>
-" 
-" augroup nerdGroup
-"     au!
-"     "start nerd when opened with no file
-"     autocmd StdinReadPre * let s:std_in=1
-"     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"     
-"     "close auto
-"     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" augroup END
-" let NERDTreeQuitOnOpen = 1
-" "arrows
-" "let g:NERDTreeDirArrowExpandable = '>'
-" "let g:NERDTreeDirArrowCollapsible = '!'
-" let NERDTreeMinimalUI = 1
-" let NERDTreeAutoDeleteBuffer = 1
-" let NERDTreeShowHidden=1
-" let NERDTreeDirArrows = 1
+"Toggle nerd
+"https://www.cheatography.com/stepk/cheat-sheets/vim-nerdtree/
+map <Leader>n :NERDTreeToggle<CR>
+ 
+ augroup nerdGroup
+     au!
+     "start nerd when opened with no file
+     autocmd StdinReadPre * let s:std_in=1
+     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+     
+     "close auto
+     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+ augroup END
+ let NERDTreeQuitOnOpen = 1
+ "arrows
+ "let g:NERDTreeDirArrowExpandable = '>'
+ "let g:NERDTreeDirArrowCollapsible = '!'
+ let NERDTreeMinimalUI = 1
+ let NERDTreeAutoDeleteBuffer = 1
+ let NERDTreeShowHidden=1
+ let NERDTreeDirArrows = 1
 
 "----ShowMarks-----
 " <Leader>mt // toggles marks
@@ -340,7 +343,6 @@ call SetupCommandAlias("Wq","wq")
 call SetupCommandAlias("WQ","wq")
 
 "-----maps-----
-let mapleader=" "
 "space + r refreshes vimrc
 map <Leader>r :source ~/.vimrc<CR>:PluginInstall<CR>:q<CR>:nohlsearch<CR>
 
