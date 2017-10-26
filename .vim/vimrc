@@ -38,6 +38,7 @@ Plugin 'mechatroner/minimal_gdb'
 " Plugin 'python-mode/python-mode'
 "hi pythonSelf  ctermfg=68  guifg=#5f87d7 cterm=bold gui=bold
 Plugin 'scrooloose/nerdtree'
+Plugin 'christoomey/vim-tmux-navigator'
 
 "------------------------------------------------------------
 " All of your Plugins must be added before the following line
@@ -62,6 +63,8 @@ augroup vundle
 augroup end
 "---------
 syntax on
+
+
 
 " inoremap ;;b <em></em><Space><++><esc>FeT>i
 set makeprg=[[\ -f\ makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ .. 
