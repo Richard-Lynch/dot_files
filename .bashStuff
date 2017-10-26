@@ -1,5 +1,10 @@
 gdb - dashboard expressions watch
 
+https://github.com/morgant/tools-osx
+    trash - send to trash with undo
+    with - open with and change default
+    ql - quicklook
+
 # shortcuts
 CTRL(hold) + x then e (then realease CTRL) - command editor
 sudo !! - redo last command w/sudo 

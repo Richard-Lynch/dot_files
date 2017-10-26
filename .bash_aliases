@@ -46,17 +46,6 @@ alias hls="fc -lr -1000 | grep -m 10" # finds 10 last uses of $1 in 1000 command
 alias r='fc -s'     #repeats last command which cotnains first arg
 
 #---------------------NAVIGATION COMMANDS---------------------
-# ls / list
-alias ls="ls -F"  #lists file with color and annotation
-alias la="ls -AF"	#lists all including hidden colors etc
-alias lsa="ls -AF"	#lists all including hidden colors etc
-alias lsal="ls -lAhF" #lists as above + permissions
-alias lsgrep="ls | grep" # list and grep output
-alias lagrep="lsa | grep" # list all and grep output 
-alias llgrep="lsal | grep" # list all with details and grep output
-ils () { # list files that include string $1, and have a name which contains $2(opt)
-    egrep -lir --include=*"$2"* "$1" .;
-}
 alias log="vim *.log.*";
 alias lslog="ls *.log.*";
 
@@ -122,3 +111,6 @@ if [ -f ~/.bash_completion.d/casm ]; then
 . ~/.bash_completion.d/casm
 fi
 
+#-------------------Mac---------------------------
+alias showHidden='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hideHidden='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'

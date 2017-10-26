@@ -6,14 +6,17 @@ if [[ -f $HOME/.bash_aliases ]] ; then
     . $HOME/.bash_aliases
 fi
 
-if [[ -x $HOME/.vmwareAlias ]] ; then
-    . $HOME/.vmwareAlias # connect to VMs
+if [[ -x $HOME/.shell/.vmwareAlias ]] ; then
+    . $HOME/.shell/.vmwareAlias # connect to VMs
 fi
 
 if [[ -x $HOME/.shell/colors.sh ]] ; then
     . $HOME/.shell/colors.sh ; # color settings
 fi
 
+if [[ -x $HOME/.shell/lsAlias.sh ]] ; then
+    . $HOME/.shell/lsAlias.sh ; # ls alias settings
+fi
 
 # platform specific
 if [[ $(uname) == *"Darwin"* ]] ; then
