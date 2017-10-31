@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -x /usr/local/bin/mvim ] ; then
+    alias vim="/usr/local/bin/mvim -v"
+    export EDITOR="/usr/local/bin/mvim -v"
+fi
 
 create () {         #just creates a quick file
     fileString=""

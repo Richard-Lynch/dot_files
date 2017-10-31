@@ -23,9 +23,15 @@ if [[ $(uname) == *"Darwin"* ]] ; then
     if [[ -x $HOME/.shell/printPDFmac.sh ]] ; then
         . $HOME/.shell/printPDFmac.sh ; # prints to PDF via vim
     fi
+    if [[ -x $HOME/.shell/whichEditorMac.sh ]] ; then
+        . $HOME/.shell/whichEditorMac.sh ; # prints to PDF via vim
+    fi
 else
     if [[ -x $HOME/.shell/printPDF.sh ]] ; then
         . $HOME/.shell/printPDF.sh ; # prints to PDF via vim
+    fi
+    if [[ -x $HOME/.shell/whichEditorLinux.sh ]] ; then
+        . $HOME/.shell/whichEditorLinux.sh ; # prints to PDF via vim
     fi
 fi
 

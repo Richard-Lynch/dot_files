@@ -65,7 +65,6 @@ augroup end
 syntax on
 
 
-
 " inoremap ;;b <em></em><Space><++><esc>FeT>i
 set makeprg=[[\ -f\ makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ .. 
 " let &makeprg = '[[ -f makefile ]] && make || make -C ..'
@@ -491,7 +490,8 @@ nnoremap L $
 nnoremap ; :
 
 "CTRL+L cancel highlight and redraw screen
-nnoremap <C-l> :nohl<CR><C-l>
+" unmap <C-l>
+nnoremap <C-c> :nohl<CR><C-l>
 
 " " Copy to buffer
 " vmap <Leader>y :w! ~/shared/clip<CR>

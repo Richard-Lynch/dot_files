@@ -24,15 +24,15 @@ alias vstuff="(cd && vim .vimStuff)"
 alias tstuff="(cd && vim .tmuxStuff)"
 
 # clear and jump to dir
-alias c="clear && lsa"  #clear and ls
-alias h="clear && cd && lsa"  #clear and return home and ls
-alias p="clear && cd $buildLocation && lsa"   #clear and return to build and ls
-alias s="clear && cd $scriptLocation && lsa"   #clear and return to build and ls
-alias t="clear && cd $testLocation && lsa"   #clear and return to build and ls
-alias e="clear && cd $envScriptLocation && lsa"   #clear and return to build and ls
-alias d="clear && cd $driveLocation && lsa"   #clear and return to build and ls
-alias D="clear && cd $documentsLocation && lsa"   #clear and return to build and ls
-alias E="clear && cd $engineeringLocation && lsa"   #clear and return to build and ls
+alias c="clear && \ls -A"  #clear and ls
+alias h="clear && cd && \ls -A"  #clear and return home and ls
+alias p="clear && cd $buildLocation && \ls -AF"   #clear and return to build and ls
+alias s="clear && cd $scriptLocation && \ls -AF"   #clear and return to build and ls
+alias t="clear && cd $testLocation && \ls -AF"   #clear and return to build and ls
+alias e="clear && cd $envScriptLocation && \ls -AF"   #clear and return to build and ls
+alias d="clear && cd $driveLocation && \ls -AF"   #clear and return to build and ls
+alias D="clear && cd $documentsLocation && \ls -AF"   #clear and return to build and ls
+alias E="clear && cd $engineeringLocation && \ls -AF"   #clear and return to build and ls
 
 # apt-get
 alias agud="sudo apt-get update"
@@ -67,7 +67,7 @@ cd_clear () {       # enters dir, clers, and lists files inside
         cd "$1"     ;
     fi
     clear           ;
-    lsa             ;
+    \ls -AF         ;
 }
 
 alias cs="cd_clear" # should repalce cd
