@@ -1,0 +1,5 @@
+using large file stoarge:
+    git lfs track "*.psd"
+    git add .gitattributes
+    then just add and commit as normal
+

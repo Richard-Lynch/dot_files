@@ -1,5 +1,0 @@
-_asm() {
-    local cur=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=( $( compgen -f -X '!*.asm' -- $cur ) )
-}
-complete -o nospace -F _asm asm

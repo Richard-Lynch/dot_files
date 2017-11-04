@@ -47,6 +47,7 @@ shopt -s histverify # ??? TODO
 export PS1="\[${bold}\]\[${yellow}\][\w]\[${grey}\][\u : \h]\n\[${yellow}\]$ \[${reset}\]" # super small
 export PROMPT_COMMAND="history -a; history -c; history -r;" # append, clear, refresh
 
-
+# enable bash completion
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
