@@ -1,0 +1,5 @@
+_casm() {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $( compgen -f -X '!*.asm' -- $cur ) $(compgen -f -X '!*.c' -- $cur) $(compgen -f -X '!*.cpp' -- $cur) )
+}
+complete -o nospace -F _casm casm

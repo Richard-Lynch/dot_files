@@ -6,8 +6,15 @@ if [[ -f $HOME/.bash_aliases ]] ; then
     . $HOME/.bash_aliases
 fi
 
-if [[ -x $HOME/.shell/.vmwareAlias ]] ; then
-    . $HOME/.shell/.vmwareAlias # connect to VMs
+if [[ -x $HOME/.shell/vmAliases ]] ; then
+    . $HOME/.shell/vmAliases # connect to VMs
+fi
+
+if [[ -x $HOME/.shell/IFTTT/makerHook.sh ]] ; then
+    . $HOME/.shell/IFTTT/makerHook.sh # add makerHook, for IFFT
+    if [[ -x $HOME/.shell/IFTTT/remind.sh ]] ; then
+        . $HOME/.shell/IFTTT/remind.sh # add reminder to ios (remind x y)
+    fi
 fi
 
 if [[ -x $HOME/.shell/colors.sh ]] ; then

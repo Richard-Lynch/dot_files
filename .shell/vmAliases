@@ -1,0 +1,41 @@
+#!/bin/bash
+
+alias aws="ssh -i "~/.ssh/awspem/IrelandVM.pem" ubuntu@ec2-54-154-93-7.eu-west-1.compute.amazonaws.com";
+alias aws2="ssh -i "~/.ssh/awspem/IrelandVM.pem" ubuntu@ec2-34-240-42-121.eu-west-1.compute.amazonaws.com";
+# alias mlaws="ssh -i "~/.ssh/awspem/IrelandVM.pem" ubuntu@ec2-54-246-220-121.eu-west-1.compute.amazonaws.com"
+# alias rmlaws="ssh richie@ec2-54-154-91-13.eu-west-1.compute.amazonaws.com" # standard2
+
+alias stoker="ssh lynchri@stoker.scss.tcd.ie"
+# alias nebula="ssh -o LogLevel=Error -o 'StrictHostKeyChecking no' -t lynchri@stoker.scss.tcd.ie 'ssh root@$1'"
+# nebula () {
+#     jump_node="$(echo "lynchri@stoker.scss.tcd.ie")"
+#     target="$(echo "ssh root@$1")"
+#     # echo '$(target)'     
+# }
+
+nebTest () {
+    jump_node="lynchri@stoker.scss.tcd.ie"
+    # target="$1"
+    target="10.62.0.57"
+    # ssh -o LogLevel=Error -o StrictHostKeyChecking=no -t $jump_node ''$target''
+     ssh -tt $jump_node ssh -tt root@$target
+}
+
+alias dvm="ssh norm@192.168.201.128"
+
+amlaws () { 
+	ssh $1@ec2-54-154-42-242.eu-west-1.compute.amazonaws.com
+}
+
+# VMware Fusion
+if [ -d "/Applications/VMware Fusion.app/Contents/Library" ]; then
+    export PATH=$PATH:"/Applications/VMware Fusion.app/Contents/Library"
+    vmName="/Users/richie/Virtual\ Machines.localized/Debian\ 8.x\ 64-bit.vmwarevm"
+    alias vstart="vmrun start $vmName nogui"
+    alias vstop="vmrun stop $vmName"
+fi
+
+alias pi="ssh pi@192.168.0.58"
+alias rpi="ssh pi@79.97.206.77 -p 2200"
+
+ip="8080 54.154.93.7"

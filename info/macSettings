@@ -1,0 +1,7 @@
+defaults write com.apple.Terminal AppleShowScrollBars -string WhenScrolling
+defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+#change screenshot default location
+defaults write com.apple.screencapture location LOCATION_TO_SAVE_SCREENSHOTS
+#restart UI for screenshot location
+killall SystemUIServer
+

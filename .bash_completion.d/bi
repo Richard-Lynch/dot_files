@@ -1,0 +1,79 @@
+# Bash completion script for brew install, taken from bash_completion brew(1)
+# Richard Lynch
+
+__brewcomp_words_include() {
+  local i=1
+  while [[ "$i" -lt "$COMP_CWORD" ]]
+  do
+    if [[ "${COMP_WORDS[i]}" = "$1" ]]
+    then
+      return 0
+    fi
+    i="$((++i))"
+  done
+  return 1
+}
+
+# Find the previous non-switch word
+__brewcomp_prev() {
+  local idx="$((COMP_CWORD - 1))"
+  local prv="${COMP_WORDS[idx]}"
+  while [[ "$prv" = -* ]]
+  do
+    idx="$((--idx))"
+    prv="${COMP_WORDS[idx]}"
+  done
+  echo "$prv"
+}
+
+__brewcomp() {
+  # break $1 on space, tab, and newline characters,
+  # and turn it into a newline separated list of words
+  local list s sep=$'\n' IFS=$' '$'\t'$'\n'
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+
+  for s in $1
+  do
+    __brewcomp_words_include "$s" && continue
+    list="$list$s$sep"
+  done
+
+  IFS="$sep"
+  COMPREPLY=($(compgen -W "$list" -- "$cur"))
+}
+
+# Don't use __brewcomp() in any of the __brew_complete_foo functions, as
+# it is too slow and is not worth it just for duplicate elimination.
+_brew_install() {
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  local prv="$(__brewcomp_prev)"
+
+  case "$cur" in
+    --*)
+      if __brewcomp_words_include "--interactive"
+      then
+        __brewcomp "--devel --git --HEAD"
+      else
+        __brewcomp "
+          --build-from-source --build-bottle --force-bottle
+          --debug
+          --devel
+          --HEAD
+          --ignore-dependencies
+          --interactive
+          --only-dependencies
+          --verbose
+          $(brew options --compact "$prv" 2>/dev/null)
+          "
+      fi
+      return
+      ;;
+  esac
+  __brew_complete_formulae
+}
+# keep around for compatibility
+_brew_to_completion() {
+  _bi
+}
+
+complete -o bashdefault -o default -F _brew_install bi

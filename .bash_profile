@@ -5,11 +5,13 @@ echo "bash profile was run"
 # locations
 buildLocation="~/programs" 
 scriptLocation="~/programs/scripts"
+utilsLocation="~/programs/scripts/utils"
 testLocation="~/programs/tests"
 envScriptLocation="~/.shell/"
+infoLocation="~/info/"
 driveLocation="~/Drive/"
 documentsLocation="~/Drive/Documents/"
-engineeringLocation="~/Engineering"
+engLocation="~/Engineering"
 
 # externals
 if [[ -x $HOME/.shell/sourceAll.sh ]] ; then
@@ -22,6 +24,7 @@ export VISUAL=vim # default editor is vim
 export EDITOR="$VISUAL"
 if [ -x /usr/local/bin/mvim ] ; then
     alias vim="/usr/local/bin/mvim -v"
+    export VISUAL="/usr/local/bin/mvim -v" # default editor is vim
     export EDITOR="/usr/local/bin/mvim -v"
 fi
 
@@ -42,7 +45,7 @@ export HISTCONTROL=ignoreboth:erasedups # no dupes, keep clean
 export HISTTIMEFORMAT="%d/%m/%y %T "
 shopt -s histappend # dont override history
 shopt -s histverify # ??? TODO
-
+export HOMEBREW_GITHUB_API_TOKEN="~/.gitToken"
 # prompt
 export PS1="\[${bold}\]\[${yellow}\][\w]\[${grey}\][\u : \h]\n\[${yellow}\]$ \[${reset}\]" # super small
 export PROMPT_COMMAND="history -a; history -c; history -r;" # append, clear, refresh

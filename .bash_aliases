@@ -9,6 +9,7 @@ alias toprl="top -u rlynch79"
 alias pdf="printPDF"
 alias v="vim"
 alias ycm="~/.vim/bundle/YCM-Generator/config_gen.py -b make ."
+alias tag="/usr/local/bin/ctags -R --exclude='.git' . -L .srclist"
 alias addMake="cp ~/.make/makefileGeneric ./makefile;" ; 
 alias topme="top -U '$(whoami)'"
 alias ghci="/usr/local/Cellar/ghc\@8.0/8.0.2/bin/ghci"
@@ -23,16 +24,18 @@ alias bstuff="(cd && vim .bashStuff)"
 alias vstuff="(cd && vim .vimStuff)"
 alias tstuff="(cd && vim .tmuxStuff)"
 
-# clear and jump to dir
-alias c="clear && \ls -A"  #clear and ls
-alias h="clear && cd && \ls -A"  #clear and return home and ls
-alias p="clear && cd $buildLocation && \ls -AF"   #clear and return to build and ls
-alias s="clear && cd $scriptLocation && \ls -AF"   #clear and return to build and ls
-alias t="clear && cd $testLocation && \ls -AF"   #clear and return to build and ls
-alias e="clear && cd $envScriptLocation && \ls -AF"   #clear and return to build and ls
-alias d="clear && cd $driveLocation && \ls -AF"   #clear and return to build and ls
-alias D="clear && cd $documentsLocation && \ls -AF"   #clear and return to build and ls
-alias E="clear && cd $engineeringLocation && \ls -AF"   #clear and return to build and ls
+# clear, jump to dir, ls
+alias c="clear && \ls -A"
+alias h="clear && cd && \ls -A"                     # Home
+alias p="clear && cd $buildLocation && \ls -AF"     # Build
+alias s="clear && cd $scriptLocation && \ls -AF"    # scripts 
+alias t="clear && cd $testLocation && \ls -AF"      # test scripts
+alias u="clear && cd $utilsLocation && \ls -AF"     # util scripts
+alias e="clear && cd $envScriptLocation && \ls -AF" # env scrips
+alias i="clear && cd $infoLocation && \ls -AF"      # info scrips
+alias d="clear && cd $driveLocation && \ls -AF"     # drive
+alias D="clear && cd $documentsLocation && \ls -AF" # documents
+alias E="clear && cd $engLocation && \ls -AF"       # engineering 
 
 # apt-get
 alias agud="sudo apt-get update"
@@ -89,14 +92,14 @@ alias txp="tmux kill-pane -a" ; # kill all other panes in windows
 alias txw="tmux kill-window -a"; # kill all other windows in session
 
 alias ta='tmux attach -t $1'
-if [ -f ~/.bash_completion.d/ta ]; then
-. ~/.bash_completion.d/ta
-fi
+# if [ -f ~/.bash_completion.d/ta ]; then
+# . ~/.bash_completion.d/ta
+# fi
 
 alias ts='tmux switch -t $1'
-if [ -f ~/.bash_completion.d/ts ]; then
-. ~/.bash_completion.d/ts
-fi
+# if [ -f ~/.bash_completion.d/ts ]; then
+# . ~/.bash_completion.d/ts
+# fi
 
 
 #---------------------Scripts---------------------

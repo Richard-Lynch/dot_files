@@ -1,0 +1,14 @@
+passwordless ssh
+[l] = local [r] = remote
+[l] ssh-keygen
+[l] scp ~/.ssh/id_rsa.pub $remoteName$remoteHost:$remotePath
+[r] touch authorized_keys
+[r] cat $remotePath >> authorized_keys
+[mac(optional)] eval "$(ssh-agent -s)"
+[mac] "add below to ~/.ssh/config
+Host *
+ AddKeysToAgent yes
+ UseKeychain yes
+ IdentityFile ~/.ssh/id_rsa
+[mac] ssh-add -K ~/.ssh/id_rsa
+

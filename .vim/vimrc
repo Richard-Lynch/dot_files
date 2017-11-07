@@ -38,8 +38,13 @@ Plugin 'mechatroner/minimal_gdb'
 " Plugin 'python-mode/python-mode'
 "hi pythonSelf  ctermfg=68  guifg=#5f87d7 cterm=bold gui=bold
 Plugin 'scrooloose/nerdtree'
-Plugin 'christoomey/vim-tmux-navigator'
-
+" Plugin 'christoomey/vim-tmux-navigator'
+" Plugin 'Townk/vim-autoclose'
+Plugin 'jakedouglas/exuberant-ctags'
+Plugin 'majutsushi/tagbar'
+Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
+Plugin 'gosukiwi/vim-atom-dark'
 "------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -75,13 +80,16 @@ set nocp
 "---CtrlP----
 "this runtime makes ctrlp work
  set runtimepath^=~/.vim/bundle/ctrlp.vim
+ " set runtimepath^=~/.vim/bundle/vim-easyclip/
 "maps
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_show_hidden = 1
-
-set tags=./tags;
-
+"
+set tags=./tags;~/Programs " will search up till programs for tags
+let g:easytags_file= './tags'
+let g:easytags_dynamic_files = 1
+let g:easytags_cmd = '/usr/local/bin/ctags'
 
 if exists('&signcolumn')  " Vim 7.4.2201
   set signcolumn=yes
@@ -355,7 +363,7 @@ nmap <Leader>h :GitGutterLineHighlightsToggle<CR>
 "nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 
 "map <Leader>q :qa<CR>:!tk 
-" map <Leader>s :call CurtineIncSw()<CR> #TODO
+" map <Leader>s :call CurtineIncSw()<CR> # TODO
 
 "s wap to nerdtree with space + w
 
@@ -491,8 +499,11 @@ nnoremap ; :
 
 "CTRL+L cancel highlight and redraw screen
 " unmap <C-l>
-nnoremap <C-c> :nohl<CR><C-l>
+" autocmd VimEnter :nohl
+" unmap <C-l>
+nnoremap <C-l> :nohl<CR><C-l>
 
+nmap <Leader>s :TagbarToggle<CR>
 " " Copy to buffer
 " vmap <Leader>y :w! ~/shared/clip<CR>
 " nmap <Leader>y :.w! ~/shared/clip<CR>
@@ -571,3 +582,5 @@ set statusline+=\
 "    \ set expandtab
 "    \ set autoindent
 "    \ set fileformat=unix
+" source ~/.vimrc
+" autocmd VimEnter :source ~/.vimrc<CR>:PluginInstall<CR>:q<CR>:nohlsearch<CR>
