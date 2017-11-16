@@ -3,7 +3,7 @@
 #---------------------SHORTCUTS---------------------
 # programs/commands
 alias sbu="source ~/.bash_profile ; tmux source ~/.tmux.conf ; " # source env
-alias sb="(cd ; gcom 'sourcing' ; gpush ) ; sbu" # source and commit
+alias sb="(\cd ; gcom 'sourcing' ; gpush ) ; sbu" # source and commit
 alias rmdi="rm -rf"
 alias toprl="top -u rlynch79"
 alias pdf="printPDF"
@@ -15,27 +15,39 @@ alias topme="top -U '$(whoami)'"
 alias ghci="/usr/local/Cellar/ghc\@8.0/8.0.2/bin/ghci"
 
 # open file
-alias bp="(cd && vim .bash_profile)" # opens bash profile
-alias ba="(cd && vim .bash_aliases)" # opens bash aliases
-alias vrc="(cd && vim .vimrc)"  # opens vimrc
-alias tco="(cd && vim .tmux.conf)"  #opens tmux.conf
-alias g="(cd ~/.shell && vim git.sh)"  #opens tmux.conf
-alias bstuff="(cd && vim .bashStuff)"
-alias vstuff="(cd && vim .vimStuff)"
-alias tstuff="(cd && vim .tmuxStuff)"
+alias bp="(\cd && vim .bash_profile)" # opens bash profile
+alias ba="(\cd && vim .bash_aliases)" # opens bash aliases
+alias vrc="(\cd && vim .vimrc)"  # opens vimrc
+alias tco="(\cd && vim .tmux.conf)"  #opens tmux.conf
+alias g="(\cd ~/.shell && vim git.sh)"  #opens tmux.conf
+alias bstuff="(\cd && vim .bashStuff)"
+alias vstuff="(\cd && vim .vimStuff)"
+alias tstuff="(\cd && vim .tmuxStuff)"
 
 # clear, jump to dir, ls
-alias c="clear && \ls -A"
-alias h="clear && cd && \ls -A"                     # Home
-alias p="clear && cd $buildLocation && \ls -AF"     # Build
-alias s="clear && cd $scriptLocation && \ls -AF"    # scripts 
-alias t="clear && cd $testLocation && \ls -AF"      # test scripts
-alias u="clear && cd $utilsLocation && \ls -AF"     # util scripts
-alias e="clear && cd $envScriptLocation && \ls -AF" # env scrips
-alias i="clear && cd $infoLocation && \ls -AF"      # info scrips
-alias d="clear && cd $driveLocation && \ls -AF"     # drive
-alias D="clear && cd $documentsLocation && \ls -AF" # documents
-alias E="clear && cd $engLocation && \ls -AF"       # engineering 
+alias c="clear && \ls -AF"
+alias h="clear && cd"                     # Home
+alias p="clear && pushb $buildLocation"     # Build
+alias s="clear && pushb $scriptLocation"    # scripts 
+alias t="clear && pushb $testLocation"      # test scripts
+alias u="clear && pushb $utilsLocation"     # util scripts
+alias e="clear && pushb $envScriptLocation" # env scrips
+alias i="clear && pushb $infoLocation"      # info scrips
+alias d="clear && pushb $driveLocation"     # drive
+alias D="clear && pushb $documentsLocation" # documents
+alias E="clear && pushb $engLocation"       # engineering 
+
+# alias c="clear && \ls -A"
+# alias h="clear && \cd && \ls -A"                     # Home
+# alias p="clear && \cd $buildLocation && \ls -AF"     # Build
+# alias s="clear && \cd $scriptLocation && \ls -AF"    # scripts 
+# alias t="clear && \cd $testLocation && \ls -AF"      # test scripts
+# alias u="clear && \cd $utilsLocation && \ls -AF"     # util scripts
+# alias e="clear && \cd $envScriptLocation && \ls -AF" # env scrips
+# alias i="clear && \cd $infoLocation && \ls -AF"      # info scrips
+# alias d="clear && \cd $driveLocation && \ls -AF"     # drive
+# alias D="clear && \cd $documentsLocation && \ls -AF" # documents
+# alias E="clear && \cd $engLocation && \ls -AF"       # engineering 
 
 # apt-get
 alias agud="sudo apt-get update"
@@ -60,28 +72,35 @@ alias mv="mv -iv"	#moves but warns if there will be an override
 alias mkdir="mkdir -p"     #creates intermediate dirs if required and is verbose
 mcdir () {                  #creates a dir and hops into it
     mkdir -p "$1"       ;
-    cd "$1"             ;
+    \cd "$1"             ;
 }
 
 # cd / go to dir
 cd_clear () {       # enters dir, clers, and lists files inside
     if [ $# -ne 1 ] ; then
-        cd          ; else
-        cd "$1"     ;
+        pushb ~/    ;
+    else
+        pushb "$1"  ;
     fi
-    clear           ;
-    \ls -AF         ;
+    # clear           ;
+    # \ls -AF         ;
+    # dirs
 }
+cd_back (){
+    pushb
+}
+alias cd="cd_clear" # should repalce cd
+alias cb="cd_back" # swap to last
+alias cr="popb"
+alias cdirs="dirs -\c"
 
-alias cs="cd_clear" # should repalce cd
-
-alias ..="cs ../"
-alias ...="cs ../../"
-alias .2="cs ../../"
-alias .3="cs ../../../"
-alias .4="cs ../../../../"
-alias .5="cs ../../../../../"
-alias .6="cs ../../../../../../"
+alias ..="cd ../"
+alias ...="cd ../../"
+alias .2="cd ../../"
+alias .3="cd ../../../"
+alias .4="cd ../../../../"
+alias .5="cd ../../../../../"
+alias .6="cd ../../../../../../"
 
 #---------------------TMUX---------------------
 alias tmux="tmux -2 -u"; 

@@ -35,7 +35,7 @@ if [ -d "/Applications/VMware Fusion.app/Contents/Library" ]; then
     alias vstop="vmrun stop $vmName"
 fi
 
-alias pi="ssh pi@192.168.0.58"
-alias rpi="ssh pi@79.97.206.77 -p 2200"
+# alias pi="ssh pi@192.168.0.58"
+# alias rpi="ssh pi@79.97.206.77 -p 2200"
 
-ip="8080 54.154.93.7"
+# ip="8080 54.154.93.7"

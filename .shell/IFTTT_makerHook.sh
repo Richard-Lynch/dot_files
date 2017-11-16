@@ -8,7 +8,7 @@ makerHook () {
         return
     fi
 
-    key=$(< ~/.shell/IFTTT/.IFTTTkey)
+    key=$(< ~/.shell/.IFTTTkey)
     # Settings from caller
     trigger=$1
     min_args=$2

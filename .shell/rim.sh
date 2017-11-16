@@ -9,8 +9,9 @@ rim () {
     mvim -v $command1
 }
 
-user="ubuntu" # "$1"
-host="ec2-54-154-93-7.eu-west-1.compute.amazonaws.com" # $2
-path="//home/ubuntu/IntApps_ChatServ/" # "$3" ( // absollute path, / relative )
-rim $user $host $path
-
+demo_rim () {
+    user="ubuntu" # "$1"
+    host="ec2-54-154-93-7.eu-west-1.compute.amazonaws.com" # $2
+    path="//home/ubuntu/IntApps_ChatServ/" # "$3" ( // absollute path, / relative )
+    rim $user $host $path
+}

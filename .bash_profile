@@ -17,6 +17,7 @@ engLocation="~/Engineering"
 if [[ -x $HOME/.shell/sourceAll.sh ]] ; then
     echo "sourcing all"
     . $HOME/.shell/sourceAll.sh ; 
+    echo "done sourcing"
 fi
 
 # defaults
