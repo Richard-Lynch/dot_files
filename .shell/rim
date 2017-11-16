@@ -1,7 +1,0 @@
-#!/bin/bash
-
-rim () {
-
-vim scp://ubuntu@ec2-54-154-93-7.eu-west-1.compute.amazonaws.com//home/ubuntu/IntApps_ChatServ/chatRoom.py
-
-

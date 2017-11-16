@@ -92,14 +92,14 @@ alias txp="tmux kill-pane -a" ; # kill all other panes in windows
 alias txw="tmux kill-window -a"; # kill all other windows in session
 
 alias ta='tmux attach -t $1'
-# if [ -f ~/.bash_completion.d/ta ]; then
-# . ~/.bash_completion.d/ta
-# fi
+if [ -f ~/.bash_completion.d/ta ]; then
+. ~/.bash_completion.d/ta
+fi
 
 alias ts='tmux switch -t $1'
-# if [ -f ~/.bash_completion.d/ts ]; then
-# . ~/.bash_completion.d/ts
-# fi
+if [ -f ~/.bash_completion.d/ts ]; then
+. ~/.bash_completion.d/ts
+fi
 
 
 #---------------------Scripts---------------------
