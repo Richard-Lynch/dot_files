@@ -49,28 +49,51 @@ create () {         #just creates a quick file
     done
     # reset $1 to the first positional argument
     shift $(($OPTIND - 1))
-    # if no flag set, then just create a blank file
-    touch $1        ;
-    chmod u+x $1    ;
+    filename="$1"
+    # create/touch a blank file
+    touch $filename        ;
+    chmod u+x $filename    ;
+
+    # if filestring was not set by flag, check if known extension
+    if [[ $fileString == "" ]] ; then
+        # echo "fileString empty"
+        extension="${filename##*.}"
+        if [[ $extension == "py" ]] ; then
+            # echo "python extension found!"
+            PY_DEFAULT="3"
+            fileString="$(which python$PY_DEFAULT)"
+        elif [[ $extension == "sh" ]] ; then
+            # echo "bash extension found!"
+            fileString="$(which bash)"
+        else
+            echo "unknown extension found!" > /dev/null
+        fi
+    fi
+    # if filestring was set, add hash-bang
     if [[ $fileString != "" ]] ; then
         # Delete all leading blank lines at top of file (only).
-        sed -i '' '/./,$!d' $1 ; 
+        sed -i '' '/./,$!d' $filename ; 
         # add a line to the file if nessasary
-        if [ \! -s $1 ] ; then echo "" >> $1 ; echo "added blank line to file" ;  fi ;
+        if [ \! -s $filename ] ; then echo "" >> $filename ; echo "added blank line to file" ;  fi ;
         # remove any lines starting with #!
-        sed -i '' '/^#!/ d' $1 ; 
+        sed -i '' '/^#!/ d' $filename ; 
         # insert the correct fileString to the top of the file
         fileString="#!$fileString"
-        echo "at the adding line stage"
-        echo "fileString: $fileString"
-        gsed -i "1i$fileString" $1 # gsed = gnu-sed ( homebrew! )
+        # echo "at the adding line stage"
+        # echo "fileString: $fileString"
+        gsed -i "1i$fileString" $filename # gsed = gnu-sed ( homebrew! )
     else
         echo "fileString empty" > /dev/null
     fi
     
-    vim $1          ;
+    # if git flag, add to git
     if [[ $addToGit == 1 ]] ; then
-        git add $1      ;
-        git commit -am "Added $1" ; 
+        git add $filename      ;
+    fi ; 
+    # open file in vim
+    vim $filename          ;
+    # if git flag, commit to git after editing
+    if [[ $addToGit == 1 ]] ; then
+        git commit -am "Added $filename" ; 
     fi ; 
 }

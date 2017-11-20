@@ -13,6 +13,7 @@ alias tag="/usr/local/bin/ctags -R --exclude='.git' . -L .srclist"
 alias addMake="cp ~/.make/makefileGeneric ./makefile;" ; 
 alias topme="top -U '$(whoami)'"
 alias ghci="/usr/local/Cellar/ghc\@8.0/8.0.2/bin/ghci"
+alias rm="trash"
 
 # open file
 alias bp="(\cd && vim .bash_profile)" # opens bash profile
@@ -101,24 +102,6 @@ alias .3="cd ../../../"
 alias .4="cd ../../../../"
 alias .5="cd ../../../../../"
 alias .6="cd ../../../../../../"
-
-#---------------------TMUX---------------------
-alias tmux="tmux -2 -u"; 
-alias tk="tmux kill-session" ; 
-alias tls="tmux ls";
-alias tsplit="~/scripts/multiTmux.sh" ;
-alias txp="tmux kill-pane -a" ; # kill all other panes in windows
-alias txw="tmux kill-window -a"; # kill all other windows in session
-
-alias ta='tmux attach -t $1'
-if [ -f ~/.bash_completion.d/ta ]; then
-. ~/.bash_completion.d/ta
-fi
-
-alias ts='tmux switch -t $1'
-if [ -f ~/.bash_completion.d/ts ]; then
-. ~/.bash_completion.d/ts
-fi
 
 
 #---------------------Scripts---------------------

@@ -46,7 +46,7 @@ export HISTCONTROL=ignoreboth:erasedups # no dupes, keep clean
 export HISTTIMEFORMAT="%d/%m/%y %T "
 shopt -s histappend # dont override history
 shopt -s histverify # ??? TODO
-export HOMEBREW_GITHUB_API_TOKEN="~/.gitToken"
+export HOMEBREW_GITHUB_API_TOKEN="$(cat ~/.hb_gitToken)"
 # prompt
 export PS1="\[${bold}\]\[${yellow}\][\w]\[${grey}\][\u : \h]\n\[${yellow}\]$ \[${reset}\]" # super small
 export PROMPT_COMMAND="history -a; history -c; history -r;" # append, clear, refresh
