@@ -35,7 +35,12 @@ if [ -d "/Applications/VMware Fusion.app/Contents/Library" ]; then
     alias vstop="vmrun stop $vmName"
 fi
 
-alias pi="ssh pi@192.168.0.58"
+# alias pi="ssh pi@192.168.0.58"
+
+alias dockerStart="open --background -a Docker"
+alias dockerStop="test -z \"$(docker ps -q 2>/dev/null)\" && osascript -e 'quit app \"Docker\"'"
+alias dockerForce="docker ps -q | xargs -L1 docker stop"
+alias restart="dockerStop ; dockerStart ; "
 # alias rpi="ssh pi@79.97.206.77 -p 2200"
 
 # ip="8080 54.154.93.7"
