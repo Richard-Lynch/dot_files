@@ -45,6 +45,14 @@ Plugin 'majutsushi/tagbar'
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 Plugin 'gosukiwi/vim-atom-dark'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'bruno-/vim-line'
+" Plugin 'kana/vim-textobj-user' ' custom text objects
+Plugin 'jiangmiao/auto-pairs'
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
 "------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -67,30 +75,98 @@ augroup vundle
     autocmd vimenter PluginInstall silent!
 augroup end
 "---------
-syntax on
+" ---- info ----
+" -- command --
+" substitue 
+" siw - sub inner word
+" delete
+" dip - delete inner paragraph
+" change 
+" ciw - delete inner word and chang eto insert mode
+" surround
+" ysiw( - surround inner word with ( word ) ... use ) for no space
+" cs(" - change the surrounding ( to "
+" ds" - remove the surrounding "
+" ys_" - surround the line with "
+" -- objects -- 
+" indent
+" sii - sub inner indent 
+" dai - delete inner indent and line below
+" argument
+" cia - change inner argument ( leave , )
+" daa - delete whole arguemnt ( remove , )
+" word 
+" diw - delete inner word
+" caw - change all word
+" sentence
+" cis - change inner sentance
+" paragraph
+" dip - delete inner paragraph
+" quotes/brackets - "'[{(` etc....
+" ci" - change inside "
+" inner line
+" c_ - change inner line
 
+" --- fixes ---- 
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
 
-" inoremap ;;b <em></em><Space><++><esc>FeT>i
 set makeprg=[[\ -f\ makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ .. 
-" let &makeprg = '[[ -f makefile ]] && make || make -C ..'
 
 " fixes issue where esc + arrow will display letters etc
 set nocp
 
+" --- ultisnip ---
+let g:UltiSnipsExpandTrigger="~"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:snips_author="Richard Lynch"
+let g:snips_email="rich753@hotmail.com"
+let g:snips_github="Richard-Lynch"
+" tabstop nav (in normal)
+" next = <c-j>
+" prev = <c-k>
+" some snips
+" docs - doc for file
+" imp - import x
+" from - from x import y
+" wh - while x: y
+" def - too big
+" deff - def better 
+
+" ----Auto-Pair---
+let g:AutoPairsFlyMode = 1
+
+"----Unimpared----
+" lines
+" [<Space>  " space before
+" ]e        " exchange before
+" options
+" =or       " toggle reglative
+" =on       " toggle numbers
+" next/prev
+" [l        " :lprev
+" ]l        " :lnext
+" [L        " :lFirst
+" ]L        " :lLast
+
 "---CtrlP----
 "this runtime makes ctrlp work
  set runtimepath^=~/.vim/bundle/ctrlp.vim
- " set runtimepath^=~/.vim/bundle/vim-easyclip/
 "maps
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_show_hidden = 1
-"
+
+"----EasyTags----
 set tags=./tags;~/Programs " will search up till programs for tags
 let g:easytags_file= './tags'
 let g:easytags_dynamic_files = 1
 let g:easytags_cmd = '/usr/local/bin/ctags'
 
+"----Git Gutter----
 if exists('&signcolumn')  " Vim 7.4.2201
   set signcolumn=yes
 else
@@ -108,32 +184,28 @@ endif
 "dash-case (cr-), dot.case (cr.), space case (cr<space>), and Title Case (crt)
 
 ""--------commentary-----------------
-"noremap <C-c> gcc
-"noremap <Leader>c gcc
-"noremap <Leader>C gcc
-"vnoremap <Leader>c gcc
-"vnoremap <Leader>C gcc
+" Commenting blocks of code.
+augroup filestypes_comments
+autocmd!
+    autocmd FileType apache setlocal commentstring=#\ %s
+    autocmd FileType asm setlocal commentstring=;\ %s
+augroup END
 
 "----------easyclip------------
-" adds 'cut' - d no longer cuts, just deletes
-" note will need to use zl and zh to delete chars on either side of the cursor
-let g:EasyClipUseCutDefaults = 0 
-nmap d <Plug>MoveMotionPlug
-xmap d <Plug>MoveMotionXPlug
-nmap dd <Plug>MoveMotionLinePlug
-let g:EasyClipUseSubstituteDefaults = 1
+let g:EasyClipUseCutDefaults = 0 " do not overwrite m
+let g:EasyClipEnableBlackHoleRedirect = 0 " do not redirect to blakhole
+let g:EasyClipUseSubstituteDefaults = 1 " use s as substitue operator
 "substitute
 " siw - substitute clipboard to inner word
 " sip - substitue inner paragraph
-
-" toggle yank 
+" "asiw - sub frm a into word
+"cycle through yank 
 " CTRL+f - search chronilogically backwards through yanks
 nmap <c-f> <plug>EasyClipSwapPasteForward
 " CTRL+d - search forward chronilogically through yanks
 nmap <c-d> <plug>EasyClipSwapPasteBackwards
 
 "----YouCompleteMe----
-noremap <Leader>t :! ~/.vim/bundle/YCM-Generator/config_gen.py ..<CR>
 "" turn on completion in comments
 let g:ycm_complete_in_comments=1
 "" load ycm conf by default
@@ -151,69 +223,79 @@ let g:ycm_seed_identifiers_with_syntax=1
 "" python in use for jedi
 let g:ycm_python_binary_path = 'python'
 
-
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 
 "----VimCompeltesMe----
 "use ctags -R in root of project to link tags, then use <C-]> to go to tag
-set encoding=utf-8
+" set encoding=utf-8
 
 " "----NERDtree----
-"Toggle nerd
-"https://www.cheatography.com/stepk/cheat-sheets/vim-nerdtree/
-map <Leader>n :NERDTreeToggle<CR>
- 
- augroup nerdGroup
-     au!
-     "start nerd when opened with no file
-     autocmd StdinReadPre * let s:std_in=1
-     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-     
-     "close auto
-     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
- augroup END
- let NERDTreeQuitOnOpen = 1
- "arrows
- "let g:NERDTreeDirArrowExpandable = '>'
- "let g:NERDTreeDirArrowCollapsible = '!'
- let NERDTreeMinimalUI = 1
- let NERDTreeAutoDeleteBuffer = 1
- let NERDTreeShowHidden=1
- let NERDTreeDirArrows = 1
+augroup nerdGroup
+    au!
+    "start nerd when opened with no file
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    "close auto
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
+let NERDTreeQuitOnOpen = 1
+"arrows
+" let g:NERDTreeDirArrowExpandable = '>'
+" let g:NERDTreeDirArrowCollapsible = '!'
+let NERDTreeMinimalUI = 1
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeShowHidden=1
+let NERDTreeDirArrows = 1
 
 "----ShowMarks-----
 " <Leader>mt // toggles marks
+" use a dash to indicate the cur mark
 let g:showmarks_textlower="-"
 let g:showmarks_textupper="-"
 let g:showmarks_textother="-"
 
-" trying to clip to mac THIS WORKS FOR ME ON MACVIM
-set clipboard=unnamed
+ " ---- Look ----
+if has("termguicolors")
+    set termguicolors
+ endif
 
-
+colorscheme wwdc16
+set t_ut=       "diable background color erase
+" ----- Options -----
 "Information on the following setting can be found with
 ":help set
+" trying to clip to mac THIS WORKS FOR ME ON MACVIM
+set clipboard=unnamed
 set printoptions=formfeed:y,number:y    " number: print linenumbers
                                         " formfeed: use pagebreaks (add with CTRL+V then CTRL+L)
-set tabstop=4
-set expandtab
-set autoindent 
-set smartindent
+" tabs
+" configure expanding of tabs for various file types
+augroup tabs
+    au!
+    au BufRead,BufNewFile *.py set expandtab
+    au BufRead,BufNewFile *.c set noexpandtab
+    au BufRead,BufNewFile *.h set noexpandtab
+    au BufRead,BufNewFile Makefile* set noexpandtab 
+augroup END
+set tabstop=4 " use 4 spaces for a tab
+set softtabstop=4
+set expandtab " enter space when tab is pressed
+set autoindent " copy indent from cur line when starting a new line
+set smartindent 
 set shiftwidth=4  "this is the level of autoindent, adjust to taste
+" numbers
 set number
 set relativenumber
 set backspace=indent,eol,start
-set visualbell
 " Uncomment below to make screen not flash on error
+set visualbell
 set vb t_vb=""
-set laststatus=2
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
+" search
 set incsearch		" do incremental searching
 set ignorecase      "ignore case
 set smartcase       "dont ignore upper case
-
+" visual command options
 set wildmenu        "show visual cmd options
 set wildmode=list:longest,full
 set wildignore=*.o,*~,*.pyc
@@ -222,42 +304,27 @@ if has("win16") || has("win32")
 else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
-
+" draw options
 set nocursorline	" highlight current active line
 set nocursorcolumn	" highlight current active line
 set lazyredraw
-set scrolljump=1
+set scrolljump=1    " lines to scroll on hit bottom
+set scrolloff=1                       " Keep one line below the cursor
+set laststatus=2
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+"show matching parenthesis
+set showmatch
+set matchtime=10        "time to flash matching
 "add some more memory etc
 set hidden
 set history=1000
-
-"reload buff after 500ms cursorhold
-set autoread
-set updatetime=500
-augroup curs
-    au!
-    au CursorHold * silent! checktime
-augroup END
-"set mouse=a
-
-" Move normally between wrapped lines
-nmap j gj
-nmap k gk
-
 " Enable folding - dont really use, pain in the a
 set foldmethod=indent
 set foldlevel=99
 " Enable folding with the spacebar
 "nnoremap <space> za
-
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
-
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
+" ---- Backing Up ----
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
@@ -273,8 +340,30 @@ else
   set undodir=~/.vim/.undo//
 endif
 
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
+" ---- Mouse ---- 
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+" ---- Autoread ----
+"reload buff after 500ms cursorhold
+set autoread
+set updatetime=500
+augroup curs
+    au!
+    au CursorHold * silent! checktime
+augroup END
+
+" Move normally between wrapped lines
+nmap j gj
+nmap k gk
+
+" ---- General ---- 
+" When started as "evim", evim.vim will already have done these settings.
+if v:progname =~? "evim"
+  finish
+endif
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -283,49 +372,38 @@ map Q gq
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
 
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
 
-" Switch syntax highlighting on, when the terminal has colors
-.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
+" " Only do this part when compiled with support for autocommands.
+" if has("autocmd")
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
+"   " Enable file type detection.
+"   " Use the default filetype settings, so that mail gets 'tw' set to 72,
+"   " 'cindent' is on in C files, etc.
+"   " Also load indent files, to automatically do language-dependent indenting.
+"   filetype plugin indent on
 
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
+"   " Put these in an autocmd group, so that we can delete them easily.
+"   augroup vimrcEx
+"   au!
 
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
+"   " For all text files set 'textwidth' to 78 characters.
+"   autocmd FileType text setlocal textwidth=78
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+"   " When editing a file, always jump to the last known cursor position.
+"   " Don't do it when the position is invalid or when inside an event handler
+"   " (happens when dropping a file on gvim).
+"   autocmd BufReadPost *
+"     \ if line("'\"") >= 1 && line("'\"") <= line("$") |
+"     \   exe "normal! g`\"" |
+"     \ endif
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if line("'\"") >= 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
+"   augroup END
 
-  augroup END
+" else
 
-else
+"   set autoindent		" always set autoindenting on
 
-  set autoindent		" always set autoindenting on
-
-endif " has("autocmd")
+" endif " has("autocmd")
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -342,6 +420,9 @@ if has('langmap') && exists('+langnoremap')
   set langnoremap
 endif
 
+
+"-----maps-----
+" typos for basic commands
 fun! SetupCommandAlias(from, to)
   exec 'cnoreabbrev <expr> '.a:from
         \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:from.'")'
@@ -351,46 +432,40 @@ call SetupCommandAlias("W","w")
 call SetupCommandAlias("Q","q")
 call SetupCommandAlias("Wq","wq")
 call SetupCommandAlias("WQ","wq")
+" remap top and botton of screen to start and end of line
+nnoremap H ^
+nnoremap L $
 
-"-----maps-----
+"remap command line option
+nnoremap ; :
+
+"CTRL+L cancel highlight and redraw screen
+nnoremap <C-l> :nohl<CR><C-l>
+"-----Utility-----
+"save and quit fast
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>W :wq<CR>
 "space + r refreshes vimrc
 map <Leader>r :source ~/.vimrc<CR>:PluginInstall<CR>:q<CR>:nohlsearch<CR>
-
-"----git gutter----
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
-nmap <Leader>h :GitGutterLineHighlightsToggle<CR>
-"nnoremap <silent> <Leader>v :NERDTreeFind<CR>
-
-"map <Leader>q :qa<CR>:!tk 
-" map <Leader>s :call CurtineIncSw()<CR> # TODO
-
-"s wap to nerdtree with space + w
-
-"map <leader>w :<C-L>w w<CR>
-
-"cancel a search with escape - breaks everything
-"nnoremap <silent> <Esc> :nohlsearch<CR>
-
 "reopen last closed file by pressing space space
 nnoremap <Leader><Leader> :e#<CR>
 " appends ; at end of line
 nnoremap <Leader>: m`A;<Esc>``
-" prepends //
-"nnoremap <Leader>c m`0i//<Esc>``
-"nnoremap <Leader>C :s/\/\///<CR>
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+"----YouCompleteMe----
+noremap <Leader>t :! ~/.vim/bundle/YCM-Generator/config_gen.py ..<CR>
 
-" Commenting blocks of code.
-augroup filestypes_comments
-autocmd!
-    autocmd FileType apache setlocal commentstring=#\ %s
-    autocmd FileType asm setlocal commentstring=;\ %s
-augroup END
+"----NerdTree---
+map <Leader>n :NERDTreeToggle<CR>
 
+"----Commentary----
 nnoremap <Leader>C :execute "normal \<Plug>CommentaryUndo"<CR>
 nnoremap <Leader>c :Commentary<CR>
 vnoremap <Leader>c :Commentary<CR>
-
 " CTRL+/ is mapped to CTRL+_ on most unix systems
 if has('win32')
   nmap <C-/> :Commentary<CR>
@@ -400,161 +475,100 @@ else
   vmap <C-_> :Commentary<CR>
 endif
 
-" augroup filestypes_comments
-" autocmd!
-"     autocmd FileType c,cpp,java,scala       let b:comment_leader = '// '
-"     autocmd FileType sh,ruby,python,tmux,make    let b:comment_leader = '# '
-"     autocmd FileType conf,fstab             let b:comment_leader = '# '
-"     autocmd FileType tex                    let b:comment_leader = '% '
-"     autocmd FileType mail                   let b:comment_leader = '> '
-"     autocmd FileType vim                    let b:comment_leader = '" '
-"     autocmd FileType asm                    let b:comment_leader = '; '
-" augroup END
-
-"   (remap) (set_mark) (search for comment at start of line) (search for start of line) (clear search) (move back to mark) (correct offset) 
-" noremap <Leader>c m`:s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>``ll
-" noremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>``hh
-" vnoremap <Leader>c m`:s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>gv
-" vnoremap <Leader>C m`:s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>gv
-
+" ----- git -----
+function! MyGitCommit()
+    silent !clear
+    execute "silent !" . g:MyGitCommitCommand
+endfunction
+function! MyGitPush()
+    silent !clear
+    execute "silent !" . g:MyGitPushCommand
+endfunction
 if !exists("g:MyGitCommitCommand")
     let g:MyGitCommitCommand = "git commit -a"
 endif
 if !exists("g:MyGitPushCommand")
     let g:MyGitPushCommand = "git push"
 endif
-
-function! MyGitCommit()
-    silent !clear
-    execute "silent !" . g:MyGitCommitCommand
-endfunction
-
-function! MyGitPush()
-    silent !clear
-    execute "silent !" . g:MyGitPushCommand
-endfunction
-
 noremap <Leader>g :call MyGitCommit()<CR>:redraw!<CR>
-" noremap <Leader>g :silent !git commit -a<CR>
 noremap <Leader>p :call MyGitPush()<CR>:redraw!<CR>
-" noremap <Lea
 
+"----git gutter----
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+nmap <Leader>h :GitGutterLineHighlightsToggle<CR>
 " Tabbling blocks of code. 
-" let b:tab_leader = '    '
-" was <Leader><Tab>
 vnoremap < <gv
 vnoremap > >gv
-" noremap > m`:s/^/<C-R>=escape(b:tab_leader,'\/')<CR>/<CR>:nohlsearch<CR>``llll
-" noremap < m`:s/^\V<C-R>=escape(b:tab_leader,'\/')<CR>//e<CR>:nohlsearch<CR>``hhhh
-" vnoremap > m`:s/^/<C-R>=escape(b:tab_leader,'\/')<CR>/<CR>:nohlsearch<CR>``llllgv
-" vnoremap < m`:s/^\V<C-R>=escape(b:tab_leader,'\/')<CR>//e<CR>:nohlsearch<CR>``hhhhgv
 
-" function Comment()
-""    if (&filetype =='python')
-"    let b:comment_leader = '#'
-""        nnoremap <Leader>c m`0ib:comment_leader<Esc>``i
-"    nnoremap <Leader>c :s/^/\=escape(b:comment_leader, '\/')/<CR>:noh<CR>
-"    nnoremap <Leader>C :s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:noh<CR>
-""        :s/V<C-R>=escape(b:comment_leader, '\/')<CR>//<CR>:noh<CR>
-""        nnoremap <Leader>c :s/^\(\)
-""    elseif (&filetype == 'c' || &filetype == 'cpp')
-""        nnoremap <Leader>c m`0i//<Esc>``
-""        nnoremap <Leader>C :s/\/\///<CR>
-"    endif
-"endfunction
-"autocmd BufNewFile,BufRead * :call Comment()
-
-":'<,'>s/foo/bar/g replaces foo with bar in current selection
-"
-"
+" ---- Diff ----
+" original (saved vs unsaved)
 nnoremap <Leader>d :DiffOrig<CR>
 nnoremap <Leader>D :diffoff!<CR>:on<CR>
 
-"insert brackets/quotes around word
-nnoremap <Leader>" bi"<Esc>ea"<Esc>
-nnoremap <Leader>' bi'<Esc>ea'<Esc>
-nnoremap <Leader>{ bi{<Esc>ea}<Esc>
-nnoremap <Leader>[ bi[<Esc>ea]<Esc>
-nnoremap <Leader>( bi(<Esc>ea)<Esc>
+"" insert brackets/quotes around word (TODO check extension for this)
+"nnoremap <Leader>" bi"<Esc>ea"<Esc>
+"nnoremap <Leader>' bi'<Esc>ea'<Esc>
+"nnoremap <Leader>{ bi{<Esc>ea}<Esc>
+"nnoremap <Leader>[ bi[<Esc>ea]<Esc>
+"nnoremap <Leader>( bi(<Esc>ea)<Esc>
 
-"insert brackets/quotes around selection
+""insert brackets/quotes around selection
+"vnoremap <Leader>" l<Esc>`<i"<Esc>`>a"<Esc>
+"vnoremap <Leader>' l<Esc>`<i'<Esc>`>a'<Esc>
+"vnoremap <Leader>{ l<Esc>`<i{<Esc>`>a}<Esc>
+"vnoremap <Leader>[ l<Esc>`<i[<Esc>`>a]<Esc>
+"vnoremap <Leader>( l<Esc>`<i(<Esc>`>a)<Esc>
 
-vnoremap <Leader>" l<Esc>`<i"<Esc>`>a"<Esc>
-vnoremap <Leader>' l<Esc>`<i'<Esc>`>a'<Esc>
-vnoremap <Leader>{ l<Esc>`<i{<Esc>`>a}<Esc>
-vnoremap <Leader>[ l<Esc>`<i[<Esc>`>a]<Esc>
-vnoremap <Leader>( l<Esc>`<i(<Esc>`>a)<Esc>
-
-"save and quit fast
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>W :wq<CR>
-
-" remap top and botton of screen to start and end of line
-nnoremap H ^
-nnoremap L $
-
-"remap command line option
-nnoremap ; :
-
-"CTRL+L cancel highlight and redraw screen
-" unmap <C-l>
-" autocmd VimEnter :nohl
-" unmap <C-l>
-nnoremap <C-l> :nohl<CR><C-l>
-
+" ---- Tagbar -----
 nmap <Leader>s :TagbarToggle<CR>
-" " Copy to buffer
-" vmap <Leader>y :w! ~/shared/clip<CR>
-" nmap <Leader>y :.w! ~/shared/clip<CR>
-" " Past from buffer
-" nmap <Leader>p :r ~/shared/clip<CR>
-" "set clipboard=unnamedplus
-"
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
-"show matching parenthesis
-set showmatch
-set matchtime=10        "time to flash matching
+" ----- syntatstic -----
+let g:syntastic_quiet_messages = { 
+    \ "type": ["style"], 
+    \ "regex": ['F401'] }
+" style : dont show style messages
+" 401 : imported but not used
+let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" Use specific checkers, and don't forget to install them "
+" let g:syntastic_<filetype>_checkers = ['<checker-name>']
+" For example: replace the default Python checker with flake8 and pylint "
+" let g:syntastic_python_checkers = ['flake8', 'pylint']
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_warning_symbol = '❗️'
 
-if has("termguicolors")
-    set termguicolors
- endif
-
-colorscheme wwdc16
-set t_ut=       "diable background color erase
-
+" ---- Status Line ----
+"  not used
 function! GitBranch()
     return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
-
+" not used
 function! StatuslineGit()
     let l:branchname = GitBranch()
     return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
-
-set scrolloff=1                       " Keep one line below the cursor
-
-
+" actual status line
 set statusline=
-set statusline+=%#todo#
+set statusline+=%#todo# " color
 " set statusline+=[%n]\ 
 " set statusline+=[%{StatuslineGit()}]\ 
-set statusline+=\ %f\ 
-set statusline+=%#LineNr#
-set statusline+=%{fugitive#statusline()}
+set statusline+=\ %f\  "filename
+set statusline+=%#LineNr# " color
+set statusline+=%{fugitive#statusline()} " git stuff
 set statusline+=%h%m%r%w                     " flags
 " set statusline+=%m\
-set statusline+=%=
-set statusline+=%#CursorColumn#
-set statusline+=\ %y
+set statusline+=%#warningmsg# " warnings from vim
+set statusline+=%{SyntasticStatuslineFlag()} "syntastic stats etc
+set statusline+=%= " split
+set statusline+=%#CursorColumn# " color as cursorColumn
+set statusline+=\ %y " filetype
 " set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 " set statusline+=\[%{&fileformat}\]
-set statusline+=\ %p%%
-set statusline+=\ Line:%l/%L\ Col:%c
+set statusline+=\ %p%% " file percentage
+set statusline+=\ Line:%l/%L\ Col:%c " line and col number
 set statusline+=\ 
 
 "When editing a file, make screen display the name of the file you are editing

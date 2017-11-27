@@ -30,12 +30,14 @@ if [ -x /usr/local/bin/mvim ] ; then
 fi
 
 # options
-export CDPATH=:..:~:~/programs # search each of these paths for autocomplete
+# export CDPATH=:..:~:~/programs # search each of these paths for autocomplete
+export CDPATH=:..: # search each of these paths for autocomplete
 stty -ixon # disable CTRL-S to suspend terminal
 alias git="git -c http.sslVerify=false"
 export CLICOLOR=1 # supports color
 export LSCOLORS=ExFxBxDxCxegedabagacad # color selection
-
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell;
 # export PYTHONPATH="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/"
 # export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/VMware Fusion.app/Contents/Library:/Applications/VMware Fusion.app/Contents/Library"
 
@@ -47,7 +49,17 @@ export HISTCONTROL=ignoreboth:erasedups # no dupes, keep clean
 export HISTTIMEFORMAT="%d/%m/%y %T "
 shopt -s histappend # dont override history
 shopt -s histverify # ??? TODO
+
+# env
 export HOMEBREW_GITHUB_API_TOKEN="$(cat ~/.hb_gitToken)"
+
+# Enable some Bash 4 features when possible:
+# * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
+# * Recursive globbing, e.g. `echo **/*.txt`
+for option in autocd globstar; do
+  shopt -s "$option" 2> /dev/null;
+done;
+
 # prompt
 export PS1="\[${bold}\]\[${yellow}\][\w]\[${grey}\][\u : \h]\n\[${yellow}\]$ \[${reset}\]" # super small
 export PROMPT_COMMAND="history -a; history -c; history -r;" # append, clear, refresh
@@ -57,7 +69,22 @@ set vi-ins-mode-string "+"
 set vi-cmd-mode-string ":"
 
 # enable bash completion
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+# Add tab completion for bash completion 2 (https://troymccall.com/better-bash-4--completions-on-osx/)
+if which brew > /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+  source "$(brew --prefix)/share/bash-completion/bash_completion";
+elif [ -f /etc/bash_completion ]; then
+  source /etc/bash_completion;
+fi;
 
+# Enable tab completion for `g` by marking it as an alias for `git` (troy)
+if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+  complete -o default -o nospace -F _git g;
+fi;
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards (troy)
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+
+# Add `killall` tab completion for common apps (troy)
+complete -o "nospace" -W "Reminders Calendar Dock Finder Mail Safari Spotify SystemUIServer Terminal Chrome" killall;
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo "bash profile was run"

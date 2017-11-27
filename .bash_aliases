@@ -1,6 +1,9 @@
 #!/bin/bash
 
 #---------------------SHORTCUTS---------------------
+# typos
+alias where=which
+alias brwe=brew 
 # programs/commands
 alias sbu="source ~/.bash_profile ; tmux source ~/.tmux.conf ; " # source env
 alias sb="(\cd ; gcom 'sourcing' ; gpush ) ; sbu" # source and commit
@@ -14,6 +17,8 @@ alias addMake="cp ~/.make/makefileGeneric ./makefile;" ;
 alias topme="top -U '$(whoami)'"
 alias ghci="/usr/local/Cellar/ghc\@8.0/8.0.2/bin/ghci"
 alias rm="trash"
+alias ccat='pygmentize -O style=monokai -f console256 -g' # pretty catrequires sudo easy_install -U Pygments
+alias lockscreen='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend' # mac only
 
 # open file
 alias bp="(\cd && vim .bash_profile)" # opens bash profile
