@@ -36,8 +36,6 @@ stty -ixon # disable CTRL-S to suspend terminal
 alias git="git -c http.sslVerify=false"
 export CLICOLOR=1 # supports color
 export LSCOLORS=ExFxBxDxCxegedabagacad # color selection
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell;
 # export PYTHONPATH="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/"
 # export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/VMware Fusion.app/Contents/Library:/Applications/VMware Fusion.app/Contents/Library"
 
@@ -56,7 +54,8 @@ export HOMEBREW_GITHUB_API_TOKEN="$(cat ~/.hb_gitToken)"
 # Enable some Bash 4 features when possible:
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
 # * Recursive globbing, e.g. `echo **/*.txt`
-for option in autocd globstar; do
+# Autocorrect typos in path names when using `cd`
+for option in autocd globstar cdspell; do
   shopt -s "$option" 2> /dev/null;
 done;
 
@@ -64,9 +63,9 @@ done;
 export PS1="\[${bold}\]\[${yellow}\][\w]\[${grey}\][\u : \h]\n\[${yellow}\]$ \[${reset}\]" # super small
 export PROMPT_COMMAND="history -a; history -c; history -r;" # append, clear, refresh
 set -o vi
-set show-mode-in-prompt on
-set vi-ins-mode-string "+"
-set vi-cmd-mode-string ":"
+# set show-mode-in-prompt on
+# set vi-ins-mode-string "+"
+# set vi-cmd-mode-string ":"
 
 # enable bash completion
 # Add tab completion for bash completion 2 (https://troymccall.com/better-bash-4--completions-on-osx/)
