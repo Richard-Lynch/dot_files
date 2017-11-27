@@ -138,6 +138,7 @@ let g:snips_github="Richard-Lynch"
 
 " ----Auto-Pair---
 let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutBackInsert = '<C-b>'
 
 "----Unimpared----
 " lines
