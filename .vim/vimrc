@@ -45,7 +45,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 Plugin 'gosukiwi/vim-atom-dark'
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
 Plugin 'bruno-/vim-line'
 " Plugin 'kana/vim-textobj-user' ' custom text objects
 Plugin 'jiangmiao/auto-pairs'
@@ -53,6 +53,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
+Plugin 'w0rp/ale'
 "------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -138,7 +139,9 @@ let g:snips_github="Richard-Lynch"
 
 " ----Auto-Pair---
 let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutBackInsert = '<C-b>'
+" insert clean bracket in insert mode <C-V>)
+" cant get the shortcut working?
+" let g:AutoPairsShortcutBackInsert = '<C-i>'
 
 "----Unimpared----
 " lines
@@ -270,6 +273,12 @@ set t_ut=       "diable background color erase
 set clipboard=unnamed
 set printoptions=formfeed:y,number:y    " number: print linenumbers
                                         " formfeed: use pagebreaks (add with CTRL+V then CTRL+L)
+" Optimize for fast terminal connections
+set ttyfast
+" Add the g flag to search/replace by default
+set gdefault
+" Show the filename in the window titlebar
+set title
 " tabs
 " configure expanding of tabs for various file types
 augroup tabs
@@ -433,6 +442,11 @@ call SetupCommandAlias("W","w")
 call SetupCommandAlias("Q","q")
 call SetupCommandAlias("Wq","wq")
 call SetupCommandAlias("WQ","wq")
+
+" insert/append 1 char
+nnoremap ,i :exec "normal i".nr2char(getchar())."\e"<CR>
+nnoremap ,a :exec "normal a".nr2char(getchar())."\e"<CR>
+
 " remap top and botton of screen to start and end of line
 nnoremap H ^
 nnoremap L $
@@ -524,23 +538,18 @@ nnoremap <Leader>D :diffoff!<CR>:on<CR>
 " ---- Tagbar -----
 nmap <Leader>s :TagbarToggle<CR>
 
-" ----- syntatstic -----
-let g:syntastic_quiet_messages = { 
-    \ "type": ["style"], 
-    \ "regex": ['F401'] }
-" style : dont show style messages
-" 401 : imported but not used
-let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-" Use specific checkers, and don't forget to install them "
-" let g:syntastic_<filetype>_checkers = ['<checker-name>']
-" For example: replace the default Python checker with flake8 and pylint "
-" let g:syntastic_python_checkers = ['flake8', 'pylint']
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_warning_symbol = '❗️'
-
+" ale
+" Disable warnings about trailing whitespace for Python files.
+let b:ale_warn_about_trailing_whitespace = 0
+" Set this setting in vimrc if you want to fix files automatically on save.
+" This is off by default.
+let g:ale_fix_on_save = 1
+" Fix Python files with autopep8 and yapf.
+let g:ale_fixers = {
+            \'python': ['autopep8', 'yapf'],
+            \'python3': ['autopep8', 'yapf'],
+            \}
+" let g:ale_python_flake8_args = '--ignore=E,W,F403,F405 --select=F,C'
 " ---- Status Line ----
 "  not used
 function! GitBranch()
@@ -550,6 +559,18 @@ endfunction
 function! StatuslineGit()
     let l:branchname = GitBranch()
     return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
 endfunction
 " actual status line
 set statusline=
@@ -562,7 +583,9 @@ set statusline+=%{fugitive#statusline()} " git stuff
 set statusline+=%h%m%r%w                     " flags
 " set statusline+=%m\
 set statusline+=%#warningmsg# " warnings from vim
-set statusline+=%{SyntasticStatuslineFlag()} "syntastic stats etc
+set statusline+=%{LinterStatus()}
+" set statusline+=%{SyntasticStatuslineFlag()} "syntastic stats etc
+" set statusline+=%{SyntasticStatuslineFlag()} "syntastic stats etc
 set statusline+=%= " split
 set statusline+=%#CursorColumn# " color as cursorColumn
 set statusline+=\ %y " filetype
@@ -599,3 +622,19 @@ set statusline+=\
 "    \ set fileformat=unix
 " source ~/.vimrc
 " autocmd VimEnter :source ~/.vimrc<CR>:PluginInstall<CR>:q<CR>:nohlsearch<CR>
+" " ----- syntatstic -----
+" let g:syntastic_quiet_messages = { 
+"     \ "type": ["style"], 
+"     \ "regex": ['F401'] }
+" " style : dont show style messages
+" " 401 : imported but not used
+" let g:syntastic_always_populate_loc_list = 1
+" " let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" " Use specific checkers, and don't forget to install them "
+" " let g:syntastic_<filetype>_checkers = ['<checker-name>']
+" " For example: replace the default Python checker with flake8 and pylint "
+" " let g:syntastic_python_checkers = ['flake8', 'pylint']
+" let g:syntastic_error_symbol = '❌'
+" let g:syntastic_warning_symbol = '❗️'

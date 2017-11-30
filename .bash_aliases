@@ -5,6 +5,7 @@
 alias where=which
 alias brwe=brew 
 # programs/commands
+eval $(thefuck --alias)
 alias sbu="source ~/.bash_profile ; tmux source ~/.tmux.conf ; " # source env
 alias sb="(\cd ; gcom 'sourcing' ; gpush ) ; sbu" # source and commit
 alias rmdi="rm -rf"
