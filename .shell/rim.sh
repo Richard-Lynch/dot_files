@@ -15,3 +15,16 @@ demo_rim () {
     path="//home/ubuntu/IntApps_ChatServ/" # "$3" ( // absollute path, / relative )
     rim $user $host $path
 }
+
+mac_rim () {
+    if [[ $# == 1 ]]; then
+        file="$1"
+    else
+        file="test_script.sql"
+    fi
+    user="lynchri"
+    host="macneill.scss.tcd.ie"
+    path="//users/ugrad/lynchri/$file"
+    echo $path
+    rim $user $host $path
+}

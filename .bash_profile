@@ -38,6 +38,7 @@ export CLICOLOR=1 # supports color
 export LSCOLORS=ExFxBxDxCxegedabagacad # color selection
 # export PYTHONPATH="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/"
 # export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/VMware Fusion.app/Contents/Library:/Applications/VMware Fusion.app/Contents/Library"
+export PATH=~/instantclient_12_2:$PATH
 
 # history
 HISTFILE="$HOME/.history" # location
@@ -61,7 +62,7 @@ done;
 
 # prompt
 export PS1="\[${bold}\]\[${yellow}\][\w]\[${grey}\][\u : \h]\n\[${yellow}\]$ \[${reset}\]" # super small
-export PROMPT_COMMAND="history -a; history -c; history -r;" # append, clear, refresh
+# export PROMPT_COMMAND="history -a; history -c; history -r;" # append, clear, refresh
 set -o vi
 # set show-mode-in-prompt on
 # set vi-ins-mode-string "+"

@@ -140,8 +140,9 @@ let g:snips_github="Richard-Lynch"
 " ----Auto-Pair---
 let g:AutoPairsFlyMode = 1
 " insert clean bracket in insert mode <C-V>)
-" cant get the shortcut working?
-" let g:AutoPairsShortcutBackInsert = '<C-i>'
+" if adding a ) and flymode jumps you, use <M-b> to back insert
+" NOTE: M is meta, if using iterm2, need to enable for alt
+" let g:AutoPairsShortcutBackInsert = '<M-i>'
 
 "----Unimpared----
 " lines
@@ -458,7 +459,7 @@ nnoremap ; :
 nnoremap <C-l> :nohl<CR><C-l>
 "-----Utility-----
 "save and quit fast
-nnoremap <Leader>w :w<CR>
+nnoremap <Leader>w :set buftype=<CR>:w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>W :wq<CR>
 "space + r refreshes vimrc
@@ -550,6 +551,8 @@ let g:ale_fixers = {
             \'python3': ['autopep8', 'yapf'],
             \}
 " let g:ale_python_flake8_args = '--ignore=E,W,F403,F405 --select=F,C'
+let g:ale_python_flake8_args = '--ignore=E401,E402'
+" ,W,F403,F405 --select=F,C'
 " ---- Status Line ----
 "  not used
 function! GitBranch()
