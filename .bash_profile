@@ -62,6 +62,7 @@ done;
 
 # prompt
 export PS1="\[${bold}\]\[${yellow}\][\w]\[${grey}\][\u : \h]\n\[${yellow}\]$ \[${reset}\]" # super small
+export PROMPT_COMMAND="history -a;" # append
 # export PROMPT_COMMAND="history -a; history -c; history -r;" # append, clear, refresh
 set -o vi
 # set show-mode-in-prompt on
@@ -88,3 +89,6 @@ fi;
 complete -o "nospace" -W "Reminders Calendar Dock Finder Mail Safari Spotify SystemUIServer Terminal Chrome" killall;
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo "bash profile was run"
+
+# added by Miniconda3 installer
+export PATH="/Users/richie/miniconda3/bin:$PATH"
