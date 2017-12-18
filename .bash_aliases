@@ -12,12 +12,13 @@ alias rmdi="rm -rf"
 alias toprl="top -u rlynch79"
 alias pdf="printPDF"
 alias v="vim"
+alias em="emacs -nw"
 alias ycm="~/.vim/bundle/YCM-Generator/config_gen.py -b make ."
 alias tag="/usr/local/bin/ctags -R --exclude='.git' . -L .srclist"
 alias addMake="cp ~/.make/makefileGeneric ./makefile;" ; 
 alias topme="top -U '$(whoami)'"
 alias ghci="/usr/local/Cellar/ghc\@8.0/8.0.2/bin/ghci"
-alias rm="trash"
+# alias rm="trash"
 alias ccat='pygmentize -O style=monokai -f console256 -g' # pretty catrequires sudo easy_install -U Pygments
 alias lockscreen='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend' # mac only
 

@@ -37,8 +37,8 @@ alias git="git -c http.sslVerify=false"
 export CLICOLOR=1 # supports color
 export LSCOLORS=ExFxBxDxCxegedabagacad # color selection
 # export PYTHONPATH="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/"
-# export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/VMware Fusion.app/Contents/Library:/Applications/VMware Fusion.app/Contents/Library"
-export PATH=~/instantclient_12_2:$PATH
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/VMware Fusion.app/Contents/Library:/Applications/VMware Fusion.app/Contents/Library"
+# export PATH=~/instantclient_12_2:$PATH
 
 # history
 HISTFILE="$HOME/.history" # location
@@ -91,4 +91,4 @@ complete -o "nospace" -W "Reminders Calendar Dock Finder Mail Safari Spotify Sys
 echo "bash profile was run"
 
 # added by Miniconda3 installer
-export PATH="/Users/richie/miniconda3/bin:$PATH"
+# export PATH="/Users/richie/miniconda3/bin:$PATH"
