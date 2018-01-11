@@ -12,7 +12,7 @@ alias rmdi="rm -rf"
 alias toprl="top -u rlynch79"
 alias pdf="printPDF"
 alias v="vim"
-alias em="emacs -nw"
+alias em="emacsclient -t"
 alias ycm="~/.vim/bundle/YCM-Generator/config_gen.py -b make ."
 alias tag="/usr/local/bin/ctags -R --exclude='.git' . -L .srclist"
 alias addMake="cp ~/.make/makefileGeneric ./makefile;" ; 
@@ -23,14 +23,17 @@ alias ccat='pygmentize -O style=monokai -f console256 -g' # pretty catrequires s
 alias lockscreen='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend' # mac only
 
 # open file
-alias bp="(\cd && vim .bash_profile)" # opens bash profile
-alias ba="(\cd && vim .bash_aliases)" # opens bash aliases
-alias vrc="(\cd && vim .vimrc)"  # opens vimrc
-alias tco="(\cd && vim .tmux.conf)"  #opens tmux.conf
-alias g="(\cd ~/.shell && vim git.sh)"  #opens tmux.conf
-alias bstuff="(\cd && vim .bashStuff)"
-alias vstuff="(\cd && vim .vimStuff)"
-alias tstuff="(\cd && vim .tmuxStuff)"
+alias e='eval $(echo $EDITOR)'
+# alias e="eval ed"
+alias bp="(\cd && e .bash_profile)" # opens bash profile
+alias ba="(\cd && e .bash_aliases)" # opens bash aliases
+alias vrc="(\cd && e .vimrc)"  # opens vimrc
+alias erc="(\cd && e .spacemacs)"  # opens vimrc
+alias tco="(\cd && e .tmux.conf)"  #opens tmux.conf
+alias g="(\cd ~/.shell && e git.sh)"  #opens tmux.conf
+alias bstuff="(\cd && e .bashStuff)"
+alias vstuff="(\cd && e .vimStuff)"
+alias tstuff="(\cd && e .tmuxStuff)"
 
 # clear, jump to dir, ls
 alias c="clear && \ls -AF"
@@ -39,11 +42,11 @@ alias p="clear && pushb $buildLocation"     # Build
 alias s="clear && pushb $scriptLocation"    # scripts 
 alias t="clear && pushb $testLocation"      # test scripts
 alias u="clear && pushb $utilsLocation"     # util scripts
-alias e="clear && pushb $envScriptLocation" # env scrips
+alias E="clear && pushb $envScriptLocation" # env scrips
 alias i="clear && pushb $infoLocation"      # info scrips
 alias d="clear && pushb $driveLocation"     # drive
-alias D="clear && pushb $documentsLocation" # documents
-alias E="clear && pushb $engLocation"       # engineering 
+alias docs="clear && pushb $documentsLocation" # documents
+alias eng="clear && pushb $engLocation"       # engineering 
 
 # alias c="clear && \ls -A"
 # alias h="clear && \cd && \ls -A"                     # Home

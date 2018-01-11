@@ -13,6 +13,11 @@ driveLocation="~/Drive/"
 documentsLocation="~/Drive/Documents/"
 engLocation="~/Engineering"
 
+# defaults
+# export VISUAL="emacsclient -c" # default editor is emacs
+# export EDITOR="emacsclient -t"
+# export ALTERNATE_EDITOR="" # causes emacs to start server if not started
+
 # externals
 if [[ -x $HOME/.shell/sourceAll.sh ]] ; then
     echo "sourcing all"
@@ -21,13 +26,25 @@ if [[ -x $HOME/.shell/sourceAll.sh ]] ; then
 fi
 
 # defaults
-export VISUAL=vim # default editor is vim
-export EDITOR="$VISUAL"
-if [ -x /usr/local/bin/mvim ] ; then
-    alias vim="/usr/local/bin/mvim -v"
-    export VISUAL="/usr/local/bin/mvim -v" # default editor is vim
-    export EDITOR="/usr/local/bin/mvim -v"
-fi
+export VISUAL="emacsclient -c" # default editor is emacs
+export EDITOR="emacsclient -t"
+export ALTERNATE_EDITOR="" # causes emacs to start server if not started
+# # defaults
+# export VISUAL=vim # default editor is vim
+# export EDITOR="$VISUAL"
+# if [ -x /usr/local/bin/mvim ] ; then
+#     alias vim="/usr/local/bin/mvim -v"
+#     export VISUAL="/usr/local/bin/mvim -v" # default editor is vim
+#     export EDITOR="/usr/local/bin/mvim -v"
+# fi
+
+# defaults
+# emacs --daemon &>/dev/null;
+# if [ -x /usr/local/bin/mvim ] ; then
+#     alias vim="/usr/local/bin/mvim -v"
+#     export VISUAL="/usr/local/bin/mvim -v" # default editor is vim
+#     export EDITOR="/usr/local/bin/mvim -v"
+# fi
 
 # options
 # export CDPATH=:..:~:~/programs # search each of these paths for autocomplete
@@ -39,6 +56,7 @@ export LSCOLORS=ExFxBxDxCxegedabagacad # color selection
 # export PYTHONPATH="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/"
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/VMware Fusion.app/Contents/Library:/Applications/VMware Fusion.app/Contents/Library"
 # export PATH=~/instantclient_12_2:$PATH
+export PKG_CONFIG_PATH=/usr/local/Cellar/zlib/1.2.8/lib/pkgconfig:/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 
 # history
 HISTFILE="$HOME/.history" # location
