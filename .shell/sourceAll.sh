@@ -1,6 +1,7 @@
 #!/bin/bash
 # source all files, called in bash_profile
 #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+verbose=true
 verbose=false
 thisFile="sourceAll.sh"
 # platform specific

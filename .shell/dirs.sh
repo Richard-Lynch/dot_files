@@ -2,14 +2,14 @@
 
 # better; pop dirs[$1] from stack
 betterpopd () {
-    popd +$1 > /dev/null;
+    popd +"$1" > /dev/null;
     dirs -v -l;
 }
 # better; push current dir onto stack, and go to arg
 # or, if +N , bring N dir from top to top of stack by rotating
 # or, if -N , bring N dir from bot to top of stack by rotating
 betterpushd () {
-    pushd $1 > /dev/null;
+    pushd "$1" > /dev/null;
     clear;
     ls -A;
     dirs -v -l;

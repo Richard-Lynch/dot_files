@@ -1,11 +1,12 @@
 #!/bin/bash
 
-if [ -x /usr/local/bin/mvim ] ; then
-    alias vim="/usr/local/bin/mvim -v"
-    export EDITOR="/usr/local/bin/mvim -v"
-fi
+# if [ -x /usr/local/bin/mvim ] ; then
+#     alias vim="/usr/local/bin/mvim -v"
+#     export EDITOR="/usr/local/bin/mvim -v"
+# fi
 
 create () {         #just creates a quick file
+    # echo "in create"
     fileString=""
     addToGit=0
     OPTIND=1
@@ -17,12 +18,14 @@ create () {         #just creates a quick file
             b) # -b = bash
                 echo "creating bash file" >&2
                 fileString="$(which bash)"
+                fileStringLeader="#!"
                 ;;
             p) # -p = python
                 case $OPTARG in 
                     2 | 3)
                         echo "creating python $OPTARG file" >&2
                         fileString="$(which python$OPTARG)"
+                        fileStringLeader="#!"
                         ;;
                     *)
                         echo "Invalid python version!"
@@ -32,6 +35,7 @@ create () {         #just creates a quick file
                 ;;
             -) # --abitrary
                 fileString="$(which $OPTARG)"
+                fileStringLeader="#!"
                 if [[ $fileString == "" ]] ; then
                     echo "$OPTARG not installed"
                     return
@@ -59,12 +63,18 @@ create () {         #just creates a quick file
         # echo "fileString empty"
         extension="${filename##*.}"
         if [[ $extension == "py" ]] ; then
-            # echo "python extension found!"
+            echo "python extension found!"
             PY_DEFAULT="3"
             fileString="$(which python$PY_DEFAULT)"
+            fileStringLeader="#!"
         elif [[ $extension == "sh" ]] ; then
-            # echo "bash extension found!"
+            echo "bash extension found!"
             fileString="$(which bash)"
+            fileStringLeader="#!"
+        elif [[ $extension == "org" ]] ; then
+            echo "org extension found!"
+            fileString="TODO: TODO RUNNING BACK IDEA | DONE CANCELED"
+            fileStringLeader="#+"
         else
             echo "unknown extension found!" > /dev/null
         fi
@@ -76,12 +86,16 @@ create () {         #just creates a quick file
         # add a line to the file if nessasary
         if [ \! -s $filename ] ; then echo "" >> $filename ; echo "added blank line to file" ;  fi ;
         # remove any lines starting with #!
-        sed -i '' '/^#!/ d' $filename ; 
+        sed -i '' '/^'$fileStringLeader'/ d' $filename ; 
         # insert the correct fileString to the top of the file
-        fileString="#!$fileString"
+        fileString="$fileStringLeader$fileString"
         # echo "at the adding line stage"
         # echo "fileString: $fileString"
-        gsed -i "1i$fileString" $filename # gsed = gnu-sed ( homebrew! )
+        # the next echo is functional!!
+        echo "$fileString
+            $(cat $filename)" > $filename
+        # echo "it worked"
+        # gsed -i "1$fileString" $filename # gsed = gnu-sed ( homebrew! )
     else
         echo "fileString empty" > /dev/null
     fi
@@ -91,7 +105,7 @@ create () {         #just creates a quick file
         git add $filename      ;
     fi ; 
     # open file in vim
-    vim $filename          ;
+    em $filename          ;
     # if git flag, commit to git after editing
     if [[ $addToGit == 1 ]] ; then
         git commit -am "Added $filename" ; 

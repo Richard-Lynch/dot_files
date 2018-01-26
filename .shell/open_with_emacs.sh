@@ -5,7 +5,7 @@ open_emacs () {
         file="$1";
     fi
 
-    emacsclient -t $file 2> /dev/null;
+    emacsclient -t "$file" 2> /dev/null;
     result=$(echo $?);
 
     if [[ $result == 1 ]] ; then

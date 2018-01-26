@@ -23,17 +23,17 @@ alias ccat='pygmentize -O style=monokai -f console256 -g' # pretty catrequires s
 alias lockscreen='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend' # mac only
 
 # open file
-alias e='eval $(echo $EDITOR)'
+# alias e='eval $(echo $EDITOR)'
 # alias e="eval ed"
-alias bp="(\cd && e .bash_profile)" # opens bash profile
-alias ba="(\cd && e .bash_aliases)" # opens bash aliases
-alias vrc="(\cd && e .vimrc)"  # opens vimrc
-alias erc="(\cd && e .spacemacs)"  # opens vimrc
-alias tco="(\cd && e .tmux.conf)"  #opens tmux.conf
-alias g="(\cd ~/.shell && e git.sh)"  #opens tmux.conf
-alias bstuff="(\cd && e .bashStuff)"
-alias vstuff="(\cd && e .vimStuff)"
-alias tstuff="(\cd && e .tmuxStuff)"
+alias bp="(\cd && em .bash_profile)" # opens bash profile
+alias ba="(\cd && em .bash_aliases)" # opens bash aliases
+alias vrc="(\cd && em .vimrc)"  # opens vimrc
+alias erc="(\cd && em .spacemacs)"  # opens vimrc
+alias tco="(\cd && em .tmux.conf)"  #opens tmux.conf
+alias g="(\cd ~/.shell && em git.sh)"  #opens tmux.conf
+alias bstuff="(\cd && em .bashStuff)"
+alias vstuff="(\cd && em .vimStuff)"
+alias tstuff="(\cd && em .tmuxStuff)"
 
 # clear, jump to dir, ls
 alias c="clear && \ls -AF"

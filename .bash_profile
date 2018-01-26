@@ -54,7 +54,7 @@ alias git="git -c http.sslVerify=false"
 export CLICOLOR=1 # supports color
 export LSCOLORS=ExFxBxDxCxegedabagacad # color selection
 # export PYTHONPATH="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/"
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/VMware Fusion.app/Contents/Library:/Applications/VMware Fusion.app/Contents/Library"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/VMware Fusion.app/Contents/Library:/Applications/VMware Fusion.app/Contents/Library:/Library/TeX/texbin/"
 # export PATH=~/instantclient_12_2:$PATH
 export PKG_CONFIG_PATH=/usr/local/Cellar/zlib/1.2.8/lib/pkgconfig:/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 
