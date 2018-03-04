@@ -10,7 +10,7 @@ case "${unameOut}" in
 esac
 echo "machine: $machine"
 
-exit 
+# exit 
 
 if [ ! -x /usr/bin/git ] ; then
     echo "Error: Git not installed.\nPlease install git and run again.";
