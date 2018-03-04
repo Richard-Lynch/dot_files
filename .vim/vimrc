@@ -233,7 +233,7 @@ let g:ycm_complete_in_strings = 1
 
 "----VimCompeltesMe----
 "use ctags -R in root of project to link tags, then use <C-]> to go to tag
-" set encoding=utf-8
+set encoding=utf-8
 
 " "----NERDtree----
 augroup nerdGroup
