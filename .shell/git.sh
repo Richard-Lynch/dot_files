@@ -14,6 +14,7 @@ alias gls="git ls-tree -r master --name-only" # list files tracked by git ( same
 alias grm="git rm --cached" # use '\*' for wildcard (eg: /home/richie/\*)
 alias gmv="git mv"
 alias gs="git status -uno" # don't show untracked files
+alias gsa="git status" # show untracked files
 
 gcp () {
     if [[ $# == 0 ]] ; then
