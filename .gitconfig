@@ -3,7 +3,7 @@
 	name = Richard Lynch
 	email = rich753@hotmail.com
 [core]
-	editor = /usr/local/bin/mvim -v
+	editor = /usr/local/bin/emacsclient -n
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true

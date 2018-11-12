@@ -11,7 +11,9 @@ alias gc="git commit -a"
 alias gpush="git push origin"	# pushes all to remote
 alias gp="git push origin"
 alias gls="git ls-tree -r master --name-only" # list files tracked by git ( same as "git ls-tree -r master --name-only" )
+alias grm="git rm --cached" # use '\*' for wildcard (eg: /home/richie/\*)
 alias gmv="git mv"
+alias gs="git status -uno" # don't show untracked files
 
 gcp () {
     if [[ $# == 0 ]] ; then

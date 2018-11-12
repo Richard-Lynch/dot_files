@@ -26,8 +26,8 @@ if [[ -x $HOME/.shell/sourceAll.sh ]] ; then
 fi
 
 # defaults
-export VISUAL="emacsclient -t" # default editor is emacs
-export EDITOR="emacsclient -t"
+export VISUAL="emacsclient -tn" # default editor is emacs
+export EDITOR="emacsclient -tn"
 export ALTERNATE_EDITOR="" # causes emacs to start server if not started
 # # defaults
 # export VISUAL=vim # default editor is vim
