@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias aws="ssh -i "~/.ssh/awspem/IrelandVM.pem" ubuntu@ec2-54-194-81-174.eu-west-1.compute.amazonaws.com"
+# alias aws="ssh -i "~/.ssh/awspem/IrelandVM.pem" ubuntu@ec2-54-194-81-174.eu-west-1.compute.amazonaws.com"
 #ec2-54-154-93-7.eu-west-1.compute.amazonaws.com";
 # alias aws2="ssh -i "~/.ssh/awspem/IrelandVM.pem" ubuntu@ec2-34-240-42-121.eu-west-1.compute.amazonaws.com";
 # alias mlaws="ssh -i "~/.ssh/awspem/IrelandVM.pem" ubuntu@ec2-54-246-220-121.eu-west-1.compute.amazonaws.com"

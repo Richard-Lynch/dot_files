@@ -105,7 +105,7 @@ create () {         #just creates a quick file
         git add $filename      ;
     fi ; 
     # open file in vim
-    em $filename          ;
+    env $EDITOR $filename          ;
     # if git flag, commit to git after editing
     if [[ $addToGit == 1 ]] ; then
         git commit -am "Added $filename" ; 

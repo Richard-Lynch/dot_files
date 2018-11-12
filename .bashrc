@@ -2,6 +2,14 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 echo "running bashrc"
+
+# run bash_profile and nothing else if it exists
+if [ -f ~/.bash_profile ]; then
+    echo "Running bash_profile instead"
+    . ~/.bash_profile
+    return
+fi
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -101,6 +109,12 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.bash_profile ]; then
+    . ~/.bash_profile
+fi
+
+
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -111,5 +125,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-eval $(thefuck --alias)

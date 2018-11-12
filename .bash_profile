@@ -26,7 +26,7 @@ if [[ -x $HOME/.shell/sourceAll.sh ]] ; then
 fi
 
 # defaults
-export VISUAL="emacsclient -c" # default editor is emacs
+export VISUAL="emacsclient -t" # default editor is emacs
 export EDITOR="emacsclient -t"
 export ALTERNATE_EDITOR="" # causes emacs to start server if not started
 # # defaults
@@ -51,10 +51,11 @@ export ALTERNATE_EDITOR="" # causes emacs to start server if not started
 export CDPATH=:..: # search each of these paths for autocomplete
 stty -ixon # disable CTRL-S to suspend terminal
 alias git="git -c http.sslVerify=false"
-export CLICOLOR=1 # supports color
+export CLICOLOR=1 # supports colohe
 export LSCOLORS=ExFxBxDxCxegedabagacad # color selection
-# export PYTHONPATH="/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/"
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/VMware Fusion.app/Contents/Library:/Applications/VMware Fusion.app/Contents/Library:/Library/TeX/texbin/"
+PYTHON_ALIASES_PATH="/usr/local/opt/python/libexec/bin"
+PYTHON_BIN_PATH="/Users/richie/Library/Python/3.7/bin/"
+export PATH="$PYTHON_ALIASES_PATH:$PYTHON_BIN_PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/VMware Fusion.app/Contents/Library:/Library/TeX/texbin/"
 # export PATH=~/instantclient_12_2:$PATH
 export PKG_CONFIG_PATH=/usr/local/Cellar/zlib/1.2.8/lib/pkgconfig:/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 
@@ -83,9 +84,6 @@ export PS1="\[${bold}\]\[${yellow}\][\w]\[${grey}\][\u : \h]\n\[${yellow}\]$ \[$
 export PROMPT_COMMAND="history -a;" # append
 # export PROMPT_COMMAND="history -a; history -c; history -r;" # append, clear, refresh
 set -o vi
-# set show-mode-in-prompt on
-# set vi-ins-mode-string "+"
-# set vi-cmd-mode-string ":"
 
 # enable bash completion
 # Add tab completion for bash completion 2 (https://troymccall.com/better-bash-4--completions-on-osx/)
@@ -110,3 +108,6 @@ echo "bash profile was run"
 
 # added by Miniconda3 installer
 # export PATH="/Users/richie/miniconda3/bin:$PATH"
+
+# test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+

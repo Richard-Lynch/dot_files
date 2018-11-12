@@ -1,7 +1,9 @@
 #!/bin/bash
 
 #---------------------SHORTCUTS---------------------
-# typos
+alias dafny='/Users/richie/dafny/dafny'
+alias john='~/programs/Scalable/JohnTheRipper/run/john'
+alias python='/usr/local/bin/python3'
 alias where=which
 alias brwe=brew 
 # programs/commands
