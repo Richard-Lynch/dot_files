@@ -518,10 +518,10 @@ you should place your code here."
 
   ;; --- HOOKS ---
   ;; - SHELL HOOKS -
-  (add-hook 'shell-mode-hook
-            (lambda ()
-              (define-key evil-insert-state-map (kbd "<tab>") 'auto-complete)
-              ('auto-complete-mode)))
+  ;; (add-hook 'shell-mode-hook
+  ;;           (lambda ()
+  ;;             (define-key evil-insert-state-map (kbd "<tab>") 'auto-complete)
+  ;;             ('auto-complete-mode)))
   ;; - ORG HOOKS -
   (add-hook 'org-mode-hook 'spacemacs/delay-emoji-cheat-sheet-hook)
   (add-hook 'org-mode-hook 'company-emoji-init)
@@ -594,6 +594,13 @@ you should place your code here."
 
   ;; --- EVIL EX COMMANDS ---
   (evil-ex-define-cmd "q" 'kill-this-buffer) ;; Only kill the buffer instead of the window and the buffer (applied below)
+  (defun my/ex-save-kill-buffer-and-close ()
+    ;; https://www.reddit.com/r/spacemacs/comments/6p3w0l/making_q_not_kill_emacs/
+    (interactive)
+    (save-buffer)
+    (kill-this-buffer)
+    )
+  (evil-ex-define-cmd "wq" 'my/ex-save-kill-buffer-and-close)
   ;; typos
   (evil-ex-define-cmd "Q" "q")
   (evil-ex-define-cmd "Q!" "q!")
@@ -678,6 +685,10 @@ you should place your code here."
      ("~" org-code verbatim)
      ("+"
       (:strike-through t)))))
+ '(org-format-latex-options
+   (quote
+    (:foreground default :background default :scale 1.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.5 :matchers
+                 ("begin" "$1" "$" "$$" "\\(" "\\["))))
  '(org-hide-emphasis-markers t)
  '(org-hierarchical-todo-statistics nil)
  '(org-image-actual-width (quote (200)))
@@ -687,6 +698,7 @@ you should place your code here."
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-rmail org-w3m)))
  '(org-read-date-prefer-future (quote time))
  '(org-startup-indented t)
+ '(org-startup-with-latex-preview t)
  '(org-todo-keywords
    (quote
     ((sequence "TODO(t)" "IN PROGRESS(i@/@)" "PAUSED(p@/@)" "BLOCKED(b@/@)" "|" "CANCLED(c@/@)" "DONE(d@/@)"))))
