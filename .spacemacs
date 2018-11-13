@@ -525,8 +525,9 @@ you should place your code here."
   ;; - ORG HOOKS -
   (add-hook 'org-mode-hook 'spacemacs/delay-emoji-cheat-sheet-hook)
   (add-hook 'org-mode-hook 'company-emoji-init)
-  (add-hook 'org-log-buffer-setup-hook (lambda ()
-                                         (evil-ex-define-cmd "wq" 'org-ctrl-c-ctrl-c)))
+  ;; Instead of remapping everywhere, getused to ', ,' as the command to close that sort of buffer
+  ;; (add-hook 'org-log-buffer-setup-hook (lambda ()
+  ;;                                        (evil-ex-define-cmd "wq" 'org-ctrl-c-ctrl-c)))
   (spacemacs/set-leader-keys-for-major-mode 'org-mode ";" 'org-set-tags-command)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode ":" 'org-set-tags-to)
   (spacemacs/set-leader-keys "oc" 'org-capture)
@@ -592,6 +593,7 @@ you should place your code here."
     (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 
   ;; --- EVIL EX COMMANDS ---
+  (evil-ex-define-cmd "q" 'kill-this-buffer) ;; Only kill the buffer instead of the window and the buffer (applied below)
   ;; typos
   (evil-ex-define-cmd "Q" "q")
   (evil-ex-define-cmd "Q!" "q!")
