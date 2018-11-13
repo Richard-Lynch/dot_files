@@ -6,17 +6,6 @@
 :PROPERTIES:
 :VISIBILITY: children
 :END:
-** Testing
-#+BEGIN_SRC emacs-lisp
-  (setq-default spaceline-minor-modes-p t)
-#+END_SRC
-** Layers
-# #+BEGIN_SRC emacs-lisp
-#   (setq-default dotspacemacs-configuration-layers
-#      '((python :variables
-#              python-enable-yapf-format-on-save t
-#              python-sort-imports-on-save t)))
-# #+END_SRC
 ** Key Bindings
 *** Org
 #+BEGIN_SRC emacs-lisp
@@ -39,7 +28,6 @@ Navigate Windows
   (spacemacs/set-leader-keys "\~" 'eyebrowse-switch-to-window-config)
   (spacemacs/set-leader-keys "`" 'eyebrowse-last-window-config)
 #+END_SRC
-*** Text
 ** Evil Ex commands
 Function to save then kill a buffer (instead of saving and killing the window)
 #+BEGIN_SRC emacs-lisp
@@ -110,7 +98,7 @@ Version Control
 #+BEGIN_SRC emacs-lisp
   (setq spaceline-version-control-p t)
 #+END_SRC
-Hide minor mode from statusline
+Hide minor mode power-line
 #+BEGIN_SRC emacs-lisp
   (setq-default spaceline-minor-modes-p nil)
 #+END_SRC
@@ -129,6 +117,17 @@ Always wrap lines visually
 #+BEGIN_SRC emacs-lisp
   (global-visual-line-mode 1)
 #+END_SRC
+Move cursor within visual lines, not true lines
+#+BEGIN_SRC emacs-lisp
+  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+#+END_SRC
+Enable mouse support
+#+BEGIN_SRC emacs-lisp
+  (unless window-system
+    (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+    (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
+#+END_SRC
 Fix issue of raising emacs frame from: https://korewanetadesu.com/emacs-on-os-x.html
 #+BEGIN_SRC emacs-lisp
   (when (featurep 'ns)
@@ -143,15 +142,4 @@ Fix issue of raising emacs frame from: https://korewanetadesu.com/emacs-on-os-x.
     (add-hook 'after-make-frame-functions 'ns-raise-emacs-with-frame)
     (when (display-graphic-p)
       (ns-raise-emacs)))
-#+END_SRC
-Move cursor within visual lines, not true lines
-#+BEGIN_SRC emacs-lisp
-  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-#+END_SRC
-Enable mouse support
-#+BEGIN_SRC emacs-lisp
-  (unless window-system
-    (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-    (global-set-key (kbd "<mouse-5>") 'scroll-up-line))
 #+END_SRC
