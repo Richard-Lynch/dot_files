@@ -1,11 +1,9 @@
 #+TITLE: SPACEMACS Literate Configuration
 #+AUTHOR: Richard Lynch
 #+PROPERTY: header-args :tangle yes :comments link
-#+EXCLUDE_TAGS: noexport
 * LAYER CONFIG
  Configuration Layers declaration.
  You should not put any user code in this function besides modifying the variable values.
-** Test                                                           :noexport:
 ** Start dotspacemacs/layers
 #+BEGIN_SRC emacs-lisp :exports none
   (defun dotspacemacs/layers ()
