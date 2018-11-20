@@ -101,13 +101,17 @@ docker
 #+BEGIN_SRC emacs-lisp
 helm
 #+END_SRC
+**** Version Control
+#+BEGIN_SRC emacs-lisp
+version-control
+#+END_SRC
 **** Git
 #+BEGIN_SRC emacs-lisp
 git
 #+END_SRC
-**** Version Control
+**** GitHub
 #+BEGIN_SRC emacs-lisp
-version-control
+github
 #+END_SRC
 **** Spelling
 #+BEGIN_SRC emacs-lisp
