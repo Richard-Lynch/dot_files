@@ -145,7 +145,10 @@ evil-commentary
             shell-default-position 'bottom
             shell-default-shell 'shell)
 #+END_SRC
-**** Restclient
+**** RestClient
+[[https://github.com/syl20bnr/spacemacs/tree/master/layers/%252Btools/restclient][Layer]]
+[[https://github.com/pashky/restclient.el][RestClient Package]]
+[[https://github.com/zweifisch/ob-http][OB HTTP (org babel)]]
 #+BEGIN_SRC emacs-lisp
 restclient
 #+END_SRC
