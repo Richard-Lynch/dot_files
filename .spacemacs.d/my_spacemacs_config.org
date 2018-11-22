@@ -286,10 +286,10 @@ values.
    size to make separators look not too crappy.
 #+BEGIN_SRC emacs-lisp
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 14
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1
+                               :powerline-scale 1.2
                                )
 #+END_SRC
 ** Leader key
