@@ -662,6 +662,10 @@ From [[https://emacs.stackexchange.com/questions/16735/how-to-add-date-and-time-
 #+BEGIN_SRC emacs-lisp
   (setq-default spaceline-minor-modes-p nil)
 #+END_SRC
+**** Battery
+#+BEGIN_SRC emacs-lisp
+  (setq-default spaceline-battery-p t)
+#+END_SRC
 *** Sublimity
 Sublime like features in emacs
 #+BEGIN_SRC emacs-lisp
