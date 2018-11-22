@@ -181,6 +181,7 @@ better-defaults
                                      eterm-256color
                                      org-autolist
                                      magithub
+                                     helm-chrome
                                      )
 #+END_SRC
 *** Frozen
@@ -678,6 +679,10 @@ From: [[https://github.com/dieggsy/eterm-256color][eterm-256color]]
   (require 'eterm-256color)
   (add-hook 'term-mode-hook #'eterm-256color-mode)
 #+END_SRC
+*** Helm-Google
+#+BEGIN_SRC emacs-lisp
+(require 'helm-chrome)
+#+END_SRC
 ** Key Bindings
 *** Org
 **** Tags
@@ -784,6 +789,17 @@ Adjusted from core
 **** Override
 #+BEGIN_SRC emacs-lisp
 (spacemacs/set-leader-keys "fed" 'my/find-dotfile)
+#+END_SRC
+*** Searches
+**** Helm Chrome Bookmarks
+'SPC o b'
+#+BEGIN_SRC emacs-lisp
+  (spacemacs/set-leader-keys "ob" 'helm-chrome-bookmarks)
+#+END_SRC
+**** Helm Google Search
+'SPC o g'
+#+BEGIN_SRC emacs-lisp
+  (spacemacs/set-leader-keys "og" 'helm-google-suggest)
 #+END_SRC
 ** Evil Ex commands
 *** Stop Closing Windows
