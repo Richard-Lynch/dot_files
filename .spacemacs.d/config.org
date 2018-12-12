@@ -626,20 +626,14 @@ Autocomplete
 #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook 'company-emoji-init)
 #+END_SRC
-**** Auto Indent
+**** TODO (turn off) Auto Indent
 Re-Indent all text in org files on save
 #+BEGIN_SRC emacs-lisp
-  (defun org-mode-indent-hook()
+  (defun my-org-mode-indent-hook()
     "Auto Indent Org-Mode"
     (when (eq major-mode 'org-mode)
       (org-indent-indent-buffer)))
-  (add-hook 'after-save-hook 'org-mode-indent-hook)
-#+END_SRC
-**** Auto List
-Auto create new items in list
-#+BEGIN_SRC emacs-lisp
-  (require 'org-autolist)
-  (add-hook 'org-mode-hook 'org-autolist-mode)
+  (add-hook 'after-save-hook 'my-org-mode-indent-hook)
 #+END_SRC
 *** Magit
 #+BEGIN_SRC
