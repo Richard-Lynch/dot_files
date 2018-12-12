@@ -143,7 +143,7 @@ evil-commentary
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom
-            shell-default-shell 'shell)
+            shell-default-shell 'ansi-term)
 #+END_SRC
 **** RestClient
 [[https://github.com/syl20bnr/spacemacs/tree/master/layers/%252Btools/restclient][Layer]]
