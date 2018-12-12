@@ -967,6 +967,11 @@ Adjusted from core
 #+BEGIN_SRC emacs-lisp
   (spacemacs/set-leader-keys "og" 'helm-google-suggest)
 #+END_SRC
+**** Helm Search Inside Files Directory (Ag)
+'SPC o s'
+#+BEGIN_SRC emacs-lisp
+  (spacemacs/set-leader-keys "os" 'helm-do-ag)
+#+END_SRC
 ** Evil Ex commands
 *** Stop Closing Windows
 Function to save then kill a buffer (instead of saving and killing the window) from [[https://www.reddit.com/r/spacemacs/comments/6p3w0l/making_q_not_kill_emacs/][here]].
