@@ -562,7 +562,7 @@ Initialization function for user code. It is called immediately after
      (shell .t)
      ))
 #+END_SRC
-** Auto-List Fix for shell commands
+** Use shell-script-mode when editing commands from bash shell
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'auto-mode-alist '("*bash.fc*" . shell-script-mode))
 #+END_SRC
