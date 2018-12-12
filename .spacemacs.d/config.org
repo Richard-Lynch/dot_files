@@ -898,13 +898,14 @@ From: [[https://github.com/dieggsy/eterm-256color][eterm-256color]]
 *** Jump to Configuration
 Jump to this file instead of ~/.spacemacs.d/init.el
 Adjusted from core
+NOTE: If this is changed, spacemacs needs to be restarted
 **** Functions/Vars
 ***** Filepath
 [[file:~/.emacs.d/core/core-dotspacemacs.el::(let*%20((env%20(getenv%20"SPACEMACSDIR"))][Original]]
 #+BEGIN_SRC emacs-lisp
   (let* ((my_env (getenv "SPACEMACSDIR"))
          (my_env-dir (when my_env (expand-file-name (concat my_env "/"))))
-         (my_env-init (and my_env-dir (expand-file-name "my_spacemacs_config.org" my_env-dir)))
+         (my_env-init (and my_env-dir (expand-file-name "config.org" my_env-dir)))
          (my_no-env-dir-default (expand-file-name
                               (concat user-home-directory
                                       ".spacemacs.d/")))
@@ -925,7 +926,7 @@ Adjusted from core
     (defvar my_dotspacemacs-filepath
       (let ((my_spacemacs-dir-init (when my_dotspacemacs-directory
                                    (concat my_dotspacemacs-directory
-                                           "my_spacemacs_config.org"))))
+                                           "config.org"))))
         (cond
          (my_env-init)
          ((file-exists-p my_default-init) my_default-init)
