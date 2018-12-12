@@ -1,4 +1,4 @@
-(org-babel-load-file "~/.spacemacs.d/my_spacemacs_config.org")
+(org-babel-load-file "~/.spacemacs.d/config.org")
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
