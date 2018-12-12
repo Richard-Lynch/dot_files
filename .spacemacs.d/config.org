@@ -576,7 +576,7 @@ Initialization function for user code. It is called immediately after
                                    )))
 #+END_SRC
 ** Emoji
-  https://github.com/dunn/company-emoji
+https://github.com/dunn/company-emoji
 #+BEGIN_SRC emacs-lisp
   (defun --set-emoji-font (frame)
     "Adjust the font settings of FRAME so Emacs can display emoji properly."
