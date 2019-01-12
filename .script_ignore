@@ -1,0 +1,5 @@
+.script_ignore
+.git
+.#
+.DS_Store
+env_setup
