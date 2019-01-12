@@ -2,6 +2,9 @@
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo "bash profile is running"
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=i
+# DOTFILES="$(dirname "$(realpath "$0")")"
+DOTFILES="$HOME/dot_files"
+echo "$DOTFILES"
 # locations
 buildLocation="~/programs" 
 scriptLocation="~/programs/scripts"
@@ -19,9 +22,9 @@ engLocation="~/Engineering"
 # export ALTERNATE_EDITOR="" # causes emacs to start server if not started
 
 # externals
-if [[ -x $HOME/.shell/sourceAll.sh ]] ; then
+if [[ -x $DOTFILES/shell/sourceAll.sh ]] ; then
     echo "sourcing all"
-    . $HOME/.shell/sourceAll.sh ; 
+    . $DOTFILES/shell/sourceAll.sh ; 
     echo "done sourcing"
 fi
 

@@ -41,7 +41,7 @@ fi
 alias dockerStart="open --background -a Docker"
 alias dockerStop="test -z \"$(docker ps -q 2>/dev/null)\" && osascript -e 'quit app \"Docker\"'"
 alias dockerForce="docker ps -q | xargs -L1 docker stop"
-alias restart="dockerStop ; dockerStart ; "
+alias dockerRestart="dockerStop ; dockerStart ; "
 # alias rpi="ssh pi@79.97.206.77 -p 2200"
 
 # ip="8080 54.154.93.7"

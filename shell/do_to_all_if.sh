@@ -5,16 +5,16 @@ do_if(){
     condition="$2"
     second="$3"
 
-    for f in ./* ; do 
+    for f in ./* ; do
         echo "in loop"
         echo $f
-        if [[ -f $f ]]; then 
+        if [[ -f $f ]]; then
             echo "is a file"
             echo $condition
-            if [[ "$f" == *"$condition"* ]] ; then 
+            if [[ "$f" == *"$condition"* ]] ; then
                 echo "meets condition"
-                $action "$f" $second; 
-            fi; 
-        fi;  
+                $action "$f" $second;
+            fi;
+        fi;
     done
 }
