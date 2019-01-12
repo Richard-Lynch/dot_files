@@ -179,7 +179,7 @@ better-defaults
   dotspacemacs-additional-packages '(
                                      sublimity
                                      eterm-256color
-                                     org-autolist
+                                     ;; org-autolist
                                      magithub
                                      helm-chrome
                                      )
