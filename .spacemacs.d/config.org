@@ -598,6 +598,19 @@ Hook for when a frame is created with emacsclient, see: [[https://www.gnu.org/so
 #+END_SRC
 ** Org Return
 [[http://kitchingroup.cheme.cmu.edu/blog/2017/04/09/A-better-return-in-org-mode/][Better Return]]
+** Flymd
+From [[https://github.com/mola-T/flymd/blob/master/browser.md#chrome-macos][here]] 
+Temporary for testing the live render of MarkDown
+#+BEGIN_SRC emacs-lisp
+(defun my-flymd-browser-function (url)
+  (let ((process-environment (browse-url-process-environment)))
+    (apply 'start-process
+           (concat "firefox " url)
+           nil
+           "/usr/bin/open"
+           (list "-a" "firefox" url))))
+(setq flymd-browser-open-function 'my-flymd-browser-function)
+#+END_SRC
 ** End dotspacemacs/user-init
 #+BEGIN_SRC emacs-lisp :exports none
     )
@@ -1006,6 +1019,7 @@ Map w and q to more sane commands (kill buffer not window)
 Always wrap lines visually
 #+BEGIN_SRC emacs-lisp
   (global-visual-line-mode 1)
+  ;; (add-hook 'text-mode-hook 'visual-line-mode)
 #+END_SRC
 *** Visual Lines
 Move cursor within visual lines, not true lines
