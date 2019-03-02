@@ -43,17 +43,21 @@ or `spacemacs'. (default 'spacemacs)
 *** Languages
 **** C
 #+BEGIN_SRC emacs-lisp
-     c-c++
+c-c++
 #+END_SRC
 **** Python
 #+BEGIN_SRC emacs-lisp
-     (python :variables
-             python-enable-yapf-format-on-save t
-             python-sort-imports-on-save t)
+(python :variables
+        python-enable-yapf-format-on-save t
+        python-sort-imports-on-save t)
 #+END_SRC
 **** Javascript
 #+BEGIN_SRC emacs-lisp
-     javascript
+javascript
+#+END_SRC
+**** Html
+#+BEGIN_SRC emacs-lisp
+html
 #+END_SRC
 **** Emacs-Lisp
 #+BEGIN_SRC emacs-lisp
@@ -66,6 +70,10 @@ vimscript
 **** Bash/Shell
 #+BEGIN_SRC emacs-lisp
 shell-scripts
+#+END_SRC
+**** React
+#+BEGIN_SRC emacs-lisp
+react
 #+END_SRC
 *** File Types
 **** csv
@@ -115,7 +123,7 @@ github
 #+END_SRC
 **** Spelling
 #+BEGIN_SRC emacs-lisp
-  spell-checking
+spell-checking
 #+END_SRC
 **** Syntax Checking
 #+BEGIN_SRC emacs-lisp
@@ -164,6 +172,11 @@ osx
 **** Better Defaults
 #+BEGIN_SRC emacs-lisp
 better-defaults
+#+END_SRC
+**** Spotify
+[[https://github.com/syl20bnr/spacemacs/tree/master/layers/%252Bweb-services/spotify][docs]]
+#+BEGIN_SRC emacs-lisp
+spotify
 #+END_SRC
 *** End dotspacemacs-configuration-layers
 #+BEGIN_SRC emacs-lisp :exports none
@@ -559,7 +572,8 @@ Initialization function for user code. It is called immediately after
    '(
      (emacs-lisp  . t)
      (python  . t)
-     (shell .t)
+     (shell . t)
+     (makefile . t) 
      ))
 #+END_SRC
 ** Use shell-script-mode when editing commands from bash shell
@@ -610,6 +624,22 @@ Temporary for testing the live render of MarkDown
            "/usr/bin/open"
            (list "-a" "firefox" url))))
 (setq flymd-browser-open-function 'my-flymd-browser-function)
+#+END_SRC
+** Web-Beautify
+Basically ensures that syntax highlighting is refreshed for react files
+From [[https://github.com/yasuyk/web-beautify/pull/29][this]] PR
+#+BEGIN_SRC emacs-lisp
+(declare-function react-mode "ext:react-mode")
+
+(defun web-beautify-reload ()
+  "Reload mode to activate faces."
+  (deactivate-mark)
+  (cond ((eq major-mode 'web-mode)
+         (web-mode-reload))
+        ((eq major-mode 'js2-mode)
+         (js2-mode))
+        ((eq major-mode 'react-mode)
+         (react-mode))))
 #+END_SRC
 ** End dotspacemacs/user-init
 #+BEGIN_SRC emacs-lisp :exports none
@@ -861,6 +891,25 @@ From: [[https://github.com/dieggsy/eterm-256color][eterm-256color]]
                                            (mapconcat 'identity aspell-words "\n"))))))
 
   (provide 'init-spelling)
+#+END_SRC
+*** React
+as per [[https://github.com/syl20bnr/spacemacs/tree/master/layers/%252Bframeworks/react][docs]]
+#+BEGIN_SRC emacs-lisp
+(setq-default
+ ;; js2-mode
+ js2-basic-offset 2
+ ;; web-mode
+ css-indent-offset 2
+ web-mode-markup-indent-offset 2
+ web-mode-css-indent-offset 2
+ web-mode-code-indent-offset 2
+ web-mode-attr-indent-offset 2)
+#+END_SRC
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'web-mode
+  (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 #+END_SRC
 ** Key Bindings
 *** Org
